@@ -40,13 +40,14 @@ export default function WelcomeScreen() {
             <View style={{flex:0.2}}>
                 <MyButtonRegular style={styles.btn}
                                  title="Começar a minha jornada"
-                                 onPress={() => {console.log("BOTAO COMEÇAR JORNADA") ;navigation.navigate('Sign')}}>
+                                 onPress={() => {console.log("BOTAO COMEÇAR JORNADA"); navigation.navigate('Sign')}}>
                 </MyButtonRegular>
                 
                 <View style={{height:10}}/>
                 
                 <MyButtonRegular style={styles.btn}
-                title="Já tenho uma conta">
+                                 title="Já tenho uma conta"
+                                 onPress={() => {console.log("BOTAO LOGIN"); navigation.navigate('Login')}}>
                 </MyButtonRegular>
             </View>
 

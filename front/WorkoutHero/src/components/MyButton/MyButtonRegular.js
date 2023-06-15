@@ -7,7 +7,6 @@ import styles from "../../screens/WelcomeScreen/style";
 export default function MyButtonRegular(props) {
     return (
         <TouchableOpacity  {...props} 
-        onPress={function(){console.log("hi")}}
         style={[defaultStyles.btnRegular, props.style]}>
             
             <MyTextRegular style={defaultStyles.btnTextRegular}>{props.title}</MyTextRegular>

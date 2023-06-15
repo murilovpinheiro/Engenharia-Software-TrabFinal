@@ -2,19 +2,27 @@ import {StyleSheet} from 'react-native'
 
 const styles = StyleSheet.create({
     body: {
-        margin: '5%'
+        width: "100%", height:"100%",
+        padding: '5%'
     },
     viewLogo: {
         //backgroundColor:"#f00",
+        flex: 0.4, //borderWidth: 8, borderColor: "red",
         alignItems: 'center', height: 300
         //width: "100%"
     },
     imgLogo: {
-        width: "80%", height:"100%",
+        width: "90%", 
+        height:"100%",
         resizeMode: 'contain'
     },
     btn: {
-        marginBottom: 100
+        //marginBottom: 100
+    },
+    text: {
+        flex: 0.25,
+        textAlign: 'justify', textAlignVertical: 'center',
+        padding: 10,
     }
 });
 

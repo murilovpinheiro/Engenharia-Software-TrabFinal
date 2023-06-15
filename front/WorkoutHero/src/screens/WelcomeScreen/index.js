@@ -1,11 +1,26 @@
 import React from "react"
 import {View, Text, Button, Image} from "react-native"
+import { useNavigation } from "@react-navigation/native";
 import styles from "./style"
 import MyTextRegular from "../../components/MyText/MyTextRegular";
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
+import RPGImageBackground from '../../components/RPGImageBackground';
 
 export default function WelcomeScreen() {
+
+    console.log("ENTROU NA TELA WELCOME");
+
+    const navigation = useNavigation();
+
+    // const handleButtonPress = () => {
+    //     navigation.navigate("Other");
+    // };
+
     return (
+
+        <>
+        <RPGImageBackground />
+        
         <View style={styles.body}>
             <View style={{flex: 0.05}}/>
             
@@ -24,8 +39,8 @@ export default function WelcomeScreen() {
 
             <View style={{flex:0.2}}>
                 <MyButtonRegular style={styles.btn}
-                title="Começar a minha jornada">
-                    {/* <MyTextRegular>Começar a minha jornada</MyTextRegular> */}
+                                 title="Começar a minha jornada"
+                                 onPress={() => {console.log("BOTAO COMEÇAR JORNADA") ;navigation.navigate('Sign')}}>
                 </MyButtonRegular>
                 
                 <View style={{height:10}}/>
@@ -36,5 +51,6 @@ export default function WelcomeScreen() {
             </View>
 
         </View>
+        </>
     );
 }

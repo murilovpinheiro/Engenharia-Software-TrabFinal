@@ -14,7 +14,7 @@ const defaultStyles = StyleSheet.create({
         justifyContent: 'center', alignItems: 'center'
     },
     btnTextRegular: {
-        fontFamily: 'Lexend', fontWeight: 'bold',
+        fontFamily: 'Lexend-Bold',// fontWeight: 'bold',
         color: 'white', fontSize: 18,
     }
 });

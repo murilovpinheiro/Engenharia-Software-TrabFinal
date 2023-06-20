@@ -4,6 +4,11 @@ import { SelectList } from "react-native-dropdown-select-list";
 import styles from "./style"
 
 
+import RPGImageBackground from "../../components/RPGImageBackground";
+import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
+import MyTextInput from "../../components/MyTextInput/MyTextInput";
+import MyTextRegular from "../../components/MyText/MyTextRegular";
+
 export default function SignUpScreen() {
 
     const [selectedSexo, setSelectedSexo] = useState("");
@@ -12,74 +17,78 @@ export default function SignUpScreen() {
     ];
     
     return (
+        <>
+        <RPGImageBackground/>
+
         <View style={styles.body}>
-            <View style={{height:40}}/>
+            <View style={{flex: 0.05}}/>
             
-            <Text>Criar uma conta</Text>
+            {/* <Text>Criar uma conta</Text> */}
             
-            <View style={{height:20}}/>
+            <View style={{flex: 0.2, zIndex: 999, borderColor:'red', borderWidth:2}}>
+                <MyTextRegular>NOME</MyTextRegular>
+                <MyTextInput style={styles.textInput}
+                ></MyTextInput>
+                
+                <MyTextRegular>SEXO</MyTextRegular>
+                <SelectList 
+                    boxStyles={styles.dropdownBox}
+                    dropdownTextStyles={styles.dropdownText}
+                    dropdownStyles={styles.dropdownList}
+                    inputStyles={styles.dropdownText}
+                    // dropdownItemStyles={styles.dropdownList}
+                    setSelected={(val) => setSelectedSexo(val)}
+                    data={selectDataSexo} save="value"
+                    search={false}
+                />
+            </View>
 
-            <Text>NOME</Text>
-            <TextInput style={styles.textInput}
-            ></TextInput>
-            <View style={{height:20}}/>
+            <View style={{flex: 0.05}}/>
 
-            {/* QUEBRADO */}
-            {/* <Text>NASCIMENTO</Text>
-            <DateTimePicker  
-                mode='date'
-                value={new Date()} 
-                onChange={setDate}
-                // onDateChange={setDate} 
-            /> */}
-            
-            <Text>SEXO</Text>
-            <SelectList
-                setSelected={(val) => setSelectedSexo(val)}
-                data={selectDataSexo} save="value"
-                search={false}
-            />
-            
-            <View style={{height:20}}/>
-
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row', flex: 0.1, borderColor:'red', borderWidth:2}}>
                 <View style={{flex:0.45}}>
-                    <Text>ALTURA</Text>
-                    <TextInput style={styles.textInput}
-                    ></TextInput>
+                    <MyTextRegular>ALTURA (cm)</MyTextRegular>
+                    <MyTextInput style={styles.textInput} inputMode='numeric'
+                    ></MyTextInput>
                 </View>
                 <View style={{flex:0.1}}/>
                 <View style={{flex:0.45}}>
-                    <Text>PESO</Text>
-                    <TextInput style={styles.textInput}
-                    ></TextInput>
+                    <MyTextRegular>PESO (kg)</MyTextRegular>
+                    <MyTextInput style={styles.textInput} inputMode='numeric'
+                    ></MyTextInput>
                 </View>
             </View>
-            
-            <View style={{height:20}}/>
 
-            <Text>EMAIL</Text>
-            <TextInput style={styles.textInput}
-            ></TextInput>
-            <View style={{height:20}}/>
+            <View style={{flex: 0.05}}/>
 
-            <Text>SENHA</Text>
-            <TextInput style={styles.textInput}
-            ></TextInput>
-            <Text>CONFIRMAR SENHA</Text>
-            <TextInput style={styles.textInput}
-            ></TextInput>
-            <View style={{height:20}}/>
+            <View style={{flex: 0.3, borderColor:'red', borderWidth:2}}>
+                <MyTextRegular>EMAIL</MyTextRegular>
+                <MyTextInput style={styles.textInput}
+                ></MyTextInput>
+
+                <MyTextRegular>SENHA</MyTextRegular>
+                <MyTextInput style={styles.textInput}
+                ></MyTextInput>
+
+                <MyTextRegular>CONFIRMAR SENHA</MyTextRegular>
+                <MyTextInput style={styles.textInput}
+                ></MyTextInput>
+            </View>
+
+            <View style={{flex: 0.05}}/>
 
             <View style={styles.viewError}>
                 <Text style={styles.textError}>Mensagens de erro vão aqui.</Text>
             </View>
             
-            <View style={{height:20}}/>
+            <View style={{flex: 0.05}}/>
 
-            <Button
-            title="Continuar"></Button>
+            <View  style={styles.viewButton}>
+                <MyButtonRegular style={styles.button}
+                title="Continuar"></MyButtonRegular>
+            </View>
         
         </View>
+        </>
     );
 }

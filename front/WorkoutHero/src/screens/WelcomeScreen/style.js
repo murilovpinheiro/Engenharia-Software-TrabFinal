@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     viewLogo: {
         //backgroundColor:"#f00",
         flex: 0.4, //borderWidth: 8, borderColor: "red",
-        alignItems: 'center', height: 300
+        alignItems: 'center'
         //width: "100%"
     },
     imgLogo: {

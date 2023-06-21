@@ -10,6 +10,8 @@ import SignUpScreen from './src/screens/SignUpScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import RPGImageBackground from './src/components/RPGImageBackground';
 
+import MainContainer from './src/MainContainer';
+
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -23,27 +25,22 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <View style={{flex: 1}}>
-      
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName='Welcome'>
-          {/* <Stack.Screen name='Welcome' component={WelcomeScreen} /> */}
-          {/* <Stack.Screen name='Login' component={LoginScreen} /> */}
-          {/* <Stack.Screen name='Sign' component={SignUpScreen} /> */}
-          <Stack.Screen name='Profile' component={ProfileScreen}/>
-        </Stack.Navigator>
-      </NavigationContainer>
+    <MainContainer/>
 
-    </View>
-    
+    // <View style={{flex: 1}}>
+      
+    //   <NavigationContainer>
+    //     <Stack.Navigator initialRouteName='BEM VINDO' screenOptions={navHeaderOptions}>
+    //       {/* <Stack.Screen name='BEM VINDO'  options={navHeaderOptions} component={WelcomeScreen} /> */}
+    //       {/* <Stack.Screen name='LOGIN'  options={navHeaderOptions} component={LoginScreen} /> */}
+    //       {/* <Stack.Screen name='CRIAR CONTA'  options={navHeaderOptions} component={SignUpScreen} /> */}
+    //       <Stack.Screen name='PERFIL' component={ProfileScreen}/>
+    //     </Stack.Navigator>
+    //   </NavigationContainer>
+    // </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
+

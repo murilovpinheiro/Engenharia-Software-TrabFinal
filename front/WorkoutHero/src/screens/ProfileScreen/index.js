@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import {View, Text, processColor, Button, Image} from "react-native"
 import { SelectList } from "react-native-dropdown-select-list";
 import styles from "./style"
-import RadarChart from "react-native-charts-wrapper"
-
 
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
@@ -44,7 +42,7 @@ export default function ProfileScreen() {
             <View style={{flex: 0.05}}/>
 
             <View style={{flex: 0.7}}>
-                <ExerciseChart/>
+                {/* <ExerciseChart/> */}
             </View>
 
             <View style={{flex: 0.05}}/>

@@ -11,6 +11,7 @@ import ProfileScreen from './src/screens/ProfileScreen';
 import RPGImageBackground from './src/components/RPGImageBackground';
 
 import MainContainer from './src/MainContainer';
+import RoutinesListScreen from './src/screens/RoutinesListScreen';
 
 export default function App() {
 
@@ -25,19 +26,19 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <MainContainer/>
+    //<MainContainer/>
 
-    // <View style={{flex: 1}}>
+    <View style={{flex: 1}}>
       
-    //   <NavigationContainer>
-    //     <Stack.Navigator initialRouteName='BEM VINDO' screenOptions={navHeaderOptions}>
-    //       {/* <Stack.Screen name='BEM VINDO'  options={navHeaderOptions} component={WelcomeScreen} /> */}
-    //       {/* <Stack.Screen name='LOGIN'  options={navHeaderOptions} component={LoginScreen} /> */}
-    //       {/* <Stack.Screen name='CRIAR CONTA'  options={navHeaderOptions} component={SignUpScreen} /> */}
-    //       <Stack.Screen name='PERFIL' component={ProfileScreen}/>
-    //     </Stack.Navigator>
-    //   </NavigationContainer>
-    // </View>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='CRIAR TREINO'>
+          {/* <Stack.Screen name='BEM VINDO'  options={navHeaderOptions} component={WelcomeScreen} /> */}
+          {/* <Stack.Screen name='LOGIN'  options={navHeaderOptions} component={LoginScreen} /> */}
+          {/* <Stack.Screen name='CRIAR CONTA'  options={navHeaderOptions} component={SignUpScreen} /> */}
+          <Stack.Screen name='CRIAR TREINO' component={RoutinesListScreen}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </View>
   );
 }
 

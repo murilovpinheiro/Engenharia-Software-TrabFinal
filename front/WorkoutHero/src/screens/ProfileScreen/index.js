@@ -7,7 +7,6 @@ import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
 import MyTextH3 from "../../components/MyText/MyTextH3";
 import RPGImageBackground from "../../components/RPGImageBackground";
-import ExerciseChart from "./ExerciseChart";
 
 export default function ProfileScreen() {
       

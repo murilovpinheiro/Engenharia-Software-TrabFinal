@@ -1,0 +1,19 @@
+node_modules/
+/back/WorkoutHero/.env
+
+front/WorkoutHero/.expo/
+front/WorkoutHero/dist/
+front/WorkoutHero/npm-debug.*
+front/WorkoutHero/*.jks
+front/WorkoutHero/*.p8
+front/WorkoutHero/*.p12
+front/WorkoutHero/*.key
+front/WorkoutHero/*.mobileprovision
+front/WorkoutHero/*.orig.*
+front/WorkoutHero/web-build/
+
+# macOS
+front/WorkoutHero/.DS_Store
+
+# Temporary files created by Metro to check the health of the file watcher
+front/WorkoutHero/.metro-health-check*

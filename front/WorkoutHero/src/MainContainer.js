@@ -10,6 +10,9 @@ import ProfileScreen from "./screens/ProfileScreen";
 // import InTrainingScreen from "./screens/InTrainingScreen";
 import RoutinesListScreen from "./screens/RoutinesListScreen";
 import CreateTrainingRoutineScreen from "./screens/CreateTrainingRoutineScreen";
+import InTrainingScreen from "./screens/InTrainingScreen";
+import TimerScreen from "./screens/TimerScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 
 
@@ -19,8 +22,6 @@ const nameTreinar = "TREINAR"
 const nameNovo = "NOVO TREINO"
 
 const Tab = createBottomTabNavigator();
-
-
 
 export default function MainContainer(){
     return (
@@ -56,13 +57,24 @@ export default function MainContainer(){
             >
             </Tab.Screen> */}
 
-            <Tab.Screen name={nameNovo} component={CreateTrainingRoutineScreen}/>
-            <Tab.Screen name={nameTreinar} component={RoutinesListScreen}/>
+            <Tab.Screen name={nameNovo} component={RoutinesListScreen}/>
+            <Tab.Screen name={nameTreinar} component={TrainingStack}/>
             <Tab.Screen name={namePerfil} component={ProfileScreen}/>
 
         </Tab.Navigator>
 
         // </NavigationContainer>
+    );
+}
+
+const TrainingStack = () => {
+    const Stack = createNativeStackNavigator();
+
+    return (
+        <Stack.Navigator initialRouteName='TRAININGSCREEN'>
+            <Stack.Screen name='TRAININGSCREEN' options={{ headerShown: false }} component={InTrainingScreen} />
+            <Stack.Screen name='TIMERSCREEN' component={TimerScreen} />
+        </Stack.Navigator>
     );
 }
 

@@ -19,7 +19,7 @@ export default function ProfileScreen() {
 
             <View style={styles.viewUser}>
                 <MyTextH3>Murilo Pinheiro</MyTextH3>
-                <MyTextRegular>3 semanas ativo [vvv]</MyTextRegular>
+                <MyTextRegular>3 semanas ativo 🔥</MyTextRegular>
                 <MyTextRegular>18244 XP</MyTextRegular>
                 {/* xp bar é placeholder */}
                 <View style={{height: 16, marginTop: 8, width: '100%', backgroundColor: 'white', borderRadius: 8, padding: 4, overflow: 'hidden'}}>

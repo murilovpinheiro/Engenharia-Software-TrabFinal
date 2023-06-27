@@ -1,5 +1,5 @@
 import React from "react"
-import {View, TouchableOpacity} from 'react-native'
+import {View, TouchableOpacity, Image} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import styles from "./style"
@@ -7,22 +7,35 @@ import styles from "./style"
 import MyTextRegular from "../MyText/MyTextRegular";
 import MyTextH3 from "../MyText/MyTextH3";
 import MyButtonThin from "../MyButton/MyButtonThin.js"
+import Images from "../../Images";
+
+
 
 export default function ExerciseOptions(props) {
+    var exercise = props.exercise
+
+    const stringFromGroups = (array) => {
+        let str = ""
+        for (let i = 0; i < array.length; i++){
+            str += array[i].toUpperCase() + " "
+        }
+        return str
+    }
+
     return (
         <View style={styles.body}>
             <View style={styles.header}>
-                <View style={styles.headerImg}>
-                </View>
+                <Image style={styles.headerImg} source={Images.exerciseImages[exercise.imagem]}>
+                </Image>
 
                 <View style={styles.headerTextView}>
-                    <MyTextH3 style={styles.headerTextName}>Flexão com Peso</MyTextH3>
-                    <MyTextRegular style={styles.headerTextType}>GRUPO MUSCULAR: PEITO</MyTextRegular>
+                    <MyTextH3 style={styles.headerTextName}>{exercise.nome}</MyTextH3>
+                    <MyTextRegular style={styles.headerTextType}>GRUPO MUSCULAR: {stringFromGroups(exercise.grupos_musculares)}</MyTextRegular>
                 </View>
 
-                <TouchableOpacity style={styles.headerDelete}>
-                    <AntDesign name='delete' color='white' size={32}/>
-                </TouchableOpacity>
+                {/* <TouchableOpacity style={styles.headerDelete}>
+                    <AntDesign name='delete' color='gray' size={32}/>
+                </TouchableOpacity> */}
             </View>
 
             <View style={styles.viewOptions}>

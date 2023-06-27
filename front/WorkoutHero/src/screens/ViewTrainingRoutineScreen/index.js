@@ -9,35 +9,44 @@ import ExerciseOptions from "../../components/ExerciseOptions/ExerciseOptions"
 import MyTextInput from "../../components/MyTextInput/MyTextInput"
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular"
 import MyTextRegular from "../../components/MyText/MyTextRegular"
+import MyTextH3 from "../../components/MyText/MyTextH3";
 
 export default function ViewTrainingRoutineScreen({route}) {
 
     var params = route.params
+    console.log(params)
+    var routine = params.routine
+    var exerciseList = routine.exerciseList
 
-    var routine = props.routine
+    const makeExercises = () => {
+        var retList = []
+        for (let i = 0; i < exerciseList.length; i++) {
+            let exercise = exerciseList[i]
+            retList.push(
+                <ExerciseOptions exercise={exerciseList[0]}/>
+            )
+        }
+        return retList
+    }
 
     return (
         <><RPGImageBackground/>
 
         <View style={styles.body}>
             <View style={{flexDirection:'row', alignItems: 'center'}}>
-                <MyTextInput style={{margin: 10, flex:0.8}} defaultValue='Treino 1'></MyTextInput>
+                {/* <MyTextInput style={{margin: 10, flex:0.8}} defaultValue='Treino 1'></MyTextInput> */}
+                <MyTextH3 style={styles.textName}>{routine.nome}</MyTextH3>
 
-                <TouchableOpacity style={{flex:0.2}}>
-                <MyTextRegular>Salvar</MyTextRegular>
-                </TouchableOpacity>
             </View>
             
-            <MyButtonRegular title="Adicionar Exercício"></MyButtonRegular>
+            <MyButtonRegular title="Começar" style={styles.startBtn}
+            onPress={()=>{}}
+            />
             
             <ScrollView style={styles.scrollBody}>
-                <ExerciseOptions/>
-                <ExerciseOptions/>
-                <ExerciseOptions/>
-                <ExerciseOptions/>
-                <ExerciseOptions/>
-                
+                { makeExercises() }
             </ScrollView>
+
         </View>
 
         </>

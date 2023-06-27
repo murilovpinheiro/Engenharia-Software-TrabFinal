@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         alignVertical:'center'
     },
     headerTextView: {
-        flex:0.7,
+        flex:0.85,
         flexDirection:'column', alignVertical: 'center'
     },
     headerTextName: {

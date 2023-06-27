@@ -32,16 +32,22 @@ export default function RoutinePreview(props) {
     }
 
     return (
-        <TouchableOpacity {...props}
+        <View {...props}
         activeOpacity={0.6} 
         style={styles.body}>
             
             <MyTextH3 style={styles.headerText}>{routine.nome}</MyTextH3>
+            
             <ScrollView horizontal={true} style={styles.scroll}>
                 
                 { getAllExercisePreviews(exerciseList) }
 
             </ScrollView>
-        </TouchableOpacity>
+            
+            <TouchableOpacity onPress={props.onPress}>
+                <MyTextRegular>Ver Detalhes</MyTextRegular>
+            </TouchableOpacity>
+
+        </View>
     );
 }

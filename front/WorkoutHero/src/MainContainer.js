@@ -74,10 +74,10 @@ const RoutinesStack = () => {
     const Stack = createNativeStackNavigator()
 
     return (
-        <StackNavigator initialRouteName='ALLROUTINES'>
+        <Stack.Navigator initialRouteName='ALLROUTINES'>
             <Stack.Screen name='VIEWROUTINE' options={{ headerShown: false }} component={ViewTrainingRoutineScreen} />
             <Stack.Screen name='ALLROUTINES' options={{ headerShown: false }} component={RoutinesListScreen} />
-        </StackNavigator>
+        </Stack.Navigator>
     )
 } 
 

@@ -5,30 +5,36 @@ import { StyleSheet } from "react-native";
 
 import { NavigationContainer, TabRouter } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "./style";
 
 export default function TimerScreen() {
 
+    const [currentTime, setCurrentTime] = useState(0);
+    const [pausado, SetPausado] = useState(true);
+    const [intervalId, setIntervalId] = useState(null);
+
+    useEffect(() => {
+
+        if (!pausado) {
+            const id = setInterval(() => {
+              setCurrentTime((prevTime) => prevTime + 1);
+            }, 1000);
+            setIntervalId(id);
+        } else {
+            clearInterval(intervalId);
+        }
+        
+        return () => clearInterval(intervalId);
+        
+    }, [pausado])
+
     const formatTime = (totalSeconds) => {
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
         return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    };
-
-    const [timer, setTimer] = useState(0);
-
-    const startTimer = () => {
-        
-    };
-
-    const pauseTimer = () => {
-        
-    };
-
-    const resetTimer = () => {
-        
+        // return totalSeconds;
     };
 
     return (
@@ -37,16 +43,16 @@ export default function TimerScreen() {
                 {/* Conteúdo da tela */}
 
                 <View style={styles.container}>
-                    <Text style={styles.timerText}>{formatTime(29000)}</Text>
+                    <Text style={styles.timerText}>{formatTime(currentTime)}</Text>
                 </View>
 
                 <View style={styles.viewTimer}>
-                    <TouchableOpacity onPress={resetTimer}>
+                    <TouchableOpacity>
                         <AntDesign style={styles.btnTimer} name='leftcircle' size={50} color='#808080' />
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={timer > 0 ? pauseTimer : startTimer}>
-                        <AntDesign style={styles.btnTimer} name={timer > 0 ? 'pausecircle' : 'playcircleo'} size={50} color='#F2BD00' />
+                    <TouchableOpacity onPress={() => SetPausado(!pausado)}>
+                        <AntDesign style={styles.btnTimer} name={!pausado ? 'pausecircle' : 'playcircleo'} size={50} color={!pausado ? '#F2BD00' : '#A4CF11'} />
                     </TouchableOpacity>
 
                     <TouchableOpacity>

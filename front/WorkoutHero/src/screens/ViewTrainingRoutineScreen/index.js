@@ -10,7 +10,9 @@ import MyTextInput from "../../components/MyTextInput/MyTextInput"
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular"
 import MyTextRegular from "../../components/MyText/MyTextRegular"
 
-export default function ViewTrainingRoutineScreen(props) {
+export default function ViewTrainingRoutineScreen({route}) {
+
+    var params = route.params
 
     var routine = props.routine
 
@@ -35,7 +37,6 @@ export default function ViewTrainingRoutineScreen(props) {
                 <ExerciseOptions/>
                 <ExerciseOptions/>
                 
-
             </ScrollView>
         </View>
 

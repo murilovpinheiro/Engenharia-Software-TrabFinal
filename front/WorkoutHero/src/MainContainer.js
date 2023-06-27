@@ -9,7 +9,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import ProfileScreen from "./screens/ProfileScreen";
 // import InTrainingScreen from "./screens/InTrainingScreen";
 import RoutinesListScreen from "./screens/RoutinesListScreen";
-import CreateTrainingRoutineScreen from "./screens/CreateTrainingRoutineScreen";
+import ViewTrainingRoutineScreen from "./screens/ViewTrainingRoutineScreen";
 import InTrainingScreen from "./screens/InTrainingScreen";
 import TimerScreen from "./screens/TimerScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -59,7 +59,7 @@ export default function MainContainer(){
             >
             </Tab.Screen> */}
 
-            <Tab.Screen name={nameNovo} component={RoutinesListScreen}/>
+            <Tab.Screen name={nameNovo} component={RoutinesStack}/>
             <Tab.Screen name={nameTreinar} component={TrainingStack}/>
             <Tab.Screen name={namePerfil} component={ProfileScreen}/>
 
@@ -68,6 +68,20 @@ export default function MainContainer(){
         // </NavigationContainer>
     );
 }
+
+
+const RoutinesStack = () => {
+    const Stack = createNativeStackNavigator()
+
+    return (
+        <StackNavigator initialRouteName='ALLROUTINES'>
+            <Stack.Screen name='VIEWROUTINE' options={{ headerShown: false }} component={ViewTrainingRoutineScreen} />
+            <Stack.Screen name='ALLROUTINES' options={{ headerShown: false }} component={RoutinesListScreen} />
+        </StackNavigator>
+    )
+} 
+
+
 
 const TrainingStack = () => {
     const Stack = createNativeStackNavigator();

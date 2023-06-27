@@ -8,7 +8,9 @@ import MyTextH3 from "../../components/MyText/MyTextH3";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
 import { useNavigation } from "@react-navigation/native";
 
-export default function InTrainingScreen() {
+export default function InTrainingScreen({route}) {
+
+    const params = route.params
 
     const navigation = useNavigation();
 

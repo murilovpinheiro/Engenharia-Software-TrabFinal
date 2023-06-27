@@ -6,10 +6,17 @@ import styles from "./style"
 import RPGImageBackground from "../../components/RPGImageBackground";
 import MyTextH3 from "../../components/MyText/MyTextH3";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
+import { useNavigation } from "@react-navigation/native";
 
-export default function InTrainingScreen({route}) {
+export default function InTrainingScreen() {
 
-    const params = route.params
+    const navigation = useNavigation();
+
+    const handleClockPress = () => {
+        // Lógica para navegar para outra tela
+        navigation.navigate('TIMERSCREEN');
+    };
+    
 
     return (
         <>
@@ -34,7 +41,7 @@ export default function InTrainingScreen({route}) {
 
             <View style={styles.viewTimer}>
                 <TouchableOpacity><AntDesign style={styles.btnTimer} name='leftcircle' size={50} color='#808080'/></TouchableOpacity>
-                <TouchableOpacity><AntDesign style={styles.btnTimer} name='clockcircleo' size={50} color='#F2BD00'/></TouchableOpacity>
+                <TouchableOpacity onPress={handleClockPress}><AntDesign style={styles.btnTimer} name='clockcircleo' size={50} color='#F2BD00'/></TouchableOpacity>
                 <TouchableOpacity><AntDesign style={styles.btnTimer} name='rightcircle' size={50} color='#808080'/></TouchableOpacity>
             </View>
         </View>

@@ -6,8 +6,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import ProfileScreen from "./screens/ProfileScreen";
-import InTrainingScreen from "./screens/InTrainingScreen";
+// import InTrainingScreen from "./screens/InTrainingScreen";
 import SignUpScreen from "./screens/SignUpScreen";
+import RoutinesListScreen from "./screens/RoutinesListScreen";
+import CreateTrainingRoutineScreen from "./screens/CreateTrainingRoutineScreen";
 
 const namePerfil = "PERFIL"
 const nameTreinar = "TREINAR"
@@ -44,8 +46,8 @@ export default function MainContainer(){
             })}
             >
                 
-                <Tab.Screen name={nameNovo} component={SignUpScreen}/>
-                <Tab.Screen name={nameTreinar} component={InTrainingScreen}/>
+                <Tab.Screen name={nameNovo} component={CreateTrainingRoutineScreen}/>
+                <Tab.Screen name={nameTreinar} component={RoutinesListScreen}/>
                 <Tab.Screen name={namePerfil} component={ProfileScreen}/>
 
             </Tab.Navigator>

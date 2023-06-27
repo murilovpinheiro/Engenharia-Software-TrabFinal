@@ -10,7 +10,7 @@ import MyTextInput from "../../components/MyTextInput/MyTextInput"
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular"
 import MyTextRegular from "../../components/MyText/MyTextRegular"
 
-export default function InTrainingScreen() {
+export default function CreateTrainingRoutineScreen() {
     return (
         <><RPGImageBackground/>
 

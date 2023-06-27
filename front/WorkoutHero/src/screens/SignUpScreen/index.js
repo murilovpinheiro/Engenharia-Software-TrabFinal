@@ -8,6 +8,7 @@ import RPGImageBackground from "../../components/RPGImageBackground";
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
 import MyTextInput from "../../components/MyTextInput/MyTextInput";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
+import { useNavigation } from "@react-navigation/native";
 
 export default function SignUpScreen() {
 
@@ -15,6 +16,16 @@ export default function SignUpScreen() {
     const selectDataSexo = [
         {'key':'1', value:'Feminino'}, {'key':'2', value:'Masculino'}, {'key':'3', value:'Outro'} 
     ];
+
+    var navigation = useNavigation()
+
+    const handleSignUp = () => {
+        // testar credenciais
+
+        navigation.reset({
+            index: 0, routes: [{name:'MAIN'}]
+        })
+    }
     
     return (
         <>
@@ -85,7 +96,8 @@ export default function SignUpScreen() {
 
             <View  style={styles.viewButton}>
                 <MyButtonRegular style={styles.button}
-                title="Continuar"></MyButtonRegular>
+                title="Continuar" onPress={handleSignUp}
+                />
             </View>
         
         </View>

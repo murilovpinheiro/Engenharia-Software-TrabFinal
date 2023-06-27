@@ -3,13 +3,16 @@ import { StyleSheet } from "react-native";
 
 import { NavigationContainer, TabRouter } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import ProfileScreen from "./screens/ProfileScreen";
 // import InTrainingScreen from "./screens/InTrainingScreen";
-import SignUpScreen from "./screens/SignUpScreen";
 import RoutinesListScreen from "./screens/RoutinesListScreen";
 import CreateTrainingRoutineScreen from "./screens/CreateTrainingRoutineScreen";
+
+
+
 
 const namePerfil = "PERFIL"
 const nameTreinar = "TREINAR"
@@ -17,42 +20,49 @@ const nameNovo = "NOVO TREINO"
 
 const Tab = createBottomTabNavigator();
 
+
+
 export default function MainContainer(){
     return (
-        <NavigationContainer>
-            <Tab.Navigator
-            initialRouteName={namePerfil}
-            screenOptions={({route}) => ({
-                tabBarIcon: ({focused, color, size}) => {
-                    let iconName; let rn = route.name;
-                    if (rn === namePerfil) {
-                        iconName = 'person'
-                    } else if (rn === nameTreinar) {
-                        iconName = 'fitness'
-                    } else if (rn === nameNovo) {
-                        iconName = 'create'
-                    }
-                    return <Ionicons name={iconName} size={45} color={color}/>
-                },
+        // <NavigationContainer>
+        <Tab.Navigator
+        initialRouteName='LOGINFLUX'
+        screenOptions={({route}) => ({
+            tabBarIcon: ({focused, color, size}) => {
+                let iconName; let rn = route.name;
+                if (rn === namePerfil) {
+                    iconName = 'person'
+                } else if (rn === nameTreinar) {
+                    iconName = 'fitness'
+                } else if (rn === nameNovo) {
+                    iconName = 'create'
+                }
+                return <Ionicons name={iconName} size={45} color={color}/>
+            },
 
-                tabBarStyle: styles.navTabStyle,
-                tabBarActiveTintColor: '#F2BD00',
-                tabBarInactiveTintColor: '#808080',
-                tabBarLabelStyle: styles.navTabText,
+            tabBarStyle: styles.navTabStyle,
+            tabBarActiveTintColor: '#F2BD00',
+            tabBarInactiveTintColor: '#808080',
+            tabBarLabelStyle: styles.navTabText,
 
-                headerStyle: styles.navHeaderStyle,
-                headerTintColor: 'white',
-                headerTitleStyle: styles.navHeaderTitle,
-            })}
+            headerStyle: styles.navHeaderStyle,
+            headerTintColor: 'white',
+            headerTitleStyle: styles.navHeaderTitle,
+        })}
+        >
+            {/* <Tab.Screen name='LOGINFLUX'
+            component={LoginFluxContainer}
+            options={{headerShown: false, tabBarHideOnKeyboard: true}}
             >
-                
-                <Tab.Screen name={nameNovo} component={CreateTrainingRoutineScreen}/>
-                <Tab.Screen name={nameTreinar} component={RoutinesListScreen}/>
-                <Tab.Screen name={namePerfil} component={ProfileScreen}/>
+            </Tab.Screen> */}
 
-            </Tab.Navigator>
+            <Tab.Screen name={nameNovo} component={CreateTrainingRoutineScreen}/>
+            <Tab.Screen name={nameTreinar} component={RoutinesListScreen}/>
+            <Tab.Screen name={namePerfil} component={ProfileScreen}/>
 
-        </NavigationContainer>
+        </Tab.Navigator>
+
+        // </NavigationContainer>
     );
 }
 

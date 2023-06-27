@@ -1,5 +1,6 @@
 import React from "react"
 import {View, Text, TextInput, Button, Image} from "react-native"
+import { useNavigation } from "@react-navigation/native";
 import styles from "./style"
 import RPGImageBackground from "../../components/RPGImageBackground";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
@@ -7,6 +8,17 @@ import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
 import MyTextInput from "../../components/MyTextInput/MyTextInput";
 
 export default function LoginScreen() {
+
+    const navigation = useNavigation();
+
+    const handleLogin = () => {
+        // testar credenciais
+
+        navigation.reset({
+            index: 0, routes: [{name:'MAIN'}]
+        })
+    }
+
     return (
         <>
         <RPGImageBackground />
@@ -43,7 +55,9 @@ export default function LoginScreen() {
 
             <View  style={styles.viewButton}>
                 <MyButtonRegular style={styles.button}
-                title="Continuar"></MyButtonRegular>
+                title="Continuar"
+                onPress={handleLogin}
+                />
             </View>
             
 

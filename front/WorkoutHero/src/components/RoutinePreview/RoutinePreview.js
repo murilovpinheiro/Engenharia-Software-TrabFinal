@@ -1,27 +1,47 @@
 import React from "react"
-import {View, TouchableOpacity} from 'react-native'
-import Ionicons from '@expo/vector-icons/Ionicons';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import {View, Image, TouchableOpacity} from 'react-native'
 import styles from "./style"
 
 import MyTextRegular from "../MyText/MyTextRegular";
 import MyTextH3 from "../MyText/MyTextH3";
-import MyButtonThin from "../MyButton/MyButtonThin.js"
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function RoutinePreview(props) {
-    return (
-        <View style={styles.body}>
-            <MyTextH3 style={styles.headerText}>Exercícios Abdominais</MyTextH3>
+import Images from "../../Images";
 
+export default function RoutinePreview(props) {
+    // console.log("PROPS: props")
+    var routine =  props.routine
+
+    var exerciseList = routine["exerciseList"]
+
+    var getAllExercisePreviews = (list) => {
+        var returnList = []
+        for (let i = 0; i < list.length; i++) {
+            var exercise = list[i]
+    
+            returnList.push(
+                // <View key={i} style={{borderWidth: 2, borderColor:'gold', borderRadius: 8, height: 80, margin: 8}}>
+                    <Image style={styles.img} key={i}
+                    source={ Images.exerciseImages[exercise["imagem"]] }
+                    onError={(error) => console.log('Image loading error:', error)}
+                    />
+                // </View> 
+            )
+        }
+        return returnList
+    }
+
+    return (
+        <TouchableOpacity {...props}
+        activeOpacity={0.6} 
+        style={styles.body}>
+            
+            <MyTextH3 style={styles.headerText}>{routine.nome}</MyTextH3>
             <ScrollView horizontal={true} style={styles.scroll}>
-                <AntDesign name='delete' color='white' size={128}/>
-                <AntDesign name='delete' color='white' size={128}/>
-                <AntDesign name='delete' color='white' size={128}/>
-                <AntDesign name='delete' color='white' size={128}/>
-                <AntDesign name='delete' color='white' size={128}/>
-                <AntDesign name='delete' color='white' size={128}/>
+                
+                { getAllExercisePreviews(exerciseList) }
+
             </ScrollView>
-        </View>
+        </TouchableOpacity>
     );
 }

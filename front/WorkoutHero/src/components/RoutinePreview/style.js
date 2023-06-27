@@ -10,6 +10,11 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     scroll: {
+    },
+    img: {
+        borderWidth: 4, borderColor:'gold', borderRadius: 8,
+        height: 120, width: 120, margin: 8,
+
     }
 });
 

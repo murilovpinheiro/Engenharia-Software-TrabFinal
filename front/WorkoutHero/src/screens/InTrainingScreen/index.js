@@ -7,7 +7,10 @@ import RPGImageBackground from "../../components/RPGImageBackground";
 import MyTextH3 from "../../components/MyText/MyTextH3";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
 
-export default function InTrainingScreen() {
+export default function InTrainingScreen({route}) {
+
+    const params = route.params
+
     return (
         <>
         <RPGImageBackground/>

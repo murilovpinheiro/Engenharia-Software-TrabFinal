@@ -10,16 +10,16 @@ import ProfileScreen from "./screens/ProfileScreen";
 // import InTrainingScreen from "./screens/InTrainingScreen";
 import RoutinesListScreen from "./screens/RoutinesListScreen";
 import CreateTrainingRoutineScreen from "./screens/CreateTrainingRoutineScreen";
+import InTrainingScreen from "./screens/InTrainingScreen";
 
 
 
 
 const namePerfil = "PERFIL"
 const nameTreinar = "TREINAR"
-const nameNovo = "NOVO TREINO"
+const nameNovo = "TREINOS"
 
 const Tab = createBottomTabNavigator();
-
 
 
 export default function MainContainer(){
@@ -56,8 +56,8 @@ export default function MainContainer(){
             >
             </Tab.Screen> */}
 
-            <Tab.Screen name={nameNovo} component={CreateTrainingRoutineScreen}/>
-            <Tab.Screen name={nameTreinar} component={RoutinesListScreen}/>
+            <Tab.Screen name={nameNovo} component={RoutinesListScreen}/>
+            <Tab.Screen name={nameTreinar} component={InTrainingScreen}/>
             <Tab.Screen name={namePerfil} component={ProfileScreen}/>
 
         </Tab.Navigator>

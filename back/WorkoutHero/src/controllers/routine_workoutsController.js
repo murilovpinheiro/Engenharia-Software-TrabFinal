@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
-const {Routine_Workout, sequelize} = require('../models/routine_workoutsModel');
+const {Routine_Workouts, sequelize} = require('../models/routine_workoutsModel');
 var bodyParser = require('body-parser')
 
-class RoutineWorkoutController{
+class RoutineWorkoutsController{
 
-    async createRoutineWorkout( id, routine_id, workout_id) {
+    async createRoutineWorkouts( id, routine_id, workout_id) {
         try {
-            const newRoutine_Workout = await Routine_Workout.create({ // criando o Routine_Workout
+            const newRoutine_Workout = await Routine_Workouts.create({ // criando o Routine_Workout
               id: id,
               routine_id: routine_id,
               workout_id: workout_id
@@ -30,9 +30,9 @@ class RoutineWorkoutController{
           }
     }
 
-    async getRoutineWorkoutBy(whereClause) {
+    async getRoutineWorkoutsBy(whereClause) {
         try{
-            const records = (await Routine_Workout.findAll({
+            const records = (await Routine_Workouts.findAll({
               where: whereClause,
             })).map(record => record.toJSON());
       
@@ -53,9 +53,9 @@ class RoutineWorkoutController{
         }
     }
 
-    async deleteRoutineWorkoutBy(id) {
+    async deleteRoutineWorkoutsBy(id) {
         try {
-            const numDeleted = await Routine_Workout.destroy({
+            const numDeleted = await Routine_Workouts.destroy({
                where: {
                  id: id
                }
@@ -77,9 +77,9 @@ class RoutineWorkoutController{
            }
     }
 
-    async updateRoutineWorkout(id, updateClause) {
+    async updateRoutineWorkouts(id, updateClause) {
         try {
-            const routine_workout = await Routine_Workout.findByPk(id);
+            const routine_workout = await Routine_Workouts.findByPk(id);
             if (routine_workout) {
               const updateRoutine_Workout = await routine_workout.update(updateClause);
               const response = {
@@ -101,4 +101,4 @@ class RoutineWorkoutController{
     }
 }
 
-module.exports = RoutineWorkoutController;
+module.exports = RoutineWorkoutsController;

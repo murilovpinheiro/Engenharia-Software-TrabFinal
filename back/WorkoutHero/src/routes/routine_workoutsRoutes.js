@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-const controller = require('../controllers/routine_workoutController')
+const controller = require('../controllers/routine_workoutsController')
 var bodyParser = require('body-parser')
 const { buildRoutineWorkouts } = require('../middlewares/middlewares');
 
@@ -16,13 +16,13 @@ router.get('/select', urlencodedParser, buildRoutineWorkouts, async (req, res) =
   const whereClause = req.clause;
   //console.log(whereClause)
 
-  let response = await RoutineWorkoutController.getRoutineWorkoutBy(whereClause)
+  let response = await RoutineWorkoutController.getRoutineWorkoutsBy(whereClause)
   res.json(response)
 });
 
 router.post('/delete', urlencodedParser, async (req, res) => {
   const {id} = req.body;
-  let response = await RoutineWorkoutController.deleteRoutineWorkoutBy(id)
+  let response = await RoutineWorkoutController.deleteRoutineWorkoutsBy(id)
   res.json(response)
 });
 
@@ -30,14 +30,14 @@ router.post('/insert', urlencodedParser, async (req, res) => {
   const { id, routine_id, workout_id} = req.body;
   //console.log(req.body);
   
-  let response = await RoutineWorkoutController.createRoutineWorkout( id, routine_id, workout_id)
+  let response = await RoutineWorkoutController.createRoutineWorkouts( id, routine_id, workout_id)
   res.json(response)
 });
 
 router.post('/update', urlencodedParser, buildRoutineWorkouts, async (req, res) => {
   const {id, ...updateClause} = req.clause;
   
-  let response = await RoutineWorkoutController.updateRoutineWorkout( id, updateClause)
+  let response = await RoutineWorkoutController.updateRoutineWorkouts(id, updateClause)
   res.json(response)
 });
 

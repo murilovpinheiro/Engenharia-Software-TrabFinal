@@ -32,7 +32,7 @@ router.post('/insert', urlencodedParser, async (req, res) => {
   const { id, difficulty, obj, user_id} = req.body;
   //console.log(req.body);
   
-  let response = await WorkoutController.createWorkout(iid, difficulty, obj, user_idd)
+  let response = await WorkoutController.createWorkout(id, difficulty, obj, user_id)
   res.json(response)
 });
 

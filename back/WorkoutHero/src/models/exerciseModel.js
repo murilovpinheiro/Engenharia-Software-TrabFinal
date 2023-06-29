@@ -1,13 +1,17 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../configs/connsequelize');
 
+const {Muscular_Group_Exercise} = require('./muscular_group_exerciseModel');
+const {Muscular_Group} = require('./muscular_groupModel');
+
 class Exercise extends Model {}
 Exercise.init(
     {
+        // Propriedades existentes do modelo Exercise
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: false,              
+            autoIncrement: false,
         },
         name: {
             type: DataTypes.STRING,
@@ -38,16 +42,23 @@ Exercise.init(
         },
         rest: {
             type: DataTypes.TIME,
-            allowNull:false
+            allowNull: false
         },
     },
-        {
-            sequelize,
-            modelName: "Exercise",
-            tableName: "EXERCISE",
-            timestamps: false,
-            logging:false
-        }
+    {
+        sequelize,
+        modelName: "Exercise",
+        tableName: "EXERCISE",
+        timestamps: false,
+        logging: false
+    }
 );
+
+Exercise.belongsToMany(Muscular_Group, {
+    through: Muscular_Group_Exercise,
+    foreignKey: 'exercise_id',
+    otherKey: 'muscular_group_id',
+    as: 'muscularGroups',
+});
 
 module.exports = {Exercise, sequelize};

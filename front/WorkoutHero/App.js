@@ -15,7 +15,7 @@ import RoutinesListScreen from './src/screens/RoutinesListScreen';
 import CreateTrainingRoutineScreen from './src/screens/CreateTrainingRoutineScreen';
 import { ScreenContainer } from 'react-native-screens';
 
-
+import { AuthProvider } from './src/AuthContext';
 
 
 
@@ -37,23 +37,22 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    // <MainContainer/>
+    <AuthProvider>
+      <View style={{flex: 1}}>
 
-    <View style={{flex: 1}}>
-      
-      <NavigationContainer>
-        {/* <MainContainer/> */}
-        <Stack.Navigator initialRouteName='BEM VINDO'>
-          <Stack.Screen name='BEM VINDO'  options={navHeaderOptions} component={WelcomeScreen} />
-          <Stack.Screen name='LOGIN'  options={navHeaderOptions} component={LoginScreen} />
-          <Stack.Screen name='CRIAR CONTA'  options={navHeaderOptions} component={SignUpScreen} />
-      
-          <Stack.Screen name='MAIN' options={mainHeaderOptions} component={MainContainer}/>
-        </Stack.Navigator>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName='BEM VINDO'>
+            <Stack.Screen name='BEM VINDO'  options={navHeaderOptions} component={WelcomeScreen} />
+            <Stack.Screen name='LOGIN'  options={navHeaderOptions} component={LoginScreen} />
+            <Stack.Screen name='CRIAR CONTA'  options={navHeaderOptions} component={SignUpScreen} />
+        
+            <Stack.Screen name='MAIN' options={mainHeaderOptions} component={MainContainer}/>
+          </Stack.Navigator>
+        </NavigationContainer>
 
-          {/* <Stack.Screen name='MAIN' component={MainContainer}/> */}
-      </NavigationContainer>
-    </View>
+      </View>
+    </AuthProvider>
+    
   );
 }
 

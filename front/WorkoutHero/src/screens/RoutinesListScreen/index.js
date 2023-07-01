@@ -6,9 +6,27 @@ import RPGImageBackground from "../../components/RPGImageBackground";
 import RoutinePreview from "../../components/RoutinePreview/RoutinePreview";
 import { useNavigation } from "@react-navigation/core";
 
+import axios from 'axios'
+
 export default function RoutinesListScreen() {
     
     var navigation = useNavigation()
+
+    // const [data, setData] = useState([])
+
+    // useEffect(() => {
+    //     fetchTableData()
+    // }, [])
+
+    // const fetchTableData = async () => {
+    //     try {
+    //       const response = await axios.get('http://localhost:3000/user/select');
+    //       console.log(response.data); // Process the response data
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    // };
+
 
     var exampleRoutine = {
         nome: "Vários Agachamentos",

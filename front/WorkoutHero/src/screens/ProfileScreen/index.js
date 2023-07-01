@@ -1,6 +1,7 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {View, Text, processColor, Button, Image} from "react-native"
 import { SelectList } from "react-native-dropdown-select-list";
+import axios from "axios";
 import styles from "./style"
 
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
@@ -8,8 +9,46 @@ import MyTextRegular from "../../components/MyText/MyTextRegular";
 import MyTextH3 from "../../components/MyText/MyTextH3";
 import RPGImageBackground from "../../components/RPGImageBackground";
 
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
+
 export default function ProfileScreen() {
       
+    
+    const [userData, setUserData] = useState({})
+
+    useEffect(() => {
+        fetchUserData(0)
+    }, [])
+
+    const fetchUserData = async (userId) => {
+        const baseUrl = 'https://apiworkouthero.onrender.com'
+        //const url = `${baseUrl}/user/select?id=${userId}&name=${userName}`
+        const url = `${baseUrl}/user/select?id=${userId}`
+
+        try {
+          const response = await axios.get(url);
+          //console.log(response.data); // Process the response data
+          setUserData(response.data[0])
+        } catch (error) {
+          console.error(error);
+          console.log(JSON.stringify(error))
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          }
+        }
+    };
+
+    if (isEmpty(userData)) {
+        return (
+            <><RPGImageBackground/></>
+        );
+    }
+
+
     return (
         <>
         <RPGImageBackground/>
@@ -18,9 +57,9 @@ export default function ProfileScreen() {
 
 
             <View style={styles.viewUser}>
-                <MyTextH3>Murilo Pinheiro</MyTextH3>
+                <MyTextH3>{userData["name"]}</MyTextH3>
                 <MyTextRegular>3 semanas ativo 🔥</MyTextRegular>
-                <MyTextRegular>18244 XP</MyTextRegular>
+                <MyTextRegular>{userData["xp"]} XP</MyTextRegular>
                 {/* xp bar é placeholder */}
                 <View style={{height: 16, marginTop: 8, width: '100%', backgroundColor: 'white', borderRadius: 8, padding: 4, overflow: 'hidden'}}>
                     <View style={{height: '100%', backgroundColor: 'blue', width: '80%'}}></View>

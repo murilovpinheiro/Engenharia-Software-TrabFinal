@@ -15,6 +15,15 @@ import RoutinesListScreen from './src/screens/RoutinesListScreen';
 import CreateTrainingRoutineScreen from './src/screens/CreateTrainingRoutineScreen';
 import { ScreenContainer } from 'react-native-screens';
 
+
+
+
+
+
+
+
+
+
 export default function App() {
 
   const [fontsLoaded] = useFonts({

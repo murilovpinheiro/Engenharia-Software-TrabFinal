@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import {View, TouchableOpacity, ScrollView, TextInput} from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -11,8 +11,8 @@ import MyButtonRegular from "../../components/MyButton/MyButtonRegular"
 import MyTextRegular from "../../components/MyText/MyTextRegular"
 import MyTextH3 from "../../components/MyText/MyTextH3";
 
-
-
+import { WorkoutContext } from "../../WorkoutContext";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ViewTrainingRoutineScreen({route}) {
 
@@ -20,6 +20,22 @@ export default function ViewTrainingRoutineScreen({route}) {
     console.log(params)
     var routine = params.routine
     var exerciseList = routine["exerciseList"]
+
+    const navigation = useNavigation()
+
+    const { startWorkout } = useContext(WorkoutContext)
+
+    const chooseRoutine = () => {
+        console.log("func: ", startWorkout)
+        
+
+        // navigation.reset({
+        //     index: 0, routes: [{name:'TRAININGSCREEN'}]
+        // })
+        navigation.goBack()
+        navigation.navigate('TREINAR', {screen: 'TRAININGSCREEN'})
+        startWorkout(routine)
+    }
 
     const makeExercises = () => {
         var retList = []
@@ -42,7 +58,7 @@ export default function ViewTrainingRoutineScreen({route}) {
             </View>
             
             <MyButtonRegular title="Começar" style={styles.startBtn}
-            onPress={()=>{}}
+            onPress={chooseRoutine}
             />
             
             <ScrollView style={styles.scrollBody}>

@@ -51,6 +51,7 @@ export default function SignUpScreen() {
     }
 
     const handleSignUp = async () => {
+        setErrorMsg("")
         // testar credenciais
         try {
             if (nome === '') throw new Error("Nome vazio.")
@@ -61,7 +62,7 @@ export default function SignUpScreen() {
             if (senha === '') throw new Error("Senha vazia.")
             if (senhaConfirme != senha) throw new Error("Confirme a senha corretamente.")
 
-            var params = {name:nome, sex:sexoPraEnum(), weight:peso, height:altura, login:email, pass:senha}
+            var params = {name:nome, sex:sexoPraEnum(), weight:peso, height:altura/100, login:email, pass:senha}
             console.log("sending request")
             var response = await trySignUp(params)
 
@@ -71,6 +72,8 @@ export default function SignUpScreen() {
             })
 
         } catch (error) {
+            console.error(error)
+            console.log(error.message)
             setErrorMsg(error.message)
         }
 

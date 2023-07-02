@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { WorkoutContext } from "../../WorkoutContext";
 import Images from "../../Images";
-
+import MyButtonThin from "../../components/MyButton/MyButtonThin";
 
 export default function InTrainingScreen({route}) {
 
@@ -19,15 +19,29 @@ export default function InTrainingScreen({route}) {
     const { currentWorkout, setCurrentWorkout } = useContext(WorkoutContext)
     const { currentExerciseIndex, setCurrentExerciseIndex } = useContext(WorkoutContext)
     const { currentExercise, setCurrentExercise } = useContext(WorkoutContext)
+    
+    const [backgroundColor, setBackgroundColor] = useState('red')
+    const [sets, setSets] = useState([])
+
+    useEffect(() => {
+        setSets(() => {
+            let newSets = []
+            for (let i = 0; i < currentExercise.sets; ++i) {
+                newSets.push(false)
+            } 
+            console.log("SETS", newSets)
+            return newSets
+        })
+    }, [currentExercise])
 
     const finish = () => {
         console.log("Finished Exercise")
-        //TODO salvar progresso
+        //TODO: salvar progresso
     }
 
     const nextExercise = () => {
         setCurrentExerciseIndex(currentExerciseIndex + 1)
-        if (currentExerciseIndex >= currentWorkout.exerciseList.length) {
+        if (currentExerciseIndex >= currentWorkout.exerciseList.length-1) { // coloquei um menos um aki
             finish()
             return
         }
@@ -48,14 +62,38 @@ export default function InTrainingScreen({route}) {
     if (!currentWorkout || !currentExercise) {
         return (
             <><RPGImageBackground/>
-             <View style={styles.body}>
-                <MyTextRegular>
+             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                <MyTextRegular style = {{fontSize: 22}}>
                     Nenhum treino selecionado.
                 </MyTextRegular>
 
              </View>
             </>
         )
+    }
+
+    const makeExerciseView = () => {
+        var retList = []
+ 
+        for (let i = 0; i < currentExercise.sets; ++i) {
+            retList.push(
+                <MyButtonThin 
+                onPress={() => {
+                    setSets((prevL) => {prevL[i] = !prevL[i]; return prevL})
+                    console.log(sets)
+                    setBackgroundColor('blue')
+                }} 
+                key={i} 
+                title={`Seção ${i+1}: ${currentExercise.reps} repetições`} 
+                // style={[styles.selectOptions, sets[i] == true ? {backgroundColor} : null]} 
+                // style={{backgroundColor: 'red'}} 
+                style={sets[i] === true ? { backgroundColor: 'blue' } : { backgroundColor: 'red' }}
+                >
+                </MyButtonThin>
+            )
+        }
+
+        return retList
     }
 
     return (
@@ -74,12 +112,17 @@ export default function InTrainingScreen({route}) {
                 
                 <View style={{alignItems:'center', paddingVertical: 8}}>
                     <MyTextH3 style={{alignContent:'center'}}>{currentExercise.name.replace(/_/g, " ")}</MyTextH3>
-                    <MyTextH3 style={{alignContent:'center'}}>{currentExerciseIndex}</MyTextH3>
+                    {/* <MyTextH3 style={{alignContent:'center'}}>{currentExerciseIndex}</MyTextH3> */}
                 </View>
 
-                <MyTextRegular>
+                {/* <MyTextRegular>
                     {getLorem()}
-                </MyTextRegular>
+                </MyTextRegular> */}
+
+                {/* aqui vai ser os check do treino */}
+                <ScrollView style={styles.scrollBody}>
+                    { makeExerciseView() }
+                </ScrollView>
 
 
                 
@@ -98,6 +141,6 @@ export default function InTrainingScreen({route}) {
 
 
 
-function getLorem() {
-return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae lorem in velit finibus maximus. Cras ac cursus orci. Vivamus euismod libero nec ligula sodales luctus. Nullam id enim facilisis, dapibus sapien ut, auctor leo. Nulla imperdiet orci at ex congue, a commodo sapien lacinia. Nullam elit nulla, rutrum id commodo vitae, egestas vel tortor. Curabitur dapibus dictum rutrum. Aliquam id volutpat urna, a elementum purus. Sed maximus est eget nisl blandit convallis. Etiam et quam finibus, luctus leo nec, posuere sem. Cras quis risus et ligula dictum molestie et vitae elit. Sed pretium sodales pellentesque. Mauris at commodo odio. Vivamus vitae odio vel augue elementum placerat.Proin feugiat vestibulum quam a cursus. Curabitur diam dolor, dapibus a libero vitae, consectetur posuere orci. Nam ultrices consectetur eleifend. Donec eget libero lacinia, placerat magna nec, tristique tortor. Vivamus quis velit dolor. Phasellus ultricies mollis est, sed imperdiet sem porttitor et. Nulla congue tortor eu lectus consectetur, non dignissim sem eleifend. Sed odio lacus, eleifend non est in, varius molestie urna. Nunc suscipit ornare suscipit. Mauris in nulla quis lectus commodo ornare. Proin iaculis auctor sapien, ut placerat orci porta sed. Phasellus non lacus libero.Proin mattis eros ut egestas feugiat. Donec rhoncus quam et malesuada sagittis. Ut tristique ac diam ac porttitor. Aliquam nec venenatis felis. Etiam molestie est vitae arcu tempor sagittis. In ultricies libero est, nec tempor urna suscipit a. Vestibulum eget dolor id libero pellentesque interdum ut a eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Vestibulum iaculis elit ac neque aliquet, eu ornare leo scelerisque. Nulla sit amet dolor ut libero porta consectetur. Etiam posuere tempor egestas.Maecenas quis orci magna. Vestibulum arcu quam, rhoncus quis congue non, mattis sed velit. Duis consectetur lorem vitae sodales fermentum. Proin sagittis libero quis quam dictum, efficitur sagittis dui vulputate. Etiam interdum tortor vitae quam laoreet, vel interdum lorem vestibulum. Nullam et sagittis felis. Donec id odio lectus.Donec sit amet faucibus mauris. Aenean a elit a lectus tincidunt suscipit sit amet in ipsum. Phasellus vel egestas neque, sit amet pellentesque mauris. Morbi malesuada leo sed elit condimentum, vel tincidunt arcu dignissim. Nulla nec finibus tortor. Phasellus tristique malesuada tortor. Duis vitae libero non neque laoreet vestibulum consequat sit amet ex. Pellentesque dictum ac felis eget feugiat. Mauris eu elit non leo feugiat condimentum at nec nunc. Curabitur risus ante, molestie sed mauris vel, aliquet semper dolor. Donec sed dictum orci, id cursus nisi. Donec ipsum lacus, malesuada ac ullamcorper sed, volutpat id sapien. Curabitur quis vestibulum dolor. Aenean porttitor pretium tortor. Sed ultricies vestibulum rhoncus. Mauris scelerisque, ante eu condimentum blandit, mauris turpis malesuada lorem, quis porttitor dolor nulla ac turpis. '
-}
+// function getLorem() {
+// return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae lorem in velit finibus maximus. Cras ac cursus orci. Vivamus euismod libero nec ligula sodales luctus. Nullam id enim facilisis, dapibus sapien ut, auctor leo. Nulla imperdiet orci at ex congue, a commodo sapien lacinia. Nullam elit nulla, rutrum id commodo vitae, egestas vel tortor. Curabitur dapibus dictum rutrum. Aliquam id volutpat urna, a elementum purus. Sed maximus est eget nisl blandit convallis. Etiam et quam finibus, luctus leo nec, posuere sem. Cras quis risus et ligula dictum molestie et vitae elit. Sed pretium sodales pellentesque. Mauris at commodo odio. Vivamus vitae odio vel augue elementum placerat.Proin feugiat vestibulum quam a cursus. Curabitur diam dolor, dapibus a libero vitae, consectetur posuere orci. Nam ultrices consectetur eleifend. Donec eget libero lacinia, placerat magna nec, tristique tortor. Vivamus quis velit dolor. Phasellus ultricies mollis est, sed imperdiet sem porttitor et. Nulla congue tortor eu lectus consectetur, non dignissim sem eleifend. Sed odio lacus, eleifend non est in, varius molestie urna. Nunc suscipit ornare suscipit. Mauris in nulla quis lectus commodo ornare. Proin iaculis auctor sapien, ut placerat orci porta sed. Phasellus non lacus libero.Proin mattis eros ut egestas feugiat. Donec rhoncus quam et malesuada sagittis. Ut tristique ac diam ac porttitor. Aliquam nec venenatis felis. Etiam molestie est vitae arcu tempor sagittis. In ultricies libero est, nec tempor urna suscipit a. Vestibulum eget dolor id libero pellentesque interdum ut a eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Vestibulum iaculis elit ac neque aliquet, eu ornare leo scelerisque. Nulla sit amet dolor ut libero porta consectetur. Etiam posuere tempor egestas.Maecenas quis orci magna. Vestibulum arcu quam, rhoncus quis congue non, mattis sed velit. Duis consectetur lorem vitae sodales fermentum. Proin sagittis libero quis quam dictum, efficitur sagittis dui vulputate. Etiam interdum tortor vitae quam laoreet, vel interdum lorem vestibulum. Nullam et sagittis felis. Donec id odio lectus.Donec sit amet faucibus mauris. Aenean a elit a lectus tincidunt suscipit sit amet in ipsum. Phasellus vel egestas neque, sit amet pellentesque mauris. Morbi malesuada leo sed elit condimentum, vel tincidunt arcu dignissim. Nulla nec finibus tortor. Phasellus tristique malesuada tortor. Duis vitae libero non neque laoreet vestibulum consequat sit amet ex. Pellentesque dictum ac felis eget feugiat. Mauris eu elit non leo feugiat condimentum at nec nunc. Curabitur risus ante, molestie sed mauris vel, aliquet semper dolor. Donec sed dictum orci, id cursus nisi. Donec ipsum lacus, malesuada ac ullamcorper sed, volutpat id sapien. Curabitur quis vestibulum dolor. Aenean porttitor pretium tortor. Sed ultricies vestibulum rhoncus. Mauris scelerisque, ante eu condimentum blandit, mauris turpis malesuada lorem, quis porttitor dolor nulla ac turpis. '
+// }

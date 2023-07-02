@@ -4,7 +4,7 @@
 const Images = {
     exerciseImages: {
         "Barbell_Full_Squat": require("../assets/img/exercises/Barbell_Full_Squat.jpg"),
-        "X": require("../assets/img/exercises/X.jpg"),
+        // "X": require("../assets/img/exercises/X.jpg"),
     },
 };
 

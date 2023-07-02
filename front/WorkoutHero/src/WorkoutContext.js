@@ -10,8 +10,9 @@ const WorkoutProvider = ({ children }) => {
     const [currentExercise, setCurrentExercise] = useState(null)
 
     useEffect(() => {
-      if (!(currentExerciseIndex < 0) && !(currentExerciseIndex >= currentWorkout.exerciseList.length))
-          setCurrentExercise(currentWorkout.exerciseList[currentExerciseIndex])
+      if (currentWorkout != null)
+        if (!(currentExerciseIndex < 0) && !(currentExerciseIndex >= currentWorkout.exerciseList.length))
+            setCurrentExercise(currentWorkout.exerciseList[currentExerciseIndex])
     }, [currentExerciseIndex]);
 
     const startWorkout = (workout) => {

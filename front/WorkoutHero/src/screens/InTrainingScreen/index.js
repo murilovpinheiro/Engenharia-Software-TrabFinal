@@ -87,7 +87,7 @@ export default function InTrainingScreen({route}) {
             </ScrollView>
 
             <View style={styles.viewTimer}>
-                <TouchableOpacity onPress={prevExercise}><AntDesign style={styles.btnTimer} name='leftcircle' size={50} color='#808080'/></TouchableOpacity>
+                <TouchableOpacity onPress={prevExercise}><AntDesign style={styles.btnTimer} name='leftcircle' size={50} color={currentExerciseIndex == 0 ? '#00000000' : '#808080'}/></TouchableOpacity>
                 <TouchableOpacity onPress={handleClockPress}><AntDesign style={styles.btnTimer} name='clockcircleo' size={50} color='#F2BD00'/></TouchableOpacity>
                 <TouchableOpacity onPress={nextExercise}><AntDesign style={styles.btnTimer} name='rightcircle' size={50} color='#808080'/></TouchableOpacity>
             </View>

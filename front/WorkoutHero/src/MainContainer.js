@@ -1,4 +1,4 @@
-import React from "react"
+import React, { createContext } from "react"
 import { StyleSheet } from "react-native";
 
 import { NavigationContainer, TabRouter } from "@react-navigation/native";
@@ -14,7 +14,7 @@ import InTrainingScreen from "./screens/InTrainingScreen";
 import TimerScreen from "./screens/TimerScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-
+import { WorkoutContext, WorkoutProvider } from "./WorkoutContext";
 
 
 const namePerfil = "PERFIL"
@@ -24,10 +24,12 @@ const nameNovo = "TREINOS"
 const Tab = createBottomTabNavigator();
 
 
-
 export default function MainContainer(){
+
+   
     return (
-        // <NavigationContainer>
+        <WorkoutProvider>
+            
         <Tab.Navigator
         initialRouteName='LOGINFLUX'
         screenOptions={({route}) => ({
@@ -64,8 +66,8 @@ export default function MainContainer(){
             <Tab.Screen name={namePerfil} component={ProfileScreen}/>
 
         </Tab.Navigator>
+        </WorkoutProvider>
 
-        // </NavigationContainer>
     );
 }
 
@@ -118,6 +120,8 @@ const styles = StyleSheet.create({
     }
 });
   
+export { WorkoutContext }
+
 // const navHeaderOptions = {
 //     headerStyle: styles.navHeaderStyle,
 //     headerTintColor: 'white',

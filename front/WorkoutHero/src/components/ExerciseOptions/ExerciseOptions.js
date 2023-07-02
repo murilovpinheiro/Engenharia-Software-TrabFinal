@@ -17,7 +17,7 @@ export default function ExerciseOptions(props) {
     const stringFromGroups = (array) => {
         let str = ""
         for (let i = 0; i < array.length; i++){
-            str += array[i].toUpperCase() + " "
+            str += array[i].name.toUpperCase() + " "
         }
         return str
     }
@@ -25,12 +25,12 @@ export default function ExerciseOptions(props) {
     return (
         <View style={styles.body}>
             <View style={styles.header}>
-                <Image style={styles.headerImg} source={Images.exerciseImages[exercise.imagem]}>
-                </Image>
+                {/* <Image style={styles.headerImg} source={Images.exerciseImages[exercise.imagem]}/> */}
+
 
                 <View style={styles.headerTextView}>
-                    <MyTextH3 style={styles.headerTextName}>{exercise.nome}</MyTextH3>
-                    <MyTextRegular style={styles.headerTextType}>GRUPO MUSCULAR: {stringFromGroups(exercise.grupos_musculares)}</MyTextRegular>
+                    <MyTextH3 style={styles.headerTextName}>{exercise.name.replace(/_/g, " ")}</MyTextH3>
+                    <MyTextRegular style={styles.headerTextType}>GRUPO MUSCULAR: {stringFromGroups(exercise.muscularGroups)}</MyTextRegular>
                 </View>
 
                 {/* <TouchableOpacity style={styles.headerDelete}>

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext, useEffect, useState } from "react"
 import {View, Text, TextInput, Button, Image} from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import styles from "./style"
@@ -7,16 +7,35 @@ import MyTextRegular from "../../components/MyText/MyTextRegular";
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
 import MyTextInput from "../../components/MyTextInput/MyTextInput";
 
+import { AuthContext } from "../../AuthContext"
+
 export default function LoginScreen() {
 
     const navigation = useNavigation();
 
-    const handleLogin = () => {
-        // testar credenciais
+    const [ username, setUsername ] = useState('')
+    const [ password, setPassword ] = useState('')
+    const [ errorMsg, setErrorMsg ] = useState('')
 
-        navigation.reset({
-            index: 0, routes: [{name:'MAIN'}]
-        })
+    const { tryLogin } = useContext(AuthContext);
+
+
+    const handleLogin = async () => {
+        // testar credenciais
+        try {
+            var response = await tryLogin(username, password)
+            //console.log(response)
+            navigation.reset({
+                index: 0, routes: [{name:'MAIN'}]
+            })
+        } catch (error) {
+            console.log(error)
+            setErrorMsg(error.message)
+        }
+
+        // navigation.reset({
+        //     index: 0, routes: [{name:'MAIN'}]
+        // })
     }
 
     return (
@@ -34,19 +53,23 @@ export default function LoginScreen() {
             <View style={{flex: 0.1}}/>
 
             <MyTextRegular>USUÁRIO OU E-MAIL</MyTextRegular>
-            <MyTextInput style={styles.textInput} autoComplete='email'
+            <MyTextInput 
+            style={styles.textInput} autoComplete='email'
+            value={username} onChangeText={setUsername}
             ></MyTextInput>
 
             <View style={{flex: 0.05}}/>
 
             <MyTextRegular>SENHA</MyTextRegular>
-            <MyTextInput style={styles.textInput}  autoComplete='current-password'
+            <MyTextInput style={styles.textInput} 
+            autoComplete='current-password'
+            value={password} onChangeText={setPassword}
             ></MyTextInput>
 
             <View style={{flex: 0.05}}/>
 
             <View style={styles.viewError}>
-                <Text style={styles.textError}>Mensagens de erro vão aqui.</Text>
+                <Text style={styles.textError}>{errorMsg}</Text>
             </View>
             
 

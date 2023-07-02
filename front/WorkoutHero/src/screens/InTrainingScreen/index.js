@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import {View, Text, ScrollView, TouchableOpacity, Button, Image} from "react-native"
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import styles from "./style"
@@ -8,17 +8,33 @@ import MyTextH3 from "../../components/MyText/MyTextH3";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
 import { useNavigation } from "@react-navigation/native";
 
+import { WorkoutContext } from "../../WorkoutContext";
+
 export default function InTrainingScreen({route}) {
 
     const params = route.params
-
     const navigation = useNavigation();
+    const { currentWorkout, setCurrentWorkout } = useContext(WorkoutContext)
+    const { currentExerciseIndex, setCurrentExerciseIndex } = useContext(WorkoutContext)
+
 
     const handleClockPress = () => {
         // Lógica para navegar para outra tela
         navigation.navigate('TIMERSCREEN');
     };
     
+    if (!currentWorkout) {
+        return (
+            <><RPGImageBackground/>
+             <View style={styles.body}>
+                <MyTextRegular>
+                    Nenhum treino selecionado.
+                </MyTextRegular>
+
+             </View>
+            </>
+        )
+    }
 
     return (
         <>

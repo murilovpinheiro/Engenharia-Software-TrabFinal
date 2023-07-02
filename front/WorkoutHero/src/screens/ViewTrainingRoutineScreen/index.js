@@ -19,14 +19,14 @@ export default function ViewTrainingRoutineScreen({route}) {
     var params = route.params
     console.log(params)
     var routine = params.routine
-    var exerciseList = routine.exerciseList
+    var exerciseList = routine["exerciseList"]
 
     const makeExercises = () => {
         var retList = []
         for (let i = 0; i < exerciseList.length; i++) {
             let exercise = exerciseList[i]
             retList.push(
-                <ExerciseOptions exercise={exerciseList[0]}/>
+                <ExerciseOptions key={i} exercise={exerciseList[i]}/>
             )
         }
         return retList
@@ -38,7 +38,7 @@ export default function ViewTrainingRoutineScreen({route}) {
         <View style={styles.body}>
             <View style={{flexDirection:'row', alignItems: 'center'}}>
                 {/* <MyTextInput style={{margin: 10, flex:0.8}} defaultValue='Treino 1'></MyTextInput> */}
-                <MyTextH3 style={styles.textName}>{routine.nome}</MyTextH3>
+                <MyTextH3 style={styles.textName}>{routine.obj}</MyTextH3>
 
             </View>
             

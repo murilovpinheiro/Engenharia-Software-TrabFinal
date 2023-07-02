@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import {View, Text, processColor, Button, Image} from "react-native"
 import { SelectList } from "react-native-dropdown-select-list";
 import axios from "axios";
@@ -9,52 +9,34 @@ import MyTextRegular from "../../components/MyText/MyTextRegular";
 import MyTextH3 from "../../components/MyText/MyTextH3";
 import RPGImageBackground from "../../components/RPGImageBackground";
 
+import { AuthContext } from "../../AuthContext";
+
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
 
 export default function ProfileScreen() {
-      
     
-    const [userData, setUserData] = useState({})
+    const { userData } = useContext(AuthContext)
 
     useEffect(() => {
-        fetchUserData(0)
+        fetchUserData()
     }, [])
 
-    const fetchUserData = async (userId) => {
-        const baseUrl = 'https://apiworkouthero.onrender.com'
-        //const url = `${baseUrl}/user/select?id=${userId}&name=${userName}`
-        const url = `${baseUrl}/user/select?id=${userId}`
-
-        try {
-          const response = await axios.get(url);
-          //console.log(response.data); // Process the response data
-          setUserData(response.data[0])
-        } catch (error) {
-          console.error(error);
-          console.log(JSON.stringify(error))
-          if (error.response) {
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-          }
-        }
+    const fetchUserData = async () => {
     };
 
-    if (isEmpty(userData)) {
+    if (!userData) {
         return (
             <><RPGImageBackground/></>
         );
     }
-
 
     return (
         <>
         <RPGImageBackground/>
 
         <View style={styles.body}>
-
 
             <View style={styles.viewUser}>
                 <MyTextH3>{userData["name"]}</MyTextH3>

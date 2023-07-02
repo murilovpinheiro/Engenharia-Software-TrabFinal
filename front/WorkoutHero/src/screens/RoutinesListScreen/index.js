@@ -31,6 +31,7 @@ export default function RoutinesListScreen() {
         fetchData();
     }, []);
 
+
     // var exampleRoutine = {
     //     nome: "Vários Agachamentos",
     //     exerciseList: [
@@ -41,6 +42,7 @@ export default function RoutinesListScreen() {
     // }
 
     //var routinesList = [exampleRoutine, exampleRoutine]
+
     
     const pegarTodosTreinos = async () => {
         // console.log("Fetching todos treinos...");

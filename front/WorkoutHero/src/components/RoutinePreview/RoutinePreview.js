@@ -7,7 +7,6 @@ import MyTextH3 from "../MyText/MyTextH3";
 import { ScrollView } from "react-native-gesture-handler";
 
 import Images from "../../Images";
-import ImageModal from "react-native-image-modal";
 
 export default function RoutinePreview(props) {
     // console.log("PROPS: props")
@@ -21,14 +20,15 @@ export default function RoutinePreview(props) {
             var exercise = list[i]
             console.log("EXERCICIO: ", exercise)
             var imgName = exercise.name + ".jpg"
+
+            var nomeFormatado = '   ' + exercise.name.replace(new RegExp('_', "g"), ' ').slice(0, 14) + '... ';
+            
             returnList.push(
                 <View key={i}>
                 {/* // <View key={i} style={{borderWidth: 2, borderColor:'gold', borderRadius: 8, height: 80, margin: 8}}> */}
-                    <MyTextRegular>{exercise.name}</MyTextRegular>
-                    <ImageModal style={styles.img} key={i}
-                    source={{
-                        uri: `../../../assets/img/exercises/${imgName}`,
-                      }}
+                    <MyTextRegular>{nomeFormatado}</MyTextRegular>
+                    <Image style={styles.img} key={i}
+                    source={ Images.exerciseImages[exercise.name] }
                     //source={ img }
                     onError={(error) => console.log('Image loading error:', error)}
                     />

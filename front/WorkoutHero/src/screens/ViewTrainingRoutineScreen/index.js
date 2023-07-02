@@ -24,7 +24,6 @@ export default function ViewTrainingRoutineScreen({route}) {
     const makeExercises = () => {
         var retList = []
         for (let i = 0; i < exerciseList.length; i++) {
-            let exercise = exerciseList[i]
             retList.push(
                 <ExerciseOptions key={i} exercise={exerciseList[i]}/>
             )

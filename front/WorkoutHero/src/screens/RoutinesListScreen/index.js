@@ -31,27 +31,36 @@ export default function RoutinesListScreen() {
         fetchData();
     }, []);
 
-    var exampleRoutine = {
-        nome: "Vários Agachamentos",
-        exerciseList: [
-            {nome:"Barbell Full Squat", imagem:"Barbell_Full_Squat", grupos_musculares:["Costas","Coxas","Quadril"]},
-            {nome:"Barbell Full Squat", imagem:"Barbell_Full_Squat", grupos_musculares:["Costas","Coxas","Quadril"]},
-            {nome:"Barbell Full Squat", imagem:"Barbell_Full_Squat", grupos_musculares:["Costas","Coxas","Quadril"]},
-        ]
-    }
+    // var exampleRoutine = {
+    //     nome: "Vários Agachamentos",
+    //     exerciseList: [
+    //         {nome:"Barbell Full Squat", imagem:"Barbell_Full_Squat", grupos_musculares:["Costas","Coxas","Quadril"]},
+    //         {nome:"Barbell Full Squat", imagem:"Barbell_Full_Squat", grupos_musculares:["Costas","Coxas","Quadril"]},
+    //         {nome:"Barbell Full Squat", imagem:"Barbell_Full_Squat", grupos_musculares:["Costas","Coxas","Quadril"]},
+    //     ]
+    // }
 
     //var routinesList = [exampleRoutine, exampleRoutine]
     
     const pegarTodosTreinos = async () => {
-        console.log("Fetching todos treinos...");
+        // console.log("Fetching todos treinos...");
         var url = baseUrl + `/WORKOUT/select?user_id=0`;
         let data = null;
         let response = null;
 
         try {
             response = await axios.get(url)
-            console.log("Data: ", response.data)
-            setRoutinesList(response.data)
+
+            // logica de sort de treinos
+            let listaTreinos = response.data;
+            for (let i = 0; i < listaTreinos.length; ++i) {
+                let exListAtual = listaTreinos[i].exerciseList;
+                const listaOrdenada = exListAtual.sort((a, b) => a.Workout_Exercise.id - b.Workout_Exercise.id);
+                listaTreinos[i].exerciseList = listaOrdenada;
+            }
+
+            // console.log("Data: ", listaTreinos)
+            setRoutinesList(listaTreinos)
 
         } catch (error) {
             //console.log("error from pegarTodosTreinos")

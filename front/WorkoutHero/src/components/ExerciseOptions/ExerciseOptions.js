@@ -29,7 +29,7 @@ export default function ExerciseOptions(props) {
 
 
                 <View style={styles.headerTextView}>
-                    <MyTextH3 style={styles.headerTextName}>{exercise.name.replace(/_/g, " ")}</MyTextH3>
+                    <MyTextH3 style={styles.headerTextName}>{exercise.name.replace(/_/g, " ").replace(/\([^()]*\)/g, "")}</MyTextH3>
                     <MyTextRegular style={styles.headerTextType}>GRUPO MUSCULAR: {stringFromGroups(exercise.muscularGroups)}</MyTextRegular>
                 </View>
 

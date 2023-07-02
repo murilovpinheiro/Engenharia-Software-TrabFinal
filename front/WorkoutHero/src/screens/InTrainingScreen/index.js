@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import {View, Text, ScrollView, TouchableOpacity, Button, Image} from "react-native"
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import styles from "./style"
@@ -9,6 +9,8 @@ import MyTextRegular from "../../components/MyText/MyTextRegular";
 import { useNavigation } from "@react-navigation/native";
 
 import { WorkoutContext } from "../../WorkoutContext";
+import Images from "../../Images";
+
 
 export default function InTrainingScreen({route}) {
 
@@ -16,14 +18,34 @@ export default function InTrainingScreen({route}) {
     const navigation = useNavigation();
     const { currentWorkout, setCurrentWorkout } = useContext(WorkoutContext)
     const { currentExerciseIndex, setCurrentExerciseIndex } = useContext(WorkoutContext)
+    const { currentExercise, setCurrentExercise } = useContext(WorkoutContext)
 
+    const finish = () => {
+        console.log("Finished Exercise")
+        //TODO salvar progresso
+    }
+
+    const nextExercise = () => {
+        setCurrentExerciseIndex(currentExerciseIndex + 1)
+        if (currentExerciseIndex >= currentWorkout.exerciseList.length) {
+            finish()
+            return
+        }
+    }
+
+    const prevExercise = () => {
+        if (currentExerciseIndex > 0) {
+            setCurrentExerciseIndex(currentExerciseIndex - 1)
+        }
+       
+    }
 
     const handleClockPress = () => {
         // Lógica para navegar para outra tela
         navigation.navigate('TIMERSCREEN');
     };
     
-    if (!currentWorkout) {
+    if (!currentWorkout || !currentExercise) {
         return (
             <><RPGImageBackground/>
              <View style={styles.body}>
@@ -42,10 +64,17 @@ export default function InTrainingScreen({route}) {
         <View style={styles.body}>
             
             <ScrollView style={styles.scrollBody}>
-                <View style={styles.imgBox}></View>
+                {/* <View style={styles.imgBox}> */}
+                    <Image
+                    style={styles.imgBox}
+                    source={ Images.exerciseImages[currentExercise.name] }
+                    />
+
+                {/* </View> */}
                 
                 <View style={{alignItems:'center', paddingVertical: 8}}>
-                    <MyTextH3 style={{alignContent:'center'}}>Agachamento Goblet</MyTextH3>
+                    <MyTextH3 style={{alignContent:'center'}}>{currentExercise.name.replace(/_/g, " ")}</MyTextH3>
+                    <MyTextH3 style={{alignContent:'center'}}>{currentExerciseIndex}</MyTextH3>
                 </View>
 
                 <MyTextRegular>
@@ -58,9 +87,9 @@ export default function InTrainingScreen({route}) {
             </ScrollView>
 
             <View style={styles.viewTimer}>
-                <TouchableOpacity><AntDesign style={styles.btnTimer} name='leftcircle' size={50} color='#808080'/></TouchableOpacity>
+                <TouchableOpacity onPress={prevExercise}><AntDesign style={styles.btnTimer} name='leftcircle' size={50} color='#808080'/></TouchableOpacity>
                 <TouchableOpacity onPress={handleClockPress}><AntDesign style={styles.btnTimer} name='clockcircleo' size={50} color='#F2BD00'/></TouchableOpacity>
-                <TouchableOpacity><AntDesign style={styles.btnTimer} name='rightcircle' size={50} color='#808080'/></TouchableOpacity>
+                <TouchableOpacity onPress={nextExercise}><AntDesign style={styles.btnTimer} name='rightcircle' size={50} color='#808080'/></TouchableOpacity>
             </View>
         </View>
         </>

@@ -63,6 +63,7 @@ export default function ProfileScreen() {
 
             <View style={{flex: 0.7}}>
                 {/* <ExerciseChart/> */}
+
             </View>
 
             <View style={{flex: 0.05}}/>

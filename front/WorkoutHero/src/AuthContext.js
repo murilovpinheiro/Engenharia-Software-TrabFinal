@@ -62,11 +62,12 @@ const AuthProvider = ({ children }) => {
         try {
             response = await axios.post(url, params, { timeout });
             console.log("Response: ", response)
+            console.log("Message: ", response.data.message)
 
             if (!response.data || response.data.length === 0) {
                 // Handle case when no data is returned
                 throw new Error('Ocorreu um erro. Tente novamente.')
-            } else if (response.data.message) {
+            } else if (response.data.message != "") {
                 throw new Error(response.data.message)
             } else {
                 // Handle the data returned by the request

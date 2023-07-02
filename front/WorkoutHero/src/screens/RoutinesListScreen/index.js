@@ -30,17 +30,6 @@ export default function RoutinesListScreen() {
       
         fetchData();
     }, []);
-
-    var exampleRoutine = {
-        nome: "Vários Agachamentos",
-        exerciseList: [
-            {nome:"Barbell Full Squat", imagem:"Barbell_Full_Squat", grupos_musculares:["Costas","Coxas","Quadril"]},
-            {nome:"Barbell Full Squat", imagem:"Barbell_Full_Squat", grupos_musculares:["Costas","Coxas","Quadril"]},
-            {nome:"Barbell Full Squat", imagem:"Barbell_Full_Squat", grupos_musculares:["Costas","Coxas","Quadril"]},
-        ]
-    }
-
-    //var routinesList = [exampleRoutine, exampleRoutine]
     
     const pegarTodosTreinos = async () => {
         console.log("Fetching todos treinos...");

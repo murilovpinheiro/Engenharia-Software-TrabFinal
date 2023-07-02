@@ -25,7 +25,7 @@ export default function ExerciseOptions(props) {
     return (
         <View style={styles.body}>
             <View style={styles.header}>
-                {/* <Image style={styles.headerImg} source={Images.exerciseImages[exercise.imagem]}/> */}
+                <Image style={styles.headerImg} source={Images.exerciseImages[exercise.name]}/>
 
 
                 <View style={styles.headerTextView}>
@@ -39,9 +39,7 @@ export default function ExerciseOptions(props) {
             </View>
 
             <View style={styles.viewOptions}>
-                <MyButtonThin title='MUDAR PRA LIST SELECT' style={styles.selectOptions}></MyButtonThin>
-                <MyButtonThin title='MUDAR PRA LIST SELECT' style={styles.selectOptions}></MyButtonThin>
-                <MyButtonThin title='MUDAR PRA LIST SELECT' style={styles.selectOptions}></MyButtonThin>
+                <MyButtonThin title={`${exercise.sets} seções de ${exercise.reps} repetições`} style={styles.selectOptions}></MyButtonThin>
             </View>
 
             <View style={styles.divider}></View>

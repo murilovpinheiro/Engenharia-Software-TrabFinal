@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         flex:0.15, 
         backgroundColor: 'gray', borderRadius:32, 
         margin:2, marginRight: 8, aspectRatio:1,
-        alignVertical:'center'
+        // alignVertical:'center'
     },
     headerTextView: {
         flex:0.85,

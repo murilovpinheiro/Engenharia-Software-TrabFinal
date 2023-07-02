@@ -21,12 +21,13 @@ export default function RoutinePreview(props) {
             console.log("EXERCICIO: ", exercise)
             var imgName = exercise.name + ".jpg"
 
-            var nomeFormatado = '   ' + exercise.name.replace(new RegExp('_', "g"), ' ').slice(0, 14) + '... ';
+            var nomeFormatado = exercise.name.replace(new RegExp('_', "g"), ' ').slice(0, 14) + '... ';
+            if (nomeFormatado.length < 15) nomeFormatado = nomeFormatado.slice(0, nomeFormatado.length-4)
             
             returnList.push(
                 <View key={i}>
                 {/* // <View key={i} style={{borderWidth: 2, borderColor:'gold', borderRadius: 8, height: 80, margin: 8}}> */}
-                    <MyTextRegular>{nomeFormatado}</MyTextRegular>
+                    <MyTextRegular style={ {width: '100%', textAlign: 'center' } }>{nomeFormatado}</MyTextRegular>
                     <Image style={styles.img} key={i}
                     source={ Images.exerciseImages[exercise.name] }
                     //source={ img }

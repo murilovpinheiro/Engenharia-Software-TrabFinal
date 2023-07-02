@@ -23,7 +23,10 @@ const styles = StyleSheet.create({
     },
     btnTimer: {
         marginHorizontal: 20, marginTop: 16, marginBottom: 30
-    }
+    },
+    selectOptions:{
+        margin: 5
+    },
 
 });
 

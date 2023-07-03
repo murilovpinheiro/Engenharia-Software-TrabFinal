@@ -32,9 +32,10 @@ export default function ViewTrainingRoutineScreen({route}) {
         // navigation.reset({
         //     index: 0, routes: [{name:'TRAININGSCREEN'}]
         // })
+        startWorkout(routine)
         navigation.goBack()
         navigation.navigate('TREINAR', {screen: 'TRAININGSCREEN'})
-        startWorkout(routine)
+        
     }
 
     const makeExercises = () => {

@@ -22,24 +22,27 @@ export default function InTrainingScreen({route}) {
     const { currentExerciseIndex, setCurrentExerciseIndex } = useContext(WorkoutContext)
     const { currentExercise, setCurrentExercise } = useContext(WorkoutContext)
     
-    const [sets, setSets] = useState([])
+    const [backgroundColor, setBackgroundColor] = useState('red')
+    //const [sets, setSets] = useState([])
 
-    useEffect(() => {
-        setSets(() => {
+    // useEffect(() => {
+    //     setSets(() => {
+    //         let newSets = []
+    //         if (currentExercise != null)
+    //             for (let i = 0; i < currentExercise.sets; ++i) {
+    //                 newSets.push(false)
+    //             } 
+    //         console.log("SETS", newSets)
+    //         return newSets
+    //     })
+    // }, [currentExercise])
 
-            if (currentProgressL[currentExerciseIndex].length != 0) {
-                return currentProgressL[currentExerciseIndex];
-            } 
-
-            let newSets = []
-            if (currentExercise != null)
-                for (let i = 0; i < currentExercise.sets; ++i) {
-                    newSets.push(false)
-                } 
-            console.log("SETS", newSets)
-            return newSets
-        })
-    }, [currentExerciseIndex]) // mudei aki
+    const setSets = (index) => {
+        var newProgressList = currentProgressL
+        newProgressList[currentExerciseIndex][index] = !newProgressList[currentExerciseIndex][index]
+        setCurrentProgressL(newProgressList)
+        console.log(currentProgressL)
+    }
 
     const finish = () => {
         console.log("Finished Exercise")
@@ -51,10 +54,10 @@ export default function InTrainingScreen({route}) {
         console.log(currentProgressL)
 
         // antes de atualizar o index:
-        setCurrentProgressL((prev) => {
-            prev[currentExerciseIndex] = sets;
-            return prev
-        })
+        // setCurrentProgressL((prev) => {
+        //     prev[currentExerciseIndex] = sets;
+        //     return prev
+        // })
         console.log("PROGRESSO ATUAL:", currentProgressL)
 
         // atualizo o index
@@ -68,10 +71,10 @@ export default function InTrainingScreen({route}) {
     const prevExercise = () => {
 
         // antes de atualizar o index:
-        setCurrentProgressL((prev) => {
-            prev[currentExerciseIndex] = sets;
-            return prev
-        })
+        // setCurrentProgressL((prev) => {
+        //     prev[currentExerciseIndex] = sets;
+        //     return prev
+        // })
         console.log("PROGRESSO ATUAL:", currentProgressL)
 
         if (currentExerciseIndex > 0) {
@@ -98,6 +101,8 @@ export default function InTrainingScreen({route}) {
         )
     }
 
+    
+
     const makeExerciseView = () => {
         var retList = []
  
@@ -108,14 +113,13 @@ export default function InTrainingScreen({route}) {
                 retList.push(
                     <MyButtonSwitch 
                     onToggle={() => {
-                        setSets((prevL) => {prevL[i] = !prevL[i]; return prevL})
-                        console.log(sets)
+                        setSets(i)
                         // setBackgroundColor('blue')
                     }} 
                     key={i} 
                     title={`Seção ${i+1}: ${currentExercise.reps} repetições`} 
                     style={[styles.selectOptions]} 
-                    value={false}
+                    value={() => {let newValue = currentProgressL[currentExerciseIndex][i]; return newValue}}
                     // style={{backgroundColor: 'red'}} 
                     // style={sets[i] === true ? { backgroundColor: 'blue' } : { backgroundColor: 'red' }}
                     >
@@ -153,7 +157,7 @@ export default function InTrainingScreen({route}) {
                 <ScrollView style={styles.scrollBody}>
 
                     {/* (sets != []) ? {currentExercise && makeExerciseView()} : {currentExercise && makeExerciseView()} */}
-                    {sets.length !== 0 && currentExercise && makeExerciseView()}
+                    {currentExercise && makeExerciseView()}
                                         
                 </ScrollView>
             

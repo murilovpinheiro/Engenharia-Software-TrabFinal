@@ -23,7 +23,7 @@ export default function ProfileScreen() {
 
     useEffect(() => {
         console.log("USUARIOOOOOOOOPERFIL", userData)
-        // fetchUserData()
+        fetchUserData()
     }, [])
 
     const fetchUserData = async () => {

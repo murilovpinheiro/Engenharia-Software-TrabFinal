@@ -11,7 +11,8 @@ export default function MyButtonSwitch(props) {
   
     const toggleSwitch = () => {
       setIsEnabled((previousState) => !previousState);
-      props.onToggle && props.onToggle(!isEnabled);
+      // props.onToggle() && props.onToggle(!isEnabled);
+      props.onToggle()
     };
   
     const resetSwitch = () => {
@@ -31,7 +32,8 @@ export default function MyButtonSwitch(props) {
           <Switch
             style={{ transform: [{ scaleX: 0.9 }, { scaleY: 0.9 }], margin: 0 }}
             onValueChange={toggleSwitch}
-            value={isEnabled}
+            // value={() => {setIsEnabled(props.value); return isEnabled}}
+            value = {props.value}
           />
           {props.children}
         </View>

@@ -23,19 +23,10 @@ export default function InTrainingScreen({route}) {
     const { currentExercise, setCurrentExercise } = useContext(WorkoutContext)
     
     const [backgroundColor, setBackgroundColor] = useState('red')
-    //const [sets, setSets] = useState([])
 
-    // useEffect(() => {
-    //     setSets(() => {
-    //         let newSets = []
-    //         if (currentExercise != null)
-    //             for (let i = 0; i < currentExercise.sets; ++i) {
-    //                 newSets.push(false)
-    //             } 
-    //         console.log("SETS", newSets)
-    //         return newSets
-    //     })
-    // }, [currentExercise])
+    useEffect(() => {
+        console.log('refresh')
+      }, [currentProgressL]);
 
     const setSets = (index) => {
         var newProgressList = currentProgressL
@@ -112,10 +103,10 @@ export default function InTrainingScreen({route}) {
                         setSets(i)
                         // setBackgroundColor('blue')
                     }} 
-                    key={i} 
+                    key={currentExerciseIndex*100 + i} 
                     title={`Seção ${i+1}: ${currentExercise.reps} repetições`} 
                     style={[styles.selectOptions]} 
-                    value={() => {let newValue = currentProgressL[currentExerciseIndex][i]; return newValue}}
+                    value={currentProgressL[currentExerciseIndex][i]}
                     // style={{backgroundColor: 'red'}} 
                     // style={sets[i] === true ? { backgroundColor: 'blue' } : { backgroundColor: 'red' }}
                     >
@@ -151,12 +142,9 @@ export default function InTrainingScreen({route}) {
 
                 {/* aqui vai ser os check do treino */}
                 <ScrollView style={styles.scrollBody}>
-
                     {/* (sets != []) ? {currentExercise && makeExerciseView()} : {currentExercise && makeExerciseView()} */}
-                    {currentExercise && makeExerciseView()}
-                                        
+                    {currentExercise && makeExerciseView()}         
                 </ScrollView>
-            
 
             </ScrollView>
 

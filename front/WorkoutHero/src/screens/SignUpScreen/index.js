@@ -88,7 +88,7 @@ export default function SignUpScreen() {
             
             {/* <Text>Criar uma conta</Text> */}
             
-            <View style={{flex: 0.2, zIndex: 999, borderColor:'red', borderWidth:2}}>
+            <View style={{flex: 0.2, zIndex: 999}}>
                 <MyTextRegular>NOME</MyTextRegular>
                 <MyTextInput style={styles.textInput} 
                 value={nome} onChangeText={setNome}
@@ -109,7 +109,7 @@ export default function SignUpScreen() {
 
             <View style={{flex: 0.05}}/>
 
-            <View style={{flexDirection:'row', flex: 0.1, borderColor:'red', borderWidth:2}}>
+            <View style={{flexDirection:'row', flex: 0.1}}>
                 <View style={{flex:0.45}}>
                     <MyTextRegular>ALTURA (cm)</MyTextRegular>
                     <MyTextInput style={styles.textInput} inputMode='numeric'
@@ -127,7 +127,7 @@ export default function SignUpScreen() {
 
             <View style={{flex: 0.05}}/>
 
-            <View style={{flex: 0.3, borderColor:'red', borderWidth:2}}>
+            <View style={{flex: 0.3}}>
                 <MyTextRegular>EMAIL</MyTextRegular>
                 <MyTextInput style={styles.textInput}
                 value={email} onChangeText={setEmail}

@@ -36,8 +36,12 @@ const WorkoutProvider = ({ children }) => {
       setCurrentProgressL(newProgressList);
     }
 
+    const finishWorkout = () => {
+      console.log("ta no workoutcontext")
+    }
+
     return (
-      <WorkoutContext.Provider value={{ currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, startWorkout, currentProgressL, setCurrentProgressL }}>
+      <WorkoutContext.Provider value={{ currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, startWorkout, currentProgressL, setCurrentProgressL, finishWorkout }}>
         {children}
       </WorkoutContext.Provider>
     );

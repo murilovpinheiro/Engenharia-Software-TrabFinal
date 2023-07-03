@@ -8,17 +8,17 @@ const styles = StyleSheet.create({
     textInput: {
     },
     dropdownBox: {
-        borderColor: 'white',
-        borderWidth: 3,
-        borderRadius: 16,
+        // borderColor: 'white',
+        // borderWidth: 3,
+        // borderRadius: 16,
         paddingLeft: 8, paddingRight: 8, paddingVertical: 5,
         backgroundColor: '#CCCED2', color: 'white',
         zIndex: 999
     },
     dropdownList: {
-        borderColor: 'white',
-        borderWidth: 3,
-        borderRadius: 16,
+        // borderColor: 'white',
+        // borderWidth: 3,
+        // borderRadius: 16,
         backgroundColor: '#CCCED2', color: 'white',
         zIndex: 999
     },
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     viewError: {
         //backgroundColor: '#aaa',
-        borderWidth: 4, borderColor: "red",
+        // borderWidth: 4, borderColor: "red",
         flex: 0.1,
         height: 100,
     },

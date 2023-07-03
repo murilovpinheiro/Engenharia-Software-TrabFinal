@@ -24,10 +24,12 @@ const WorkoutProvider = ({ children }) => {
       setCurrentExerciseIndex(0)
       setCurrentExercise(workout.exerciseList[0])
       setCurrentProgressL(
-        (prevList) => {
+        () => {
+          let retList = []
           workout.exerciseList.forEach(e => {
-            prevList.push([])
+            retList.push([])
           });
+          return retList
         } 
       )
     }

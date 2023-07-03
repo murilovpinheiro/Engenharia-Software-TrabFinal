@@ -22,11 +22,15 @@ export default function InTrainingScreen({route}) {
     const { currentExerciseIndex, setCurrentExerciseIndex } = useContext(WorkoutContext)
     const { currentExercise, setCurrentExercise } = useContext(WorkoutContext)
     
-    const [backgroundColor, setBackgroundColor] = useState('red')
     const [sets, setSets] = useState([])
 
     useEffect(() => {
         setSets(() => {
+
+            if (currentProgressL[currentExerciseIndex].length != 0) {
+                return currentProgressL[currentExerciseIndex];
+            } 
+
             let newSets = []
             if (currentExercise != null)
                 for (let i = 0; i < currentExercise.sets; ++i) {
@@ -35,7 +39,7 @@ export default function InTrainingScreen({route}) {
             console.log("SETS", newSets)
             return newSets
         })
-    }, [currentExercise])
+    }, [currentExerciseIndex]) // mudei aki
 
     const finish = () => {
         console.log("Finished Exercise")
@@ -43,6 +47,8 @@ export default function InTrainingScreen({route}) {
     }
 
     const nextExercise = () => {
+
+        console.log(currentProgressL)
 
         // antes de atualizar o index:
         setCurrentProgressL((prev) => {

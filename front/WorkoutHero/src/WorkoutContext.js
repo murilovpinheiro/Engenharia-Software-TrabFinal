@@ -23,13 +23,17 @@ const WorkoutProvider = ({ children }) => {
       setCurrentWorkout(workout)
       setCurrentExerciseIndex(0)
       setCurrentExercise(workout.exerciseList[0])
-      setCurrentProgressL(
-        (prevList) => {
-          workout.exerciseList.forEach(e => {
-            prevList.push([])
-          });
-        } 
-      )
+      
+      var newProgressList = []
+      for (let j = 0; j < workout.exerciseList.length; j++) {
+        let setArray = []
+        console.log(workout.exerciseList[j].sets)
+        for (let i = 0; i < workout.exerciseList[j].sets; i++) {
+          setArray.push(false)
+        }
+        newProgressList.push(setArray)
+      }
+      setCurrentProgressL(newProgressList);
     }
 
     return (

@@ -22,11 +22,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "softwareKeyboardLayoutMode": "pan"
-      
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.natanmaia95.WorkoutHero"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "34c993fb-3bf5-4c72-b636-1ee915014763"
+      }
     }
   }
 }

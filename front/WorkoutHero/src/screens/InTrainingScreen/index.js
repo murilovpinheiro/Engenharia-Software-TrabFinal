@@ -45,15 +45,6 @@ export default function InTrainingScreen({route}) {
         console.log(currentProgressL)
     }
 
-    const finish = () => {
-        console.log("Finished Exercise")
-        //TODO: salvar progresso
-        navigation.reset({
-            index: 0, routes: [{name:'MAIN'}]
-        })
-
-    }
-
     const nextExercise = () => {
 
         console.log(currentProgressL)
@@ -68,7 +59,6 @@ export default function InTrainingScreen({route}) {
         // atualizo o index
         setCurrentExerciseIndex(currentExerciseIndex + 1)
         if (currentExerciseIndex >= currentWorkout.exerciseList.length-1) { // coloquei um menos um aki
-            finish()
             finishWorkout()
             return
         }

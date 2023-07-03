@@ -1,9 +1,12 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { useNavigation } from "@react-navigation/native";
 
 
 const WorkoutContext = createContext();
 
 const WorkoutProvider = ({ children }) => {
+
+    const navigation = useNavigation();
 
     const [currentWorkout, setCurrentWorkout] = useState(null);
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
@@ -37,7 +40,14 @@ const WorkoutProvider = ({ children }) => {
     }
 
     const finishWorkout = () => {
-      console.log("ta no workoutcontext")
+      console.log("Finished Exercise")
+      //TODO: salvar progresso
+
+      
+
+      navigation.reset({
+          index: 0, routes: [{name:'MAIN'}]
+      })
     }
 
     return (

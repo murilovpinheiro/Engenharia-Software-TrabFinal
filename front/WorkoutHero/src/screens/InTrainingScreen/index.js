@@ -18,6 +18,7 @@ export default function InTrainingScreen({route}) {
     const params = route.params
     const navigation = useNavigation();
     const { currentWorkout, setCurrentWorkout } = useContext(WorkoutContext)
+    const { currentProgressL, setCurrentProgressL } = useContext(WorkoutContext)
     const { currentExerciseIndex, setCurrentExerciseIndex } = useContext(WorkoutContext)
     const { currentExercise, setCurrentExercise } = useContext(WorkoutContext)
     
@@ -42,6 +43,15 @@ export default function InTrainingScreen({route}) {
     }
 
     const nextExercise = () => {
+
+        // antes de atualizar o index:
+        setCurrentProgressL((prev) => {
+            prev[currentExerciseIndex] = sets;
+            return prev
+        })
+        console.log("PROGRESSO ATUAL:", currentProgressL)
+
+        // atualizo o index
         setCurrentExerciseIndex(currentExerciseIndex + 1)
         if (currentExerciseIndex >= currentWorkout.exerciseList.length-1) { // coloquei um menos um aki
             finish()
@@ -50,6 +60,14 @@ export default function InTrainingScreen({route}) {
     }
 
     const prevExercise = () => {
+
+        // antes de atualizar o index:
+        setCurrentProgressL((prev) => {
+            prev[currentExerciseIndex] = sets;
+            return prev
+        })
+        console.log("PROGRESSO ATUAL:", currentProgressL)
+
         if (currentExerciseIndex > 0) {
             setCurrentExerciseIndex(currentExerciseIndex - 1)
         }
@@ -127,8 +145,10 @@ export default function InTrainingScreen({route}) {
 
                 {/* aqui vai ser os check do treino */}
                 <ScrollView style={styles.scrollBody}>
-                    { currentExercise && makeExerciseView() }
 
+                    {/* (sets != []) ? {currentExercise && makeExerciseView()} : {currentExercise && makeExerciseView()} */}
+                    {sets.length !== 0 && currentExercise && makeExerciseView()}
+                                        
                 </ScrollView>
             
 

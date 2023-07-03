@@ -11,14 +11,14 @@ import Images from "../../Images";
 export default function RoutinePreview(props) {
     // console.log("PROPS: props")
     var routine =  props.routine
-    console.log("TREINO: ", routine, "\n")
+    // console.log("TREINO: ", routine, "\n")
     var exerciseList = routine["exerciseList"]
 
     var getAllExercisePreviews = (list) => {
         var returnList = []
         for (let i = 0; i < list.length; i++) {
             var exercise = list[i]
-            console.log("EXERCICIO: ", exercise)
+            // console.log("EXERCICIO: ", exercise)
             var imgName = exercise.name + ".jpg"
 
             var nomeFormatado = exercise.name.replace(new RegExp('_', "g"), ' ').slice(0, 14) + '... ';

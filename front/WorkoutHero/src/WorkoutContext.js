@@ -1,9 +1,14 @@
-import React, { createContext, useState, useEffect } from 'react';
-
+import axios from 'axios';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { AuthContext } from './AuthContext';
 
 const WorkoutContext = createContext();
 
+const baseUrl = 'https://apiworkouthero.onrender.com'
+
 const WorkoutProvider = ({ children }) => {
+
+    const { userData } = useContext(AuthContext)
 
     const [currentWorkout, setCurrentWorkout] = useState(null);
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
@@ -17,9 +22,6 @@ const WorkoutProvider = ({ children }) => {
     }, [currentExerciseIndex]);
 
     const startWorkout = (workout) => {
-
-      console.log("WORKOUT", workout)
-
       setCurrentWorkout(workout)
       setCurrentExerciseIndex(0)
       setCurrentExercise(workout.exerciseList[0])
@@ -36,8 +38,54 @@ const WorkoutProvider = ({ children }) => {
       setCurrentProgressL(newProgressList);
     }
 
-    const finishWorkout = () => {
+    const finishWorkout = async () => {
       console.log("ta no workoutcontext")
+      
+      try {
+        //update xp
+        let xpYield = calculateXpYield()
+       
+        userData.xp += xpYield
+        console.log("XP OBTIDO: ", xpYield)
+        var url = `${baseUrl}/user/update?id=${userData.id}&xp=${userData.xp}`
+        response = await axios.post(url);
+        console.log("RESPONSE: ", response)
+      } catch (error) {
+        console.log(error)
+        if (error.response) {
+          console.log(error.response.data)
+        }
+      }
+
+
+      //reset all
+      setCurrentWorkout(null)
+      setCurrentExerciseIndex(0)
+      setCurrentExercise(null)
+      setCurrentProgressL([])
+    }
+
+    const calculateXpYield = () => {
+      let totalYield = 0
+      for (let i = 0; i < currentWorkout.exerciseList.length; i++) {
+        let exYield = 0
+        for (let j = 0; j < currentExercise.sets; j++) {
+          exYield += 1;
+        }
+        if (exYield == currentExercise.sets) exYield += 1; //bonus por fazer todos
+
+        if (currentExercise.difficulty == "E") {
+          exYield *= 15;
+        } else if (currentExercise.difficulty == "M") {
+          exYield *= 70;
+        } else if (currentExercise.difficulty == "H") {
+          exYield *= 150;
+        }
+
+        totalYield += exYield
+      }
+
+      return totalYield
     }
 
     return (

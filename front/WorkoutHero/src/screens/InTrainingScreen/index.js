@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { WorkoutContext } from "../../WorkoutContext";
 import Images from "../../Images";
 import MyButtonThin from "../../components/MyButton/MyButtonThin";
+import MyButtonSwitch from "../../components/MyButton/MyButtonSwitch";
 
 export default function InTrainingScreen({route}) {
 
@@ -26,9 +27,10 @@ export default function InTrainingScreen({route}) {
     useEffect(() => {
         setSets(() => {
             let newSets = []
-            for (let i = 0; i < currentExercise.sets; ++i) {
-                newSets.push(false)
-            } 
+            if (currentExercise != null)
+                for (let i = 0; i < currentExercise.sets; ++i) {
+                    newSets.push(false)
+                } 
             console.log("SETS", newSets)
             return newSets
         })
@@ -75,23 +77,27 @@ export default function InTrainingScreen({route}) {
     const makeExerciseView = () => {
         var retList = []
  
-        for (let i = 0; i < currentExercise.sets; ++i) {
-            retList.push(
-                <MyButtonThin 
-                onPress={() => {
-                    setSets((prevL) => {prevL[i] = !prevL[i]; return prevL})
-                    console.log(sets)
-                    setBackgroundColor('blue')
-                }} 
-                key={i} 
-                title={`Seção ${i+1}: ${currentExercise.reps} repetições`} 
-                // style={[styles.selectOptions, sets[i] == true ? {backgroundColor} : null]} 
-                // style={{backgroundColor: 'red'}} 
-                style={sets[i] === true ? { backgroundColor: 'blue' } : { backgroundColor: 'red' }}
-                >
-                </MyButtonThin>
-            )
-        }
+        console.log('chamou')
+
+        if (currentExercise != null)
+            for (let i = 0; i < currentExercise.sets; ++i) {
+                retList.push(
+                    <MyButtonSwitch 
+                    onToggle={() => {
+                        setSets((prevL) => {prevL[i] = !prevL[i]; return prevL})
+                        console.log(sets)
+                        // setBackgroundColor('blue')
+                    }} 
+                    key={i} 
+                    title={`Seção ${i+1}: ${currentExercise.reps} repetições`} 
+                    style={[styles.selectOptions]} 
+                    value={false}
+                    // style={{backgroundColor: 'red'}} 
+                    // style={sets[i] === true ? { backgroundColor: 'blue' } : { backgroundColor: 'red' }}
+                    >
+                    </MyButtonSwitch>
+                )
+            }
 
         return retList
     }
@@ -121,11 +127,10 @@ export default function InTrainingScreen({route}) {
 
                 {/* aqui vai ser os check do treino */}
                 <ScrollView style={styles.scrollBody}>
-                    { makeExerciseView() }
+                    { currentExercise && makeExerciseView() }
+
                 </ScrollView>
-
-
-                
+            
 
             </ScrollView>
 

@@ -21,6 +21,7 @@ export default function InTrainingScreen({route}) {
     const { currentProgressL, setCurrentProgressL } = useContext(WorkoutContext)
     const { currentExerciseIndex, setCurrentExerciseIndex } = useContext(WorkoutContext)
     const { currentExercise, setCurrentExercise } = useContext(WorkoutContext)
+    const { finishWorkout } = useContext(WorkoutContext)
     
     const [backgroundColor, setBackgroundColor] = useState('red')
     //const [sets, setSets] = useState([])
@@ -47,6 +48,10 @@ export default function InTrainingScreen({route}) {
     const finish = () => {
         console.log("Finished Exercise")
         //TODO: salvar progresso
+        navigation.reset({
+            index: 0, routes: [{name:'MAIN'}]
+        })
+
     }
 
     const nextExercise = () => {
@@ -64,6 +69,7 @@ export default function InTrainingScreen({route}) {
         setCurrentExerciseIndex(currentExerciseIndex + 1)
         if (currentExerciseIndex >= currentWorkout.exerciseList.length-1) { // coloquei um menos um aki
             finish()
+            finishWorkout()
             return
         }
     }
@@ -101,7 +107,7 @@ export default function InTrainingScreen({route}) {
         )
     }
 
-    
+
 
     const makeExerciseView = () => {
         var retList = []

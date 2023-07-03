@@ -42,14 +42,24 @@ const WorkoutProvider = ({ children }) => {
       console.log("ta no workoutcontext")
       
       try {
-        //update xp
-        let xpYield = calculateXpYield()
+        // //update xp
+        // let xpYield = calculateXpYield()
        
-        userData.xp += xpYield
-        console.log("XP OBTIDO: ", xpYield)
-        var url = `${baseUrl}/user/update?id=${userData.id}&xp=${userData.xp}`
-        response = await axios.post(url);
-        console.log("RESPONSE: ", response)
+        // userData.xp += xpYield
+        // console.log("XP OBTIDO: ", xpYield)
+        // var url = `${baseUrl}/user/update?id=${userData.id}&xp=${userData.xp}`
+        // response = await axios.post(url);
+        // console.log("RESPONSE: ", response)
+
+
+        var responseHistoric = axios.get(`${baseUrl}/historic/select?user_id=${userData.id}`)
+        console.log("HISTORIC: \n",responseHistoric)
+        var historic = responseHistoric.data[0]
+        var historicId = historic.id
+
+        var responseRealized = axios.post(`${baseUrl}/workout_realized/insert`, {workout_id:currentWorkout.id , historic_id:historicId})
+        console.log("REALIZED: \n",responseRealized)
+
       } catch (error) {
         console.log(error)
         if (error.response) {

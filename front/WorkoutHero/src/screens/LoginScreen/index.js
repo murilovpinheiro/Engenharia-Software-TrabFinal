@@ -32,10 +32,6 @@ export default function LoginScreen() {
             console.log(error)
             setErrorMsg(error.message)
         }
-
-        // navigation.reset({
-        //     index: 0, routes: [{name:'MAIN'}]
-        // })
     }
 
     return (

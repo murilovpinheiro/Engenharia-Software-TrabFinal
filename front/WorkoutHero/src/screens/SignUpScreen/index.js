@@ -17,6 +17,7 @@ export default function SignUpScreen() {
     var navigation = useNavigation()
 
     const { trySignUp } = useContext(AuthContext)
+    const { tryLogin } = useContext(AuthContext);
 
     const [ nome, setNome ] = useState('')
     const [ altura, setAltura ] = useState(0)
@@ -25,6 +26,9 @@ export default function SignUpScreen() {
     const [ email, setEmail ] = useState('')
     const [ senha, setSenha ] = useState('')
     const [ senhaConfirme, setSenhaConfirme ] = useState('')
+
+    const [ username, setUsername ] = useState('')
+    const [ password, setPassword ] = useState('')
 
     const [selectedSexo, setSelectedSexo] = useState('');
     const selectDataSexo = [
@@ -50,6 +54,20 @@ export default function SignUpScreen() {
         } else { setPeso('') }   
     }
 
+    // const handleLogin = async () => {
+    //     // testar credenciais
+    //     try {
+    //         var response = await tryLogin(email, senha)
+    //         //console.log(response)
+    //         navigation.reset({
+    //             index: 0, routes: [{name:'MAIN'}]
+    //         })
+    //     } catch (error) {
+    //         console.log(error)
+    //         setErrorMsg(error.message)
+    //     }
+    // }
+
     const handleSignUp = async () => {
         setErrorMsg("")
         // testar credenciais
@@ -65,16 +83,26 @@ export default function SignUpScreen() {
             var params = {name:nome, sex:sexoPraEnum(), weight:peso, height:altura/100, login:email, pass:senha}
             console.log("sending request")
             var response = await trySignUp(params)
+            // var response2 = await tryLogin(params.login, params.pass);
 
             console.log(params)
+            console.log("TENTANDO FAZER SIGN UP E LOGIN AO MSM TEMPO")
             navigation.reset({
                 index: 0, routes: [{name:'MAIN'}]
             })
 
         } catch (error) {
-            console.error(error)
-            console.log(error.message)
-            setErrorMsg(error.message)
+            if (error.message != 'undefined is not a function') {
+                console.error(error)
+                console.log(error.message)
+                setErrorMsg(error.message)
+            } 
+            else {
+                // console.error(error)
+                navigation.reset({
+                    index: 0, routes: [{name:'MAIN'}]
+                })
+            }
         }
 
     }

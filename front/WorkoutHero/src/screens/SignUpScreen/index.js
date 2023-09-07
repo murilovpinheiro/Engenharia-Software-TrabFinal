@@ -136,11 +136,13 @@ export default function SignUpScreen() {
                 <MyTextRegular>SENHA</MyTextRegular>
                 <MyTextInput style={styles.textInput}
                 value={senha} onChangeText={setSenha}
+                secureTextEntry = {true}
                 ></MyTextInput>
 
                 <MyTextRegular>CONFIRMAR SENHA</MyTextRegular>
                 <MyTextInput style={styles.textInput}
                 value={senhaConfirme} onChangeText={setSenhaConfirme}
+                secureTextEntry = {true}
                 ></MyTextInput>
             </View>
 

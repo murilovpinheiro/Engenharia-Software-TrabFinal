@@ -17,13 +17,6 @@ import { ScreenContainer } from 'react-native-screens';
 
 import { AuthProvider } from './src/AuthContext';
 
-
-
-
-
-
-
-
 export default function App() {
 
   const [fontsLoaded] = useFonts({

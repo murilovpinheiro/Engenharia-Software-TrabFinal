@@ -52,7 +52,7 @@ export default function LoginScreen() {
             
             <View style={{flex: 0.1}}/>
 
-            <MyTextRegular>USUÁRIO OU E-MAIL</MyTextRegular>
+            <MyTextRegular>E-MAIL</MyTextRegular>
             <MyTextInput 
             style={styles.textInput} autoComplete='email'
             value={username} onChangeText={setUsername}
@@ -64,6 +64,7 @@ export default function LoginScreen() {
             <MyTextInput style={styles.textInput} 
             autoComplete='current-password'
             value={password} onChangeText={setPassword}
+            secureTextEntry = {true}
             ></MyTextInput>
 
             <View style={{flex: 0.05}}/>

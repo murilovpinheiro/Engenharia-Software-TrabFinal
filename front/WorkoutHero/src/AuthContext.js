@@ -64,7 +64,7 @@ const AuthProvider = ({ children }) => {
             console.log("Response: ", response)
             
 
-            if (!response.data || response.data.length === 0) {
+            if (Object.is(response.config.data, null)) {
                 // Handle case when no data is returned
                 console.log("passou aqui")
                 throw new Error('Ocorreu um erro. Tente novamente.')

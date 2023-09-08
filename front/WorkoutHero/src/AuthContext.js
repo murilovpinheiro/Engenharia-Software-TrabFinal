@@ -83,9 +83,9 @@ const AuthProvider = ({ children }) => {
             
             
         } catch (error) {
-            if (axios.isTimeout(error)) {
-                console.log('Request timed out.'); // Handle the timeout error
-            }
+            // if (axios.isTimeout(error)) {
+            //     console.log('Request timed out.'); // Handle the timeout error
+            // }
             console.log(error)
             throw error
         }

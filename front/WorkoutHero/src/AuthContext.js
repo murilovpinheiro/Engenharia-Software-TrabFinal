@@ -62,31 +62,30 @@ const AuthProvider = ({ children }) => {
         try {
             response = await axios.post(url, params, { timeout });
             console.log("Response: ", response)
-            console.log("Response data: ", response.data)
+            
 
-            if (Object.is(response.config.data, null)) {
+            if (!response.data || response.data.length === 0) {
                 // Handle case when no data is returned
-                 console.log("passou aqui")
-                //let errorMsg = response.data.message
-                throw new Error("No response")
+                console.log("passou aqui")
+                throw new Error('Ocorreu um erro. Tente novamente.')
             }
-            else if (!response.data.sucess) {
+
+            if (response.data.sucess == false) {
                 console.log("nao, passou aqui")
-                console.log("response: ", response.data)
                 let errorMsg = response.data.message
                 console.log("Message: ", errorMsg)
                 throw new Error(errorMsg)
             }
 
             // Handle the data returned by the request
-            setUserData(response.data[0])
-            console.log('Data:', response.data)
+            setUserData(response.data.newUser)
+            console.log('User data:', response.data.newUser)
             
             
         } catch (error) {
-            //if (axios.isTimeout(error)) {
-            //    console.log('Request timed out.'); // Handle the timeout error
-            //}
+            // if (axios.isTimeout(error)) {
+            //     console.log('Request timed out.'); // Handle the timeout error
+            // }
             console.log(error)
             throw error
         }

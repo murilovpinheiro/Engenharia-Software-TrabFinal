@@ -33,12 +33,10 @@ export default function InTrainingScreen({route}) {
         var newProgressList = currentProgressL
         newProgressList[currentExerciseIndex][index] = !newProgressList[currentExerciseIndex][index]
         setCurrentProgressL(newProgressList)
-        console.log(currentProgressL)
+        console.log("Exercise status: ", currentProgressL)
     }
 
     const nextExercise = async () => {
-
-        console.log(currentProgressL)
 
         // antes de atualizar o index:
         // setCurrentProgressL((prev) => {
@@ -85,7 +83,6 @@ export default function InTrainingScreen({route}) {
                 <MyTextRegular style = {{fontSize: 22}}>
                     Nenhum treino selecionado.
                 </MyTextRegular>
-
              </View>
             </>
         )
@@ -95,8 +92,6 @@ export default function InTrainingScreen({route}) {
 
     const makeExerciseView = () => {
         var retList = []
- 
-        console.log('chamou')
 
         if (currentExercise != null)
             for (let i = 0; i < currentExercise.sets; ++i) {
@@ -104,8 +99,7 @@ export default function InTrainingScreen({route}) {
                     <MyButtonSwitch 
                     onToggle={() => {
                         setSets(i)
-                        // setBackgroundColor('blue')
-                    }} 
+                    }}
                     key={currentExerciseIndex*100 + i} 
                     title={`Seção ${i+1}: ${currentExercise.reps} repetições`} 
                     style={[styles.selectOptions]} 

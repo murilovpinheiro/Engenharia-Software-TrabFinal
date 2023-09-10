@@ -7,16 +7,15 @@ import { Switch } from "react-native-gesture-handler";
 
 
 export default function MyButtonSwitch(props) {
-    const [isEnabled, setIsEnabled] = useState(false);
+    const [isEnabled, setIsEnabled] = useState(props.value);
   
     const toggleSwitch = () => {
       setIsEnabled((previousState) => !previousState);
-      // props.onToggle() && props.onToggle(!isEnabled);
       props.onToggle()
     };
   
     const resetSwitch = () => {
-      setIsEnabled(false);
+      isEnabled = false;
     };
   
     useEffect(() => {
@@ -33,7 +32,7 @@ export default function MyButtonSwitch(props) {
             style={{ transform: [{ scaleX: 0.9 }, { scaleY: 0.9 }], margin: 0 }}
             onValueChange={toggleSwitch}
             // value={() => {setIsEnabled(props.value); return isEnabled}}
-            value = {props.value}
+            value = {isEnabled}
           />
           {props.children}
         </View>

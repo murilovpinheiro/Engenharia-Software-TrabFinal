@@ -64,13 +64,13 @@ const AuthProvider = ({ children }) => {
             console.log("Response: ", response)
             
 
-            if (!response.data || response.data.length === 0) {
+            if (Object.is(response.data, null)) {
                 // Handle case when no data is returned
                 console.log("passou aqui")
                 throw new Error('Ocorreu um erro. Tente novamente.')
             }
 
-            if (response.data.message) {
+            if (response.data.sucess == false) {
                 console.log("nao, passou aqui")
                 let errorMsg = response.data.message
                 console.log("Message: ", errorMsg)
@@ -78,8 +78,8 @@ const AuthProvider = ({ children }) => {
             }
 
             // Handle the data returned by the request
-            setUserData(response.data[0])
-            console.log('Data:', response.data)
+            setUserData(response.data.newUser)
+            console.log('User data:', response.data.newUser)
             
             
         } catch (error) {

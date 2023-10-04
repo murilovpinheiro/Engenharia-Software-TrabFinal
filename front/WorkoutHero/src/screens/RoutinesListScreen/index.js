@@ -46,7 +46,7 @@ export default function RoutinesListScreen() {
     
     const pegarTodosTreinos = async () => {
         // console.log("Fetching todos treinos...");
-        var url = baseUrl + `/WORKOUT/select?user_id=0`;
+        var url = baseUrl + `/WORKOUT/select?user_id=1`;
         let data = null;
         let response = null;
 

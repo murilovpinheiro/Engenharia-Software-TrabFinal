@@ -12,6 +12,12 @@ const defaultStyles = StyleSheet.create({
         fontSize: 20,
         color: AppStyles.colors.text,
         marginVertical: 4
+    },
+    textH1: {
+        fontFamily: 'Lexend-Bold',
+        fontSize: 40,
+        color: AppStyles.colors.text,
+        marginVertical: 12
     }
 });
 

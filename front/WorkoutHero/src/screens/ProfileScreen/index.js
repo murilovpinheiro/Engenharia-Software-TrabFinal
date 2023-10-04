@@ -58,7 +58,6 @@ export default function ProfileScreen() {
 
     return (
         <>
-        <RPGImageBackground/>
 
         <View style={styles.body}>
 

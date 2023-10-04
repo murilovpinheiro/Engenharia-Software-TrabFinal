@@ -1,8 +1,11 @@
 import {StyleSheet} from 'react-native'
+import AppStyles from '../../AppStyles';
+
 
 const styles = StyleSheet.create({
     body: {
-        flex: 1
+        flex: 1,
+        backgroundColor: AppStyles.colors.background
     },
     scrollBody: {
         width: "100%", height:"100%",

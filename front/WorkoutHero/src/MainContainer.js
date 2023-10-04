@@ -1,5 +1,6 @@
 import React, { createContext } from "react"
 import { StyleSheet } from "react-native";
+import AppStyles from "./AppStyles";
 
 import { NavigationContainer, TabRouter } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -50,9 +51,10 @@ export default function MainContainer(){
             tabBarInactiveTintColor: '#808080',
             tabBarLabelStyle: styles.navTabText,
 
-            headerStyle: styles.navHeaderStyle,
-            headerTintColor: 'white',
-            headerTitleStyle: styles.navHeaderTitle,
+            headerShown: false,
+            // headerStyle: styles.navHeaderStyle,
+            // headerTintColor: 'white',
+            // headerTitleStyle: styles.navHeaderTitle,
         })}
         >
             {/* <Tab.Screen name='LOGINFLUX'
@@ -104,16 +106,21 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     navHeaderStyle: {
-      backgroundColor: '#00132A',
+      backgroundColor: AppStyles.colors.primary,
       borderBottomWidth: 6, borderColor: 'white', height: 100
     },
     navHeaderTitle: {
       fontFamily: 'Lexend-Bold', fontSize: 26
     },
     navTabStyle: {
-        height: 70, padding: 4,
-        backgroundColor: '#00132A',
-        borderTopWidth: 6, borderColor: 'white'
+        height: 70, padding: 8, margin: 20,
+        paddingHorizontal: 16,
+        paddingBottom: 8,
+        borderRadius: 60,
+        backgroundColor: AppStyles.colors.primary,
+        // borderTopWidth: 6, borderColor: 'white'
+        position: 'absolute',
+        overflow: 'hidden'
     },
     navTabText: {
         fontFamily: 'Lexend', fontSize: 0

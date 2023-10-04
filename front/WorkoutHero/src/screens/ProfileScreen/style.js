@@ -1,10 +1,12 @@
 import {StyleSheet} from 'react-native'
+import AppStyles from '../../AppStyles';
 
 const styles = StyleSheet.create({
     body: {
         width: "100%", 
         height:"100%",
-        padding: '5%'
+        padding: '5%',
+        backgroundColor: AppStyles.colors.background
     },
     container: {
         flex: 1,

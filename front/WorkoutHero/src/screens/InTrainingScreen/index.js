@@ -78,8 +78,8 @@ export default function InTrainingScreen({route}) {
     
     if (!currentWorkout || !currentExercise) {
         return (
-            <><RPGImageBackground/>
-             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <>
+             <View style={[styles.body,{ flex: 1, justifyContent: "center", alignItems: "center" }]}>
                 <MyTextRegular style = {{fontSize: 22}}>
                     Nenhum treino selecionado.
                 </MyTextRegular>
@@ -116,7 +116,7 @@ export default function InTrainingScreen({route}) {
 
     return (
         <>
-        <RPGImageBackground/>
+        {/* <RPGImageBackground/> */}
         <View style={styles.body}>
             
             <ScrollView style={styles.scrollBody}>
@@ -150,6 +150,8 @@ export default function InTrainingScreen({route}) {
                 <TouchableOpacity onPress={handleClockPress}><AntDesign style={styles.btnTimer} name='clockcircleo' size={50} color='#F2BD00'/></TouchableOpacity>
                 <TouchableOpacity onPress={nextExercise}><AntDesign style={styles.btnTimer} name='rightcircle' size={50} color='#808080'/></TouchableOpacity>
             </View>
+
+            <View style={{height:70}}/>
         </View>
         </>
     );

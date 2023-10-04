@@ -7,6 +7,10 @@ import RoutinePreview from "../../components/RoutinePreview/RoutinePreview";
 import { useNavigation } from "@react-navigation/core";
 
 import axios from 'axios'
+import MyTextRegular from "../../components/MyText/MyTextRegular";
+import MyTextH1 from "../../components/MyText/MyTextH1";
+import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
+import MyTextH3 from "../../components/MyText/MyTextH3";
 
 const baseUrl = 'https://apiworkouthero.onrender.com'
 
@@ -165,14 +169,35 @@ export default function RoutinesListScreen() {
     if (loading) {
         
         return (
-        <><RPGImageBackground/></>
+        // <><RPGImageBackground/></>
+        <View style={styles.body}>
+            <MyTextRegular>
+                Carregando...
+            </MyTextRegular>
+            
+        </View>
         )
     }
 
     return (
-        <><RPGImageBackground/>
+        <>
         
         <View style={styles.body}>
+            <MyTextH1>Rotinas</MyTextH1>
+
+            <View style={{height:50}}/>
+
+            <MyButtonRegular style={styles.btn} 
+            title="Criar Nova Rotina">
+            </MyButtonRegular>
+
+            <View style={{height:10}}/>
+            <View style={{flexDirection:'row',alignItems:'center', overflow:'visible', marginVertical:10}}>
+                <View style={styles.dividerLeft}></View>
+                <MyTextRegular style={{flex:0.4, textAlign:'center'}}>Minhas Rotinas</MyTextRegular>
+                <View style={styles.dividerRight}></View>
+            </View>
+
             <ScrollView style={styles.scrollBody}>
                 {makePreviews()}
             </ScrollView>

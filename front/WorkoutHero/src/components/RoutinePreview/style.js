@@ -1,9 +1,12 @@
 import {StyleSheet} from 'react-native'
+import AppStyles from '../../AppStyles';
+
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: '#00132A88',
-        borderWidth: 5, borderColor: 'gray', borderRadius: 8,
+        backgroundColor: AppStyles.colors.secondary,
+        borderRadius: 24,
+        // borderWidth: 5, borderColor: 'gray', borderRadius: 8,
         marginVertical: 16, paddingHorizontal: 8,
     },
     headerText: {

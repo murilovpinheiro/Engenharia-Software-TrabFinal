@@ -15,7 +15,7 @@ export default function MyButtonSwitch(props) {
     };
   
     const resetSwitch = () => {
-      isEnabled = false;
+      setIsEnabled(false);
     };
   
     useEffect(() => {

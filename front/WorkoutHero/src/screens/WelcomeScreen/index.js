@@ -4,11 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./style"
 import MyTextRegular from "../../components/MyText/MyTextRegular";
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
-import RPGImageBackground from '../../components/RPGImageBackground';
+
 
 export default function WelcomeScreen() {
-
-    console.log("ENTROU NA TELA WELCOME");
 
     const navigation = useNavigation();
 
@@ -18,15 +16,12 @@ export default function WelcomeScreen() {
 
     return (
 
-        <>
-        <RPGImageBackground />
-        
         <View style={styles.body}>
             <View style={{flex: 0.05}}/>
             
             <View style={styles.viewLogo}>
                 <Image style={styles.imgLogo}
-                source={require('./logo_small.png')} />
+                source={require('./WorkoutHero_Logo1.png')} />
             </View>
             
             <View style={{flex:0.05}}/>
@@ -38,20 +33,19 @@ export default function WelcomeScreen() {
             <View style={{flex:0.05}}/>
 
             <View style={{flex:0.2}}>
-                <MyButtonRegular style={styles.btn}
+                <MyButtonRegular style={styles.btn1}
                                  title="Começar a minha jornada"
                                  onPress={() => {console.log("BOTAO COMEÇAR JORNADA"); navigation.navigate('CRIAR CONTA')}}>
                 </MyButtonRegular>
                 
-                <View style={{height:10}}/>
+                <View style={{height:16}}/>
                 
-                <MyButtonRegular style={styles.btn}
+                <MyButtonRegular style={styles.btn2}
                                  title="Já tenho uma conta"
                                  onPress={() => {console.log("BOTAO LOGIN"); navigation.navigate('LOGIN')}}>
                 </MyButtonRegular>
             </View>
 
         </View>
-        </>
     );
 }

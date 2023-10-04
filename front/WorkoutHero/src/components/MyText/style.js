@@ -1,13 +1,16 @@
 import {StyleSheet} from 'react-native'
+import AppStyles from '../../AppStyles';
 
 const defaultStyles = StyleSheet.create({
     textRegular: {
         fontFamily: 'Lexend',
-        color: 'white', fontSize: 14
+        fontSize: 16,
+        color: AppStyles.colors.text, 
     },
     textH3: {
         fontFamily: 'Lexend-Bold',
-        color: 'white', fontSize: 18,
+        fontSize: 20,
+        color: AppStyles.colors.text,
         marginVertical: 4
     }
 });

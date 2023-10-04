@@ -34,12 +34,14 @@ export default function App() {
       <View style={{flex: 1}}>
 
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='BEM VINDO'>
-            <Stack.Screen name='BEM VINDO'  options={navHeaderOptions} component={WelcomeScreen} />
-            <Stack.Screen name='LOGIN'  options={navHeaderOptions} component={LoginScreen} />
-            <Stack.Screen name='CRIAR CONTA'  options={navHeaderOptions} component={SignUpScreen} />
+          <Stack.Navigator 
+          screenOptions={stackOptions}
+          initialRouteName='BEM VINDO'>
+            <Stack.Screen name='BEM VINDO'   component={WelcomeScreen} />
+            <Stack.Screen name='LOGIN'   component={LoginScreen} />
+            <Stack.Screen name='CRIAR CONTA'   component={SignUpScreen} />
         
-            <Stack.Screen name='MAIN' options={mainHeaderOptions} component={MainContainer}/>
+            <Stack.Screen name='MAIN'  component={MainContainer}/>
           </Stack.Navigator>
         </NavigationContainer>
 
@@ -50,8 +52,10 @@ export default function App() {
 }
 
 
-navHeaderOptions = {}
-
-mainHeaderOptions = {
+stackOptions = {
   headerShown:false
 }
+
+// mainHeaderOptions = {
+//   headerShown:false
+// }

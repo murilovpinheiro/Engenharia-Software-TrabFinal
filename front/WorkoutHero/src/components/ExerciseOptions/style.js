@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native'
+import AppStyles from '../../AppStyles'
 
 const styles = StyleSheet.create({
     body:{
@@ -31,10 +32,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: '5%'
     },
     selectOptions:{
-        margin:2
+        margin:2,
+        backgroundColor: AppStyles.colors.primary,
+        // color: AppStyles.colors.primary,
+        borderWidth: 0
     },
     divider: {
-        marginTop: 16, height:4, borderRadius: 2, backgroundColor: 'gray'
+        marginTop: 16, height:4, borderRadius: 2, backgroundColor: AppStyles.colors.primary
     }
 })
 

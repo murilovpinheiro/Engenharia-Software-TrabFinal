@@ -49,9 +49,11 @@ export default function ViewTrainingRoutineScreen({route}) {
     }
 
     return (
-        <><RPGImageBackground/>
+        <>
 
         <View style={styles.body}>
+            <View style={{height:30}}></View>
+
             <View style={{flexDirection:'row', alignItems: 'center'}}>
                 {/* <MyTextInput style={{margin: 10, flex:0.8}} defaultValue='Treino 1'></MyTextInput> */}
                 <MyTextH3 style={styles.textName}>{routine.obj}</MyTextH3>

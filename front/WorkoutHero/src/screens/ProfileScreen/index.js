@@ -73,13 +73,19 @@ export default function ProfileScreen() {
 
             <View style={{flex: 0.05}}/>
 
-            <View style={{marginVertical: 10, flexDirection: 'row', alignItems: 'center'}}>
+            {/* <View style={{marginVertical: 10, flexDirection: 'row', alignItems: 'center'}}>
                 <MyTextH3>Estatísticas</MyTextH3>
                 <View style={{flex:0.2}}/>
-                {/* <MyButtonRegular
+                <MyButtonRegular
                 style={{flex: 0.8}}
                 title="Últimos 30 dias"
-                ></MyButtonRegular> */}
+                ></MyButtonRegular>
+            </View> */}
+
+            <View style={{flexDirection:'row',alignItems:'center', overflow:'visible', marginVertical:10}}>
+                <View style={styles.dividerLeft}></View>
+                <MyTextRegular style={{flex:0.4, textAlign:'center'}}>Estatísticas</MyTextRegular>
+                <View style={styles.dividerRight}></View>
             </View>
 
             {/* <View style={{flex: 0.05}}/>
@@ -91,16 +97,16 @@ export default function ProfileScreen() {
             <View style={{flex: 0.05}}/> */}
 
 
-            <View style = {{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <View style={styles.viewStats}>
+            <View style={[styles.viewStats,{height:100}]}>
+                <View style={styles.viewSingleStat}>
                     <MyTextRegular style={styles.textStats}>Exercicios realizados</MyTextRegular>
                     <MyTextRegular style={styles.textStats2}>{info.exercicios_feitos}</MyTextRegular>
                 </View>
-                <View style={styles.viewStats}>
+                <View style={styles.viewSingleStat}>
                     <MyTextRegular style={styles.textStats}>XP total:</MyTextRegular>
                     <MyTextRegular style={styles.textStats2}>{userData["xp"]}</MyTextRegular>
                 </View>
-                <View style={styles.viewStats}>
+                <View style={styles.viewSingleStat}>
                     <MyTextRegular style={styles.textStats}>Repetições feitas</MyTextRegular>
                     <MyTextRegular style={styles.textStats2}>{info.repeticoes}</MyTextRegular>
                 </View>

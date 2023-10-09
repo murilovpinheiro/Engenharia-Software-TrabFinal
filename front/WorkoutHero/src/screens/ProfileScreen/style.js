@@ -20,15 +20,39 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         margin: 4
     },
+    dividerLeft: {
+        height: 6, borderRadius: 10,
+        backgroundColor: AppStyles.colors.primary,
+        flex: 0.3,
+        left: -30
+    },
+    dividerRight: {
+        height: 6, borderRadius: 10,
+        backgroundColor: AppStyles.colors.primary,
+        flex: 0.3,
+        right: -30
+    },
+    viewStats: {
+        justifyContent: "center", alignItems: "center",
+        padding: 16, borderRadius: 16,
+        backgroundColor: AppStyles.colors.secondary
+    },
+    viewSingleStat: {
+        flexDirection: "row",
+        // borderWidth:2, 
+        width:"100%", justifyContent: "center"
+    },
     textStats: {
-        flex: 0.5,
+        flex: 1,
         color: '#808080',
         fontSize: 17
     },
     textStats2: {
-        flex: 0.5,
+        right: 0,
         textAlign: 'right',
-        fontSize: 18
+        fontFamily: "Lexend-Bold",
+        fontSize: 18,
+        color: AppStyles.colors.accent
     }
 });
 

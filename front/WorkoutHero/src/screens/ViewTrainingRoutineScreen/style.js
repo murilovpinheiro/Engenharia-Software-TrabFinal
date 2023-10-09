@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native'
+import AppStyles from '../../AppStyles'
 
 const styles = StyleSheet.create({
     body: {
-        flex: 1, padding: '2%',
+        flex: 1, padding: '2%', backgroundColor: AppStyles.colors.background
     },
     scrollBody: {
         width: "100%", height:"100%",
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
     },
     startBtn: {
         margin: 8,
-        width: '80%', alignSelf: 'center'
+        width: '80%', alignSelf: 'center', backgroundColor: AppStyles.colors.accent
     }
 })
 

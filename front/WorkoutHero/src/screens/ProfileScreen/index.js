@@ -3,6 +3,7 @@ import {View, Text, processColor, Button, Image} from "react-native"
 import { SelectList } from "react-native-dropdown-select-list";
 import axios from "axios";
 import styles from "./style"
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
@@ -61,14 +62,25 @@ export default function ProfileScreen() {
 
         <View style={styles.body}>
 
+            <View style={{height:16}}/>
+
             <View style={styles.viewUser}>
-                <MyTextH3>{userData["name"]}</MyTextH3>
-                {/* <MyTextRegular>3 semanas ativo 🔥</MyTextRegular> */}
-                <MyTextRegular>Level {Math.floor(userData["xp"] / 25)}</MyTextRegular>
-                {/* xp bar é placeholder */}
-                <View style={{height: 16, marginTop: 8, width: '100%', backgroundColor: 'white', borderRadius: 8, padding: 4, overflow: 'hidden'}}>
-                    <View style={{height: '100%', backgroundColor: 'blue', width: '80%'}}></View>
+                <View style={styles.viewUserImage}>
+                    <Ionicons name="person" size={80} color="black"/>
                 </View>
+
+                <View style={{width:24}}/>
+
+                <View style={{flex:1}}>
+                    <MyTextH3>{userData["name"]}</MyTextH3>
+                    {/* <MyTextRegular>3 semanas ativo 🔥</MyTextRegular> */}
+                    <MyTextRegular>Level {Math.floor(userData["xp"] / 25)}</MyTextRegular>
+                    {/* xp bar é placeholder */}
+                    <View style={{height: 16, marginTop: 8, width: '100%', backgroundColor: 'white', borderRadius: 8, padding: 4, overflow: 'hidden'}}>
+                        <View style={{height: '100%', backgroundColor: 'blue', width: '80%'}}></View>
+                    </View>
+                </View>
+
             </View>
 
             <View style={{flex: 0.05}}/>
@@ -88,14 +100,7 @@ export default function ProfileScreen() {
                 <View style={styles.dividerRight}></View>
             </View>
 
-            {/* <View style={{flex: 0.05}}/>
-
-            <View style={{flex: 0.7}}>
-        
-            </View>
-
-            <View style={{flex: 0.05}}/> */}
-
+            <View style={{height:16}}/>
 
             <View style={[styles.viewStats,{height:100}]}>
                 <View style={styles.viewSingleStat}>

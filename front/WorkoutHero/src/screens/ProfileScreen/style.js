@@ -14,7 +14,15 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
     },
     viewUser: {
-        //borderWidth: 2, borderColor: 'red'
+        height: 140,
+        // borderWidth: 2, borderColor: 'red',
+        flexDirection: "row", alignItems: "center"
+    },
+    viewUserImage: {
+        width:128, height:128, 
+        borderRadius: 16,
+        backgroundColor: AppStyles.colors.secondary,
+        justifyContent: "center", alignItems: "center"
     },
     viewStats: {
         flexDirection: 'row',

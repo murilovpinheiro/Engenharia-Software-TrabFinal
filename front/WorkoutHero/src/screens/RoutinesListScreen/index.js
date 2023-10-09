@@ -185,7 +185,7 @@ export default function RoutinesListScreen() {
         <View style={styles.body}>
             <MyTextH1>Rotinas</MyTextH1>
 
-            <View style={{height:50}}/>
+            <View style={{height:40}}/>
 
             <MyButtonRegular style={styles.btn} 
             title="Criar Nova Rotina">

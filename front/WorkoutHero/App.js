@@ -16,6 +16,9 @@ import CreateTrainingRoutineScreen from './src/screens/CreateTrainingRoutineScre
 import { ScreenContainer } from 'react-native-screens';
 
 import { AuthProvider } from './src/AuthContext';
+import AppStyles from './src/AppStyles';
+
+const STYLES = ['default', 'dark-content', 'light-content'];
 
 export default function App() {
 
@@ -27,9 +30,13 @@ export default function App() {
     return null;
   }
 
+  const [statusBarStyle, setStatusBarStyle] = useState(STYLES[2]);
+
   const Stack = createNativeStackNavigator();
 
   return (
+    <>
+    <StatusBar backgroundColor= {AppStyles.colors.primary} barStyle={statusBarStyle}/>
     <AuthProvider>
       <View style={{flex: 1}}>
 
@@ -47,6 +54,7 @@ export default function App() {
 
       </View>
     </AuthProvider>
+    </>
     
   );
 }

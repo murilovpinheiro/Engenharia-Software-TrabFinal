@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { StyleSheet, Text, View, Image } from 'react-native';
@@ -18,7 +19,7 @@ import { ScreenContainer } from 'react-native-screens';
 import { AuthProvider } from './src/AuthContext';
 import AppStyles from './src/AppStyles';
 
-const STYLES = ['default', 'dark-content', 'light-content'];
+// const STYLES = ['default', 'dark-content', 'light-content'];
 
 export default function App() {
 
@@ -30,13 +31,13 @@ export default function App() {
     return null;
   }
 
-  const [statusBarStyle, setStatusBarStyle] = useState(STYLES[2]);
+  // const [statusBarStyle, setStatusBarStyle] = useState(STYLES[2]);
 
   const Stack = createNativeStackNavigator();
 
   return (
     <>
-    <StatusBar backgroundColor= {AppStyles.colors.primary} barStyle={statusBarStyle}/>
+    <StatusBar backgroundColor= {AppStyles.colors.primary} barStyle={'light-content'}/>
     <AuthProvider>
       <View style={{flex: 1}}>
 

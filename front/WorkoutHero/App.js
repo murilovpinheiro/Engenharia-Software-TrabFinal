@@ -18,6 +18,7 @@ import { ScreenContainer } from 'react-native-screens';
 
 import { AuthProvider } from './src/AuthContext';
 import AppStyles from './src/AppStyles';
+import PassRestoreRequestScreen from './src/screens/PassRestoreRequestScreen';
 
 // const STYLES = ['default', 'dark-content', 'light-content'];
 
@@ -47,6 +48,7 @@ export default function App() {
           initialRouteName='BEM VINDO'>
             <Stack.Screen name='BEM VINDO'   component={WelcomeScreen} />
             <Stack.Screen name='LOGIN'   component={LoginScreen} />
+            <Stack.Screen name='PASSRESTOREREQUEST'  component={PassRestoreRequestScreen}/>
             <Stack.Screen name='CRIAR CONTA'   component={SignUpScreen} />
         
             <Stack.Screen name='MAIN'  component={MainContainer}/>

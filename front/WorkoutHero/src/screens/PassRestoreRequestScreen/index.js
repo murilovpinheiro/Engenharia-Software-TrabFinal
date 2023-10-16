@@ -5,41 +5,38 @@ import styles from "./style"
 import MyTextRegular from "../../components/MyText/MyTextRegular";
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
 import MyTextInput from "../../components/MyTextInput/MyTextInput";
+import MyTextH3 from "../../components/MyText/MyTextH3";
+
 
 import { AuthContext } from "../../AuthContext"
 
-export default function LoginScreen() {
+export default function PassRestoreRequestScreen() {
 
     const navigation = useNavigation();
 
-    const [ username, setUsername ] = useState('')
-    const [ password, setPassword ] = useState('')
+    const [ email, setEmail ] = useState('')
+    // const [ password, setPassword ] = useState('')
     const [ errorMsg, setErrorMsg ] = useState('')
 
-    const { tryLogin } = useContext(AuthContext);
+    // const { tryLogin } = useContext(AuthContext);
 
+    // const handleRestoreRequest = async () => {
+    //     // testar credenciais
+    //     try {
+    //         var response = await tryLogin(username, password)
+    //         //console.log(response)
+    //         navigation.reset({
+    //             index: 0, routes: [{name:'MAIN'}]
+    //         })
+    //     } catch (error) {
+    //         console.log(error)
+    //         setErrorMsg(error.message)
+    //     }
 
-    const handlePassRestoreRequest = () => {
-        navigation.push('PASSRESTOREREQUEST', {});
-    }
-
-    const handleLogin = async () => {
-        // testar credenciais
-        try {
-            var response = await tryLogin(username, password)
-            //console.log(response)
-            navigation.reset({
-                index: 0, routes: [{name:'MAIN'}]
-            })
-        } catch (error) {
-            console.log(error)
-            setErrorMsg(error.message)
-        }
-
-        // navigation.reset({
-        //     index: 0, routes: [{name:'MAIN'}]
-        // })
-    }
+    //     // navigation.reset({
+    //     //     index: 0, routes: [{name:'MAIN'}]
+    //     // })
+    // }
 
     return (
         <>
@@ -54,20 +51,23 @@ export default function LoginScreen() {
             
             <View style={{flex: 0.1}}/>
 
+            <MyTextH3>Esqueceu a senha?</MyTextH3>
+            <View style={{flex: 0.05}}/>
+
             <MyTextRegular>EMAIL</MyTextRegular>
             <MyTextInput 
             style={styles.textInput} autoComplete='email'
-            value={username} onChangeText={setUsername}
+            value={email} onChangeText={setEmail}
             ></MyTextInput>
 
             <View style={{flex: 0.05}}/>
 
-            <MyTextRegular>SENHA</MyTextRegular>
+            {/* <MyTextRegular>SENHA</MyTextRegular>
             <MyTextInput style={styles.textInput} 
             autoComplete='current-password'
             value={password} onChangeText={setPassword}
             secureTextEntry = {true}
-            ></MyTextInput>
+            ></MyTextInput> */}
 
             <View style={{flex: 0.05}}/>
 
@@ -81,20 +81,13 @@ export default function LoginScreen() {
 
             <View  style={styles.viewButton}>
                 <MyButtonRegular style={styles.button}
-                title="Continuar"
-                onPress={handleLogin}
+                title="Enviar Email"
+                // onPress={handleLogin}
                 />
             </View>
             
 
             <View style={{flex: 0.1}}/>
-
-            <View  style={styles.viewButton}>
-                <MyButtonRegular style={styles.button}
-                    title="Esqueci a senha"
-                    onPress={handlePassRestoreRequest}
-                />
-            </View>
         
         </View>
 

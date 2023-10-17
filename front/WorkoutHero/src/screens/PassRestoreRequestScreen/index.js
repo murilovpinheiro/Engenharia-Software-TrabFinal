@@ -38,6 +38,16 @@ export default function PassRestoreRequestScreen() {
     //     // })
     // }
 
+    const { trySendEmail } = useContext(AuthContext)
+
+    const handleEnviarEmail = async () => {
+        try {
+            var response = await trySendEmail(email)
+        } catch (error) {
+            console.log('ERRO HANDLE ENVIAR EMAIL', error);
+        }
+    }
+
     return (
         <>
         
@@ -82,7 +92,7 @@ export default function PassRestoreRequestScreen() {
             <View  style={styles.viewButton}>
                 <MyButtonRegular style={styles.button}
                 title="Enviar Email"
-                // onPress={handleLogin}
+                onPress={handleEnviarEmail}
                 />
             </View>
             

@@ -12,6 +12,37 @@ function isEmpty(obj) {
 const AuthProvider = ({ children }) => {
     //const [userId, setUserId] = useState(null);
     const [userData, setUserData] = useState(null);
+
+    const trySendEmail = async (login) => {
+        const url = baseUrl + `/user/forgot_password?login=${login}`
+        
+        if (login === '') throw new Error("login vazio.")
+
+        let response = null
+
+        try {
+            response = await axios.post(url, login, {timeout: 10000});
+
+            console.log('RESPONSE SENDEMAIL:',response)
+            
+            if (Object.is(response.data, null)) {
+                // Handle case when no data is returned
+                console.log("passou aqui")
+                throw new Error('Ocorreu um erro. Tente novamente.')
+            }
+
+            if (response.data.sucess == false) {
+                console.log("nao, passou aqui")
+                let errorMsg = response.data.message
+                console.log("Message: ", errorMsg)
+                throw new Error(errorMsg)
+            }
+
+        } catch (error) {
+            console.log('ERRO EM TRYSENDEMAIL:', error)
+            throw error
+        }
+    }
   
     const tryLogin = async (username, password) => {
         const url = baseUrl + `/user/select?login=${username}&pass=${password}`
@@ -49,10 +80,6 @@ const AuthProvider = ({ children }) => {
             throw error
         }
     }
-
-    // const login = (data) => {
-    //     setUserData(data);
-    // };
 
     const trySignUp = async (params) => {
         const { name, sex, weight, height, login, pass } = params
@@ -96,7 +123,7 @@ const AuthProvider = ({ children }) => {
     };
   
     return (
-      <AuthContext.Provider value={{ userData, tryLogin, logout, trySignUp, setUserData }}>
+      <AuthContext.Provider value={{ userData, tryLogin, trySendEmail, logout, trySignUp, setUserData }}>
         {children}
       </AuthContext.Provider>
     );

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import {View, Text, TextInput, Button, Image} from "react-native"
+import {View, Text, TextInput, Button, Image, KeyboardAvoidingView} from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import styles from "./style"
 import MyTextRegular from "../../components/MyText/MyTextRegular";
@@ -43,16 +43,15 @@ export default function LoginScreen() {
 
     return (
         <>
-        
-        <View style={styles.body}>
-            <View style={{flex: 0.05}}/>
+        <KeyboardAvoidingView style={styles.body}>
+            <View style={{height: 128}}/>
             
             <View style={styles.viewLogo}>
                 <Image style={styles.imgLogo}
                 source={require('./logo_small.png')} />
             </View>
             
-            <View style={{flex: 0.1}}/>
+            <View style={{height: 16}}/>
 
             <MyTextRegular>EMAIL</MyTextRegular>
             <MyTextInput 
@@ -60,7 +59,7 @@ export default function LoginScreen() {
             value={username} onChangeText={setUsername}
             ></MyTextInput>
 
-            <View style={{flex: 0.05}}/>
+            <View style={{height: 16}}/>
 
             <MyTextRegular>SENHA</MyTextRegular>
             <MyTextInput style={styles.textInput} 
@@ -69,14 +68,14 @@ export default function LoginScreen() {
             secureTextEntry = {true}
             ></MyTextInput>
 
-            <View style={{flex: 0.05}}/>
+            <View style={{height: 16}}/>
 
             <View style={styles.viewError}>
                 <Text style={styles.textError}>{errorMsg}</Text>
             </View>
             
 
-            <View style={{flex: 0.05}}/>
+            <View style={{height: 16}}/>
 
 
             <View  style={styles.viewButton}>
@@ -87,7 +86,7 @@ export default function LoginScreen() {
             </View>
             
 
-            <View style={{flex: 0.1}}/>
+            <View style={{height: 16}}/>
 
             <View  style={styles.viewButton}>
                 <MyButtonRegular style={styles.button}
@@ -96,7 +95,7 @@ export default function LoginScreen() {
                 />
             </View>
         
-        </View>
+        </KeyboardAvoidingView>
 
         </>
     );

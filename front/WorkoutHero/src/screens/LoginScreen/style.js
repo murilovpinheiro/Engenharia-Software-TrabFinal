@@ -2,19 +2,19 @@ import {StyleSheet} from 'react-native'
 
 const styles = StyleSheet.create({
     body: {
-        width: "100%", height:"100%",
-        padding: '5%'
+        width: "100%", //height:"100%",
+        padding: 16
     },
     viewLogo: {
         //borderWidth: 4, borderColor: "red",
         //backgroundColor:"#f00",
-        flex: 0.6,
+        // flex: 0.6,
         alignItems: 'center'
         //width: "100%"
     },
     imgLogo: {
         
-        width: "90%", height:"100%",
+        width: 256, height:256,
         resizeMode: 'contain'
     },
     textInput: {

@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./style"
 import MyTextRegular from "../../components/MyText/MyTextRegular";
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
-import MyTextInput from "../../components/MyTextInput/MyTextInput";
+import MyTextInputLow from "../../components/MyTextInput/MyTextInputLow";
 import MyTextH3 from "../../components/MyText/MyTextH3";
 
 
@@ -52,52 +52,36 @@ export default function PassRestoreRequestScreen() {
         <>
         
         <View style={styles.body}>
-            <View style={{flex: 0.05}}/>
+            <View style={{height: 100}}/>
             
             <View style={styles.viewLogo}>
                 <Image style={styles.imgLogo}
-                source={require('./logo_small.png')} />
+                source={require('../WelcomeScreen/WorkoutHero_Logo1.png')} />
             </View>
             
-            <View style={{flex: 0.1}}/>
+            <View style={{height: 32}}/>
 
-            <MyTextH3>Esqueceu a senha?</MyTextH3>
-            <View style={{flex: 0.05}}/>
-
-            <MyTextRegular>EMAIL</MyTextRegular>
-            <MyTextInput 
-            style={styles.textInput} autoComplete='email'
-            value={email} onChangeText={setEmail}
-            ></MyTextInput>
-
-            <View style={{flex: 0.05}}/>
-
-            {/* <MyTextRegular>SENHA</MyTextRegular>
-            <MyTextInput style={styles.textInput} 
-            autoComplete='current-password'
-            value={password} onChangeText={setPassword}
-            secureTextEntry = {true}
-            ></MyTextInput> */}
-
-            <View style={{flex: 0.05}}/>
-
-            <View style={styles.viewError}>
-                <Text style={styles.textError}>{errorMsg}</Text>
+            <View style={styles.viewContent}> 
+                <MyTextH3>Esqueceu a senha?</MyTextH3>
+                <View style={{height: 16}}/>
+                <MyTextRegular>  EMAIL</MyTextRegular>
+                <MyTextInputLow 
+                style={styles.textInput} autoComplete='email'
+                value={email} onChangeText={setEmail}
+                ></MyTextInputLow>
+                <View style={{height: 16}}/>
+                <View style={styles.viewError}>
+                    <Text style={styles.textError}>{errorMsg}</Text>
+                </View>
+                <View style={{height: 32}}/>
+                <View  style={styles.viewButton}>
+                    <MyButtonRegular style={styles.button}
+                    title="Enviar Email"
+                    onPress={handleEnviarEmail}
+                    />
+                </View>
             </View>
             
-
-            <View style={{flex: 0.05}}/>
-
-
-            <View  style={styles.viewButton}>
-                <MyButtonRegular style={styles.button}
-                title="Enviar Email"
-                onPress={handleEnviarEmail}
-                />
-            </View>
-            
-
-            <View style={{flex: 0.1}}/>
         
         </View>
 

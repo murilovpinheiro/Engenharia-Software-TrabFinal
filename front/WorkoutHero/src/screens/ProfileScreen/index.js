@@ -8,7 +8,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
 import MyTextH3 from "../../components/MyText/MyTextH3";
-import RPGImageBackground from "../../components/RPGImageBackground";
 
 import { AuthContext } from "../../AuthContext";
 
@@ -51,11 +50,11 @@ export default function ProfileScreen() {
 
     if (!userData) {
         return (
-            <><RPGImageBackground/></>
+            <View style={styles.body}/>
         );
     }
 
-    if (info == {}) return (<>Loading...</>)
+    if (info == {}) return (<View style={styles.body}><>Carregando...</></View>)
 
     return (
         <>

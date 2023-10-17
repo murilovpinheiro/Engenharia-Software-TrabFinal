@@ -3,7 +3,6 @@ import {View, Text, ScrollView, TouchableOpacity, Button, Image} from "react-nat
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 import styles from "./style"
 
-import RPGImageBackground from "../../components/RPGImageBackground";
 import MyTextH3 from "../../components/MyText/MyTextH3";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
 import { useNavigation } from "@react-navigation/native";
@@ -116,7 +115,6 @@ export default function InTrainingScreen({route}) {
 
     return (
         <>
-        {/* <RPGImageBackground/> */}
         <View style={styles.body}>
             
             <ScrollView style={styles.scrollBody}>

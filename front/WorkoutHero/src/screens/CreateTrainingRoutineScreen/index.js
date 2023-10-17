@@ -4,7 +4,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import styles from "./style"
 
-import RPGImageBackground from "../../components/RPGImageBackground"
 import ExerciseOptions from "../../components/ExerciseOptions/ExerciseOptions"
 import MyTextInput from "../../components/MyTextInput/MyTextInput"
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular"
@@ -12,7 +11,7 @@ import MyTextRegular from "../../components/MyText/MyTextRegular"
 
 export default function CreateTrainingRoutineScreen() {
     return (
-        <><RPGImageBackground/>
+        <>
 
         <View style={styles.body}>
             <View style={{flexDirection:'row', alignItems: 'center'}}>

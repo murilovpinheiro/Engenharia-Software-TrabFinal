@@ -9,7 +9,6 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
-import RPGImageBackground from './src/components/RPGImageBackground';
 
 import MainContainer from './src/MainContainer';
 import RoutinesListScreen from './src/screens/RoutinesListScreen';

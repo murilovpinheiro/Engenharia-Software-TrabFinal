@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from "react"
 import {View, TouchableOpacity, ScrollView, TextInput} from "react-native"
 import styles from "./style"
 
-import RPGImageBackground from "../../components/RPGImageBackground";
 import RoutinePreview from "../../components/RoutinePreview/RoutinePreview";
 import { useNavigation } from "@react-navigation/core";
 
@@ -169,7 +168,6 @@ export default function RoutinesListScreen() {
     if (loading) {
         
         return (
-        // <><RPGImageBackground/></>
         <View style={styles.body}>
             <MyTextRegular>
                 Carregando...

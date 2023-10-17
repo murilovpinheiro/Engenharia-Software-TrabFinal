@@ -1,9 +1,11 @@
 import {StyleSheet} from 'react-native'
+import AppStyles from '../../AppStyles';
 
 const styles = StyleSheet.create({
     body: {
-        width: "100%", //height:"100%",
-        padding: 16
+        backgroundColor: AppStyles.colors.background,
+        width: "100%", height:"100%",
+        padding: 24
     },
     viewLogo: {
         //borderWidth: 4, borderColor: "red",
@@ -12,16 +14,18 @@ const styles = StyleSheet.create({
         alignItems: 'center'
         //width: "100%"
     },
-    imgLogo: {
-        
+    imgLogo: {  
         width: 256, height:256,
         resizeMode: 'contain'
     },
+    viewContent: {
+        paddingHorizontal: 16,
+    },
     textInput: {
         //borderWidth: 4, borderColor: "red",
-        borderWidth: 3,
-        borderRadius: 16,
-        paddingLeft: 8, paddingRight: 8
+        // borderWidth: 3,
+        // borderRadius: 16,
+        // paddingLeft: 8, paddingRight: 8
     },
     viewError: {
         //backgroundColor: '#aaa',
@@ -36,10 +40,17 @@ const styles = StyleSheet.create({
     },
     viewButton: {
         //borderWidth: 4, borderColor: "red",
-        alignItems: 'center'
+        alignItems: 'center',
+        // width: "100%"
     },
     button: {
-        width: "80%"
+        width: "100%", backgroundColor: AppStyles.colors.accent
+    },
+    extraButton: {
+        backgroundColor: "#0000", borderWidth: 0,
+        width: "100%", 
+        color: "#000",
+        alignItems: 'center',
     }
 });
 

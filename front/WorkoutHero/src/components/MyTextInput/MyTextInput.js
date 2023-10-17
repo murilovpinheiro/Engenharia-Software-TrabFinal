@@ -4,6 +4,6 @@ import defaultStyles from "./style"
 
 export default function MyTextInput(props) {
     return (
-        <TextInput {...props} secure style={[defaultStyles.textInput, props.style]} cursorColor={'#00132A'}>{props.children}</TextInput>
+        <TextInput {...props} secure style={[defaultStyles.textInput, props.style]} cursorColor={'#0007'}>{props.children}</TextInput>
     );
 }

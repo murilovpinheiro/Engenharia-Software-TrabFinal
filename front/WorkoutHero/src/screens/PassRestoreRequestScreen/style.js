@@ -1,27 +1,32 @@
 import {StyleSheet} from 'react-native'
+import AppStyles from '../../AppStyles';
 
 const styles = StyleSheet.create({
     body: {
+        backgroundColor: AppStyles.colors.background,
         width: "100%", height:"100%",
-        padding: '5%'
+        padding: 24
     },
     viewLogo: {
         //borderWidth: 4, borderColor: "red",
         //backgroundColor:"#f00",
-        flex: 0.6,
+        // flex: 0.6,
         alignItems: 'center'
         //width: "100%"
     },
     imgLogo: {
         
-        width: "90%", height:"100%",
+        width: 256, height:256,
         resizeMode: 'contain'
+    },
+    viewContent: {
+        paddingHorizontal: 16,
     },
     textInput: {
         //borderWidth: 4, borderColor: "red",
-        borderWidth: 3,
-        borderRadius: 16,
-        paddingLeft: 8, paddingRight: 8
+        // borderWidth: 3,
+        // borderRadius: 16,
+        // paddingLeft: 8, paddingRight: 8
     },
     viewError: {
         //backgroundColor: '#aaa',
@@ -36,10 +41,12 @@ const styles = StyleSheet.create({
     },
     viewButton: {
         //borderWidth: 4, borderColor: "red",
-        alignItems: 'center'
+        alignItems: 'center',
+        
     },
     button: {
-        width: "80%"
+        backgroundColor: AppStyles.colors.accent,
+        width: "100%"
     }
 });
 

@@ -4,7 +4,6 @@ import { SelectList } from "react-native-dropdown-select-list";
 import styles from "./style"
 
 
-import RPGImageBackground from "../../components/RPGImageBackground";
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
 import MyTextInput from "../../components/MyTextInput/MyTextInput";
 import MyTextRegular from "../../components/MyText/MyTextRegular";
@@ -81,7 +80,6 @@ export default function SignUpScreen() {
     
     return (
         <>
-        <RPGImageBackground/>
 
         <View style={styles.body}>
             <View style={{flex: 0.05}}/>

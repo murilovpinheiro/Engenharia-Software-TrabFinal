@@ -1,10 +1,9 @@
 import React from "react"
-import {View, Image, TouchableOpacity} from 'react-native'
+import {View, Image, TouchableOpacity, ScrollView} from 'react-native'
 import styles from "./style"
 
 import MyTextRegular from "../MyText/MyTextRegular";
 import MyTextH3 from "../MyText/MyTextH3";
-import { ScrollView } from "react-native-gesture-handler";
 
 import Images from "../../Images";
 

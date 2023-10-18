@@ -1,9 +1,9 @@
 import React from "react"
-import { View, TouchableOpacity, Pressable } from 'react-native'
+import { useContext, useState, useEffect } from "react"
+import { View, TouchableOpacity, Switch, Pressable } from 'react-native'
 import defaultStyles from "./style"
 import MyTextRegular from "../MyText/MyTextRegular";
-import { useContext, useState, useEffect } from "react"
-import { Switch } from "react-native-gesture-handler";
+
 
 
 export default function MyButtonSwitch(props) {

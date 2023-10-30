@@ -9,12 +9,18 @@ const styles = StyleSheet.create({
     },
     scrollBody: {
         width: "100%", height:"100%",
-        padding: '5%',
+        padding: 16,
     },
     imgBox: {
-        height: 200, width: '90%', alignSelf: 'center',
-        backgroundColor: '#00132A',
-        borderColor: '#F2BD00', borderRadius: 10, borderWidth: 2
+        width: '95%', aspectRatio:1.2, alignSelf: 'center',
+        backgroundColor: AppStyles.colors.accent,
+        borderRadius: 16,
+        padding:16,
+        alignItems:'center'
+        // borderColor: '#F2BD00', borderRadius: 10, borderWidth: 2
+    },
+    img: {
+
     },
     viewTimer: {
         //width: '100%',
@@ -27,8 +33,34 @@ const styles = StyleSheet.create({
     btnTimer: {
         marginHorizontal: 20, marginTop: 16, marginBottom: 30
     },
-    selectOptions:{
-        margin: 5
+
+    viewSets:{
+        backgroundColor: AppStyles.colors.secondary,
+        borderRadius:16,
+        padding:8,
+
+        // borderWidth:2
+    },
+    setsHeader: {
+        // height: 10,
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    setsHeaderText: {
+        // justifyContent:'center',
+        textAlign:'center',
+        flex:0.25,
+        fontSize: 10,
+        // borderWidth:2
+    },
+    setOptions:{
+        margin: 8,
+        justifyContent: 'center',
+        height:32,
+        
+        borderWidth:0,
+        backgroundColor: AppStyles.colors.accent,
+        color: AppStyles.colors.text
     },
 
 });

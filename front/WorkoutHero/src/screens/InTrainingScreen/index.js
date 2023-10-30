@@ -101,7 +101,7 @@ export default function InTrainingScreen({route}) {
                     }}
                     key={currentExerciseIndex*100 + i} 
                     title={`Seção ${i+1}: ${currentExercise.reps} repetições`} 
-                    style={[styles.selectOptions]} 
+                    style={[styles.setOptions]} 
                     value={currentProgressL[currentExerciseIndex][i]}
                     // style={{backgroundColor: 'red'}} 
                     // style={sets[i] === true ? { backgroundColor: 'blue' } : { backgroundColor: 'red' }}
@@ -116,20 +116,27 @@ export default function InTrainingScreen({route}) {
     return (
         <>
         <View style={styles.body}>
+            <View style={{height: 36}}/>
+
+            <View style={{alignItems:'center'}}>
+                <MyTextH3 style={{alignContent:'center'}}>{currentExercise.name.replace(/_/g, " ")}</MyTextH3>
+                {/* <MyTextH3 style={{alignContent:'center'}}>{currentExerciseIndex}</MyTextH3> */}
+            </View>
             
             <ScrollView style={styles.scrollBody}>
-                {/* <View style={styles.imgBox}> */}
+                
+                <View style={styles.imgBox}>
                     <Image
-                    style={styles.imgBox}
+                    style={styles.img}
                     source={ Images.exerciseImages[currentExercise.name] }
                     />
-
-                {/* </View> */}
-                
-                <View style={{alignItems:'center', paddingVertical: 8}}>
-                    <MyTextH3 style={{alignContent:'center'}}>{currentExercise.name.replace(/_/g, " ")}</MyTextH3>
-                    {/* <MyTextH3 style={{alignContent:'center'}}>{currentExerciseIndex}</MyTextH3> */}
+                    <MyTextRegular
+                    style={{alignContent:'center'}}
+                    >
+                        {currentExercise.name.replace(/_/g, " ")}
+                    </MyTextRegular>
                 </View>
+                
 
                 {/* <MyTextRegular>
                     {getLorem()}
@@ -137,8 +144,18 @@ export default function InTrainingScreen({route}) {
 
                 {/* aqui vai ser os check do treino */}
                 <ScrollView style={styles.scrollBody}>
-                    {/* (sets != []) ? {currentExercise && makeExerciseView()} : {currentExercise && makeExerciseView()} */}
-                    {currentExercise && makeExerciseView()}         
+
+                    <View style={styles.viewSets}>
+                        <View style={styles.setsHeader}>
+                            <MyTextRegular style={styles.setsHeaderText}>SÉRIE</MyTextRegular>
+                            <MyTextRegular style={styles.setsHeaderText}>PESO (KG)</MyTextRegular>
+                            <MyTextRegular style={[styles.setsHeaderText,{flex:0.3}]}>REPETIÇÕES</MyTextRegular>
+                            <MyTextRegular style={styles.setsHeaderText}>FEITO</MyTextRegular>
+                        </View>
+
+                        {currentExercise && makeExerciseView()}     
+                    </View>
+                        
                 </ScrollView>
 
             </ScrollView>
@@ -149,7 +166,7 @@ export default function InTrainingScreen({route}) {
                 <TouchableOpacity onPress={nextExercise}><AntDesign style={styles.btnTimer} name='rightcircle' size={50} color='#808080'/></TouchableOpacity>
             </View>
 
-            <View style={{height:70}}/>
+            <View style={{height:90}}/>
         </View>
         </>
     );

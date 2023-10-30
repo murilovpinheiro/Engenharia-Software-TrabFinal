@@ -35,7 +35,8 @@
     "react-native-web": "~0.19.6",
     "react-navigation": "^4.4.4",
     "expo-splash-screen": "~0.20.5",
-    "expo-system-ui": "~2.4.0"
+    "expo-system-ui": "~2.4.0",
+    "expo-linking": "~5.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

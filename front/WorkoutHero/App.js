@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import * as Linking from 'expo-linking';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -22,6 +23,17 @@ import PassRestoreRequestScreen from './src/screens/PassRestoreRequestScreen';
 // const STYLES = ['default', 'dark-content', 'light-content'];
 
 export default function App() {
+
+  const url = Linking.useURL();
+  if (url) {
+    const { hostname, path, queryParams } = Linking.parse(url);
+
+    console.log(
+      `Linked to app with hostname: ${hostname}, path: ${path} and data: ${JSON.stringify(
+        queryParams
+      )}`
+    );
+  }
 
   const [fontsLoaded] = useFonts({
     'Lexend': require('./assets/fonts/Lexend/Lexend.ttf'),

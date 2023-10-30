@@ -18,26 +18,6 @@ export default function PassRestoreRequestScreen() {
     // const [ password, setPassword ] = useState('')
     const [ errorMsg, setErrorMsg ] = useState('')
 
-    // const { tryLogin } = useContext(AuthContext);
-
-    // const handleRestoreRequest = async () => {
-    //     // testar credenciais
-    //     try {
-    //         var response = await tryLogin(username, password)
-    //         //console.log(response)
-    //         navigation.reset({
-    //             index: 0, routes: [{name:'MAIN'}]
-    //         })
-    //     } catch (error) {
-    //         console.log(error)
-    //         setErrorMsg(error.message)
-    //     }
-
-    //     // navigation.reset({
-    //     //     index: 0, routes: [{name:'MAIN'}]
-    //     // })
-    // }
-
     const { trySendEmail } = useContext(AuthContext)
 
     const handleEnviarEmail = async () => {

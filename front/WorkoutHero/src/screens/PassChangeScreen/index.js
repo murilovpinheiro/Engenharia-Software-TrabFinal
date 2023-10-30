@@ -13,29 +13,35 @@ export default function LoginScreen() {
 
     const navigation = useNavigation();
 
-    const [ username, setUsername ] = useState('')
-    const [ password, setPassword ] = useState('')
+    const [ newPassword, setNewPassword ] = useState('')
+    const [ confirmPassword, setConfirmPassword ] = useState('')
     const [ errorMsg, setErrorMsg ] = useState('')
 
-    const { tryLogin } = useContext(AuthContext);
+    const [ btnDisabled, setBtnDisabled ] = useState(false)
+
+    // const { tryLogin } = useContext(AuthContext);
 
 
-    const handlePassRestoreRequest = () => {
-        navigation.push('PASSRESTOREREQUEST', {});
-    }
+    // const handlePassRestoreRequest = () => {
+    //     navigation.push('PASSCHANGEREQUEST', {});
+    // }
 
-    const handleLogin = async () => {
+    const handlePassChange = async () => {
+        setBtnDisabled(true)
+
         // testar credenciais
-        try {
-            var response = await tryLogin(username, password)
-            //console.log(response)
-            navigation.reset({
-                index: 0, routes: [{name:'MAIN'}]
-            })
-        } catch (error) {
-            console.log(error)
-            setErrorMsg(error.message)
-        }
+        // try {
+        //     var response = await tryLogin(username, password)
+        //     //console.log(response)
+        //     navigation.reset({
+        //         index: 0, routes: [{name:'MAIN'}]
+        //     })
+        // } catch (error) {
+        //     console.log(error)
+        //     setErrorMsg(error.message)
+        // }
+
+        setBtnDisabled(false)
 
         // navigation.reset({
         //     index: 0, routes: [{name:'MAIN'}]
@@ -55,16 +61,16 @@ export default function LoginScreen() {
             <View style={{height: 32}}/>
 
             <View style={styles.viewContent}>
-                <MyTextRegular>  EMAIL</MyTextRegular>
+                <MyTextRegular>  NOVA SENHA</MyTextRegular>
                 <MyTextInput 
-                style={styles.textInput} autoComplete='email'
-                value={username} onChangeText={setUsername}
+                style={styles.textInput} autoComplete='current-password'
+                value={newPassword} onChangeText={setNewPassword}
                 ></MyTextInput>
                 <View style={{height: 16}}/>
-                <MyTextRegular>  SENHA</MyTextRegular>
+                <MyTextRegular>   CONFIRME A SENHA</MyTextRegular>
                 <MyTextInput style={styles.textInput} 
                 autoComplete='current-password'
-                value={password} onChangeText={setPassword}
+                value={confirmPassword} onChangeText={setConfirmPassword}
                 secureTextEntry = {true}
                 ></MyTextInput>
                 <View style={{height: 16}}/>
@@ -73,25 +79,17 @@ export default function LoginScreen() {
                 </View>
                 <View style={{height: 16}}/>
                 <View  style={styles.viewButton}>
-                    <MyButtonRegular style={styles.button}
-                    title="Continuar"
-                    onPress={handleLogin}
+                    <MyButtonRegular 
+                    // style={[styles.button, {backgroundColor: btnDisabled ? '#fff5' : AppStyles.colors.accent }]}
+                    style={[styles.button]}
+                    title="Redefinir Senha"
+                    onPress={handlePassChange}
+                    disabled={btnDisabled}
                     />
                 </View>
-                <View style={{height: 16}}/>
-                <View  style={styles.viewButton}>
-                    <TouchableOpacity style={styles.extraButton}
-                        onPress={handlePassRestoreRequest}
-                    >
-                        <MyTextRegular>Esqueci minha senha</MyTextRegular>
-                    </TouchableOpacity>
-                </View>
-            </View>
-
-            
+            </View>     
         
         </View>
-
         </>
     );
 }

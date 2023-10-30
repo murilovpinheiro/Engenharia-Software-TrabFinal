@@ -9,6 +9,7 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
+import PassChangeScreen from './src/screens/PassChangeScreen';
 
 import MainContainer from './src/MainContainer';
 import RoutinesListScreen from './src/screens/RoutinesListScreen';
@@ -35,6 +36,8 @@ export default function App() {
 
   const Stack = createNativeStackNavigator();
 
+
+
   return (
     <>
     <StatusBar backgroundColor= {AppStyles.colors.primary} barStyle={'light-content'}/>
@@ -45,12 +48,15 @@ export default function App() {
           <Stack.Navigator 
           screenOptions={stackOptions}
           initialRouteName='BEM VINDO'>
+            
             <Stack.Screen name='BEM VINDO'   component={WelcomeScreen} />
             <Stack.Screen name='LOGIN'   component={LoginScreen} />
             <Stack.Screen name='PASSRESTOREREQUEST'  component={PassRestoreRequestScreen}/>
             <Stack.Screen name='CRIAR CONTA'   component={SignUpScreen} />
         
             <Stack.Screen name='MAIN'  component={MainContainer}/>
+
+            <Stack.Screen name='PASSCHANGE' component={PassChangeScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
 

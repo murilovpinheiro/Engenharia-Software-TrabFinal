@@ -17,6 +17,8 @@ export default function LoginScreen() {
     const [ password, setPassword ] = useState('')
     const [ errorMsg, setErrorMsg ] = useState('')
 
+    const [ btnDisabled, setBtnDisabled ] = useState(false)
+
     const { tryLogin } = useContext(AuthContext);
 
 

@@ -9,7 +9,7 @@ import MyButtonThin from "../../components/MyButton/MyButtonThin.js"
 
 import { AuthContext } from "../../AuthContext"
 
-export default function PassChangeScreen() {
+export default function PassChangeScreen({ route }) {
 
     const navigation = useNavigation();
 
@@ -19,7 +19,12 @@ export default function PassChangeScreen() {
 
     const [ btnDisabled, setBtnDisabled ] = useState(false)
 
+    useEffect(() => {
+        console.log('PASSCHANGESCREEN', route.params);
+    }, [])
+
     // const { tryLogin } = useContext(AuthContext);
+    const { trySendPassword } = useContext(AuthContext);
 
 
     // const handlePassRestoreRequest = () => {
@@ -30,22 +35,17 @@ export default function PassChangeScreen() {
         setBtnDisabled(true)
 
         // testar credenciais
-        // try {
-        //     var response = await tryLogin(username, password)
-        //     //console.log(response)
-        //     navigation.reset({
-        //         index: 0, routes: [{name:'MAIN'}]
-        //     })
-        // } catch (error) {
-        //     console.log(error)
-        //     setErrorMsg(error.message)
-        // }
+        try {
+            var response = await trySendPassword(route.params?.login, route.params?.token, newPassword)
+            navigation.reset({
+                index: 0, routes: [{name:'BEM VINDO'}]
+            })
+        } catch (error) {
+            console.log('ERRO HANDLE ENVIAR PASS', error);
+        }
 
         setBtnDisabled(false)
 
-        // navigation.reset({
-        //     index: 0, routes: [{name:'MAIN'}]
-        // })
     }
 
     return (

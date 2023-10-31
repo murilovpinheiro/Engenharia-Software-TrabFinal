@@ -9,7 +9,7 @@ import MyButtonThin from "../../components/MyButton/MyButtonThin.js"
 
 import { AuthContext } from "../../AuthContext"
 
-export default function LoginScreen() {
+export default function PassChangeScreen() {
 
     const navigation = useNavigation();
 

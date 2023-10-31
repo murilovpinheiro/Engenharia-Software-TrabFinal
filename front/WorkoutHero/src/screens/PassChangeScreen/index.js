@@ -19,28 +19,31 @@ export default function PassChangeScreen({ route }) {
 
     const [ btnDisabled, setBtnDisabled ] = useState(false)
 
-    const { tryChangePassword } = useContext(AuthContext);
+    useEffect(() => {
+        console.log('PASSCHANGESCREEN', route.params);
+    }, [])
+
+    const { trySendPassword } = useContext(AuthContext);
 
     const { token } = route.params
 
-    // const handlePassRestoreRequest = () => {
-    //     navigation.push('PASSCHANGEREQUEST', {});
-    // }
 
     const handlePassChange = async () => {
         setBtnDisabled(true)
 
+        // testar credenciais
         try {
-            var response = await tryChangePassword(newPassword, confirmPassword)
-            // navigation.reset({
-            //     index: 0, routes: [{name:'MAIN'}]
-            // })
+            var response = await trySendPassword(route.params?.login, route.params?.token, newPassword)
+            navigation.reset({
+                index: 0, routes: [{name:'BEM VINDO'}]
+            })
         } catch (error) {
-            console.log(error)
+            console.log('ERRO HANDLE ENVIAR PASS', error);
             setErrorMsg(error.message)
         }
 
         setBtnDisabled(false)
+
     }
 
     return (

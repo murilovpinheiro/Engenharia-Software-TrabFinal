@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import * as Linking from 'expo-linking';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -23,6 +24,30 @@ import PassRestoreRequestScreen from './src/screens/PassRestoreRequestScreen';
 // const STYLES = ['default', 'dark-content', 'light-content'];
 
 export default function App() {
+
+  const [resetData, setResetData] = useState(null);
+  const url = Linking.useURL();
+
+  useEffect( () => {
+    if (url) {
+      const { hostname, path, queryParams } = Linking.parse(url);
+
+      console.log(
+        `Linked to app with hostname: ${hostname}, path: ${path} and data: ${JSON.stringify(
+          queryParams
+        )}`
+      );
+      
+      if (path) {
+        const list = path.split('/')
+        if (list[1] == 'forgotpass') {
+          setResetData(queryParams); // colocando dados do link como dados para recuperação de senha
+        }
+      } else {
+        setResetData(null);
+      }
+    }
+  }, [url]);
 
   const [fontsLoaded] = useFonts({
     'Lexend': require('./assets/fonts/Lexend/Lexend.ttf'),
@@ -47,7 +72,8 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator 
           screenOptions={stackOptions}
-          initialRouteName='PASSCHANGE'>
+          initialRouteName={resetData ? 'PASSCHANGE' : 'BEM VINDO'}>
+          {/* initialRouteName='BEM VINDO'> */}
             
             <Stack.Screen name='BEM VINDO'   component={WelcomeScreen} />
             <Stack.Screen name='LOGIN'   component={LoginScreen} />
@@ -56,7 +82,7 @@ export default function App() {
         
             <Stack.Screen name='MAIN'  component={MainContainer}/>
 
-            <Stack.Screen name='PASSCHANGE' component={PassChangeScreen} initialParams={{token:"1234"}}/>
+            <Stack.Screen name='PASSCHANGE' component={PassChangeScreen} initialParams={resetData}/>
           </Stack.Navigator>
         </NavigationContainer>
 

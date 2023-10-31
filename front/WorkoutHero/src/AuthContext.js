@@ -16,6 +16,40 @@ const AuthProvider = ({ children }) => {
     //const [userId, setUserId] = useState(null);
     const [userData, setUserData] = useState(null);
 
+    const trySendPassword = async (login, token, pass) => {
+        const url = baseUrl + `/user/reset_password?login=${login}&passResetToken=${token}&pass=${pass}`;
+
+        if (login === '') throw new Error("login vazio.");
+        if (token === '') throw new Error("token vazio.");
+        if (pass === '') throw new Error("pass vazio.");
+
+        let response = null;
+
+        try {
+            response = await axios.post(url, {login, token, pass}, { timeout:10000 });
+
+            console.log('RESPONSE SENDPASS:', response)
+
+            if (Object.is(response.data, null)) {
+                // Handle case when no data is returned
+                console.log("passou aqui")
+                throw new Error('Ocorreu um erro. Tente novamente.')
+            }
+
+            if (response.data.sucess == false) {
+                console.log("nao, passou aqui")
+                let errorMsg = response.data.message
+                console.log("Message: ", errorMsg)
+                throw new Error(errorMsg)
+            }
+        } catch (error) {
+            console.log('ERRO EM TRYSENDPASS:', error);
+            throw error;
+        }
+        
+
+    }
+
     const trySendEmail = async (login) => {
         const url = baseUrl + `/user/forgot_password?login=${login}`
         
@@ -140,7 +174,7 @@ const AuthProvider = ({ children }) => {
     };
   
     return (
-      <AuthContext.Provider value={{ userData, tryLogin, trySendEmail, logout, trySignUp, tryChangePassword, setUserData }}>
+      <AuthContext.Provider value={{ userData, trySendPassword, tryLogin, trySendEmail, logout, trySignUp, tryChangePassword, setUserData }}>
         {children}
       </AuthContext.Provider>
     );

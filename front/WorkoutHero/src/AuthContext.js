@@ -1,9 +1,12 @@
 import React, { createContext, useState } from 'react';
 import axios from 'axios';
 
+
 const AuthContext = createContext();
 
 const baseUrl = 'https://apiworkouthero.onrender.com'
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
@@ -117,13 +120,27 @@ const AuthProvider = ({ children }) => {
             throw error
         }
     }
-  
+
+    const tryChangePassword = async (newPass, confirmPass) => {
+        if (newPass == '') throw new Error('Nova senha não pode ser vazia.')
+        if (confirmPass == '') throw new Error('Confirme a nova senha.')
+
+
+        if (newPass != confirmPass) {
+            throw new Error('Confirmação incorreta. Digite a mesma senha nas duas caixas.')
+        }
+
+        //send to back
+        await sleep(3000)
+        throw new Error('Função não implaementada.')
+    }
+
     const logout = () => {
       setUserData(null);
     };
   
     return (
-      <AuthContext.Provider value={{ userData, tryLogin, trySendEmail, logout, trySignUp, setUserData }}>
+      <AuthContext.Provider value={{ userData, tryLogin, trySendEmail, logout, trySignUp, tryChangePassword, setUserData }}>
         {children}
       </AuthContext.Provider>
     );

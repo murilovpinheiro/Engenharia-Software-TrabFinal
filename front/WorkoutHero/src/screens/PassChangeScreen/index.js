@@ -9,7 +9,7 @@ import MyButtonThin from "../../components/MyButton/MyButtonThin.js"
 
 import { AuthContext } from "../../AuthContext"
 
-export default function LoginScreen() {
+export default function PassChangeScreen({ route }) {
 
     const navigation = useNavigation();
 
@@ -19,8 +19,9 @@ export default function LoginScreen() {
 
     const [ btnDisabled, setBtnDisabled ] = useState(false)
 
-    // const { tryLogin } = useContext(AuthContext);
+    const { tryChangePassword } = useContext(AuthContext);
 
+    const { token } = route.params
 
     // const handlePassRestoreRequest = () => {
     //     navigation.push('PASSCHANGEREQUEST', {});
@@ -29,23 +30,17 @@ export default function LoginScreen() {
     const handlePassChange = async () => {
         setBtnDisabled(true)
 
-        // testar credenciais
-        // try {
-        //     var response = await tryLogin(username, password)
-        //     //console.log(response)
-        //     navigation.reset({
-        //         index: 0, routes: [{name:'MAIN'}]
-        //     })
-        // } catch (error) {
-        //     console.log(error)
-        //     setErrorMsg(error.message)
-        // }
+        try {
+            var response = await tryChangePassword(newPassword, confirmPassword)
+            // navigation.reset({
+            //     index: 0, routes: [{name:'MAIN'}]
+            // })
+        } catch (error) {
+            console.log(error)
+            setErrorMsg(error.message)
+        }
 
         setBtnDisabled(false)
-
-        // navigation.reset({
-        //     index: 0, routes: [{name:'MAIN'}]
-        // })
     }
 
     return (

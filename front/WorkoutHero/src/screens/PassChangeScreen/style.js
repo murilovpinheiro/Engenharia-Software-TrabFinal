@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     viewError: {
         //backgroundColor: '#aaa',
         //borderWidth: 4, borderColor: "red",
-        flex: 0.2,
-        height: 100,
+        // flex: 0.2,
+        // height: 100,
     },
     textError: {
         //backgroundColor: '#001',

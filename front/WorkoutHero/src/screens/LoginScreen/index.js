@@ -27,6 +27,8 @@ export default function LoginScreen() {
     }
 
     const handleLogin = async () => {
+        setErrorMsg('')
+        setBtnDisabled(true)
         // testar credenciais
         try {
             var response = await tryLogin(username, password)
@@ -38,10 +40,8 @@ export default function LoginScreen() {
             console.log(error)
             setErrorMsg(error.message)
         }
-
-        // navigation.reset({
-        //     index: 0, routes: [{name:'MAIN'}]
-        // })
+        
+        setBtnDisabled(false)
     }
 
     return (
@@ -70,19 +70,24 @@ export default function LoginScreen() {
                 secureTextEntry = {true}
                 ></MyTextInput>
                 <View style={{height: 16}}/>
+                
                 <View style={styles.viewError}>
                     <Text style={styles.textError}>{errorMsg}</Text>
                 </View>
+                
                 <View style={{height: 16}}/>
                 <View  style={styles.viewButton}>
-                    <MyButtonRegular style={styles.button}
+                    <MyButtonRegular 
+                    disabled={btnDisabled}
+                    style={styles.button}
                     title="Continuar"
                     onPress={handleLogin}
                     />
                 </View>
                 <View style={{height: 16}}/>
                 <View  style={styles.viewButton}>
-                    <TouchableOpacity style={styles.extraButton}
+                    <TouchableOpacity style={[styles.extraButton, {opacity: btnDisabled ? 0.2 : 1}]}
+                        disabled={btnDisabled}
                         onPress={handlePassRestoreRequest}
                     >
                         <MyTextRegular>Esqueci minha senha</MyTextRegular>

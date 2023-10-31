@@ -47,7 +47,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator 
           screenOptions={stackOptions}
-          initialRouteName='BEM VINDO'>
+          initialRouteName='PASSCHANGE'>
             
             <Stack.Screen name='BEM VINDO'   component={WelcomeScreen} />
             <Stack.Screen name='LOGIN'   component={LoginScreen} />
@@ -56,7 +56,7 @@ export default function App() {
         
             <Stack.Screen name='MAIN'  component={MainContainer}/>
 
-            <Stack.Screen name='PASSCHANGE' component={PassChangeScreen}/>
+            <Stack.Screen name='PASSCHANGE' component={PassChangeScreen} initialParams={{token:"1234"}}/>
           </Stack.Navigator>
         </NavigationContainer>
 

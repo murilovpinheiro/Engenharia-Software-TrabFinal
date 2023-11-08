@@ -72,8 +72,9 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator 
           screenOptions={stackOptions}
-          initialRouteName={resetData ? 'PASSCHANGE' : 'BEM VINDO'}>
-          {/* initialRouteName='BEM VINDO'> */}
+          // initialRouteName={resetData ? 'PASSCHANGE' : 'BEM VINDO'}>
+          // {/* initialRouteName='BEM VINDO'> */}
+          initialRouteName='PASSCHANGE'>
             
             <Stack.Screen name='BEM VINDO'   component={WelcomeScreen} />
             <Stack.Screen name='LOGIN'   component={LoginScreen} />

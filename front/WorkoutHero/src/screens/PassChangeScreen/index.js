@@ -63,6 +63,7 @@ export default function PassChangeScreen({ route }) {
                 <MyTextInput 
                 style={styles.textInput} autoComplete='current-password'
                 value={newPassword} onChangeText={setNewPassword}
+                secureTextEntry = {true}
                 ></MyTextInput>
                 <View style={{height: 16}}/>
                 <MyTextRegular>   CONFIRME A SENHA</MyTextRegular>

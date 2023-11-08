@@ -58,7 +58,7 @@ export default function RoutinesListScreen() {
         // let response = null;
 
         // try {
-        //     response = await axios.get(url)
+        //     response = await axios.get(baseUrl + `/WORKOUT/select?user_id=1`)
         //     // logica de sort de treinos
         //     let listaTreinos = response.data;
         //     for (let i = 0; i < listaTreinos.length; ++i) {
@@ -75,7 +75,7 @@ export default function RoutinesListScreen() {
         // }
         
         try {
-            let routinesListFromApi = getRoutinesFromUser(1)
+            let routinesListFromApi = await getRoutinesFromUser(1)
             console.log("\n TODAS AS ROTINAS:\n", routinesListFromApi)
             setRoutinesList(routinesListFromApi)
         } catch (error) {

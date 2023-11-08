@@ -11,6 +11,8 @@ import MyTextH1 from "../../components/MyText/MyTextH1";
 import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
 import MyTextH3 from "../../components/MyText/MyTextH3";
 
+import { WorkoutContext } from "../../WorkoutContext";
+
 const baseUrl = 'https://apiworkouthero.onrender.com'
 
 export default function RoutinesListScreen() {
@@ -18,6 +20,8 @@ export default function RoutinesListScreen() {
     var navigation = useNavigation()
     const [ loading, setLoading ] = useState(true)
     const [ routinesList, setRoutinesList ] = useState([])
+
+    const { getRoutinesFromUser } = useContext(WorkoutContext)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -49,28 +53,33 @@ export default function RoutinesListScreen() {
     
     const pegarTodosTreinos = async () => {
         // console.log("Fetching todos treinos...");
-        var url = baseUrl + `/WORKOUT/select?user_id=1`;
-        let data = null;
-        let response = null;
+        // var url = baseUrl + `/WORKOUT/select?user_id=1`;
+        // let data = null;
+        // let response = null;
 
+        // try {
+        //     response = await axios.get(url)
+        //     // logica de sort de treinos
+        //     let listaTreinos = response.data;
+        //     for (let i = 0; i < listaTreinos.length; ++i) {
+        //         let exListAtual = listaTreinos[i].exerciseList;
+        //         const listaOrdenada = exListAtual.sort((a, b) => a.Workout_Exercise.id - b.Workout_Exercise.id);
+        //         listaTreinos[i].exerciseList = listaOrdenada;
+        //     }
+        //     // console.log("Data: ", listaTreinos)
+        //     setRoutinesList(listaTreinos)
+        // } catch (error) {
+        //     //console.log("error from pegarTodosTreinos")
+        //     console.error(error)
+        //     if (error.response) console.log(error.response.data)
+        // }
+        
         try {
-            response = await axios.get(url)
-
-            // logica de sort de treinos
-            let listaTreinos = response.data;
-            for (let i = 0; i < listaTreinos.length; ++i) {
-                let exListAtual = listaTreinos[i].exerciseList;
-                const listaOrdenada = exListAtual.sort((a, b) => a.Workout_Exercise.id - b.Workout_Exercise.id);
-                listaTreinos[i].exerciseList = listaOrdenada;
-            }
-
-            // console.log("Data: ", listaTreinos)
-            setRoutinesList(listaTreinos)
-
+            let routinesListFromApi = getRoutinesFromUser(1)
+            console.log("\n TODAS AS ROTINAS:\n", routinesListFromApi)
+            setRoutinesList(routinesListFromApi)
         } catch (error) {
-            //console.log("error from pegarTodosTreinos")
             console.error(error)
-            if (error.response) console.log(error.response.data)
         }
 
         setLoading(false)
@@ -198,6 +207,7 @@ export default function RoutinesListScreen() {
 
             <ScrollView style={styles.scrollBody}>
                 {makePreviews()}
+                <View style={{height:80}}/>
             </ScrollView>
         </View>
         

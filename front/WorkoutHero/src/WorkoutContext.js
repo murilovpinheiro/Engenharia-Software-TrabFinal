@@ -106,7 +106,7 @@ const WorkoutProvider = ({ children }) => {
     */
     const getExerciseById = (id) => {
       //exemplo
-      let retlist = []
+      let retList = []
       let exerciseFromDatabase = {}//request
       let retExercise = {
         id: id,
@@ -116,6 +116,8 @@ const WorkoutProvider = ({ children }) => {
         equipment: "empty",
         gifUrl: "empty",
         imgName: "Dumbbell_Squat",
+
+        sets: 3, reps: 10,
       
         target: "empty",
         secondaryMuscles: [
@@ -125,14 +127,14 @@ const WorkoutProvider = ({ children }) => {
           "empty"
         ]
       }
-      retlist.push(retExercise)
+      retList.push(retExercise)
       return retList
     }
 
     const getExerciseByName = (name) => {
       //exemplo
 
-      let retlist = []
+      let retList = []
       let exerciseFromDatabase = {}//request
 
       let retExercise = {
@@ -143,6 +145,8 @@ const WorkoutProvider = ({ children }) => {
         equipment: "empty",
         gifUrl: "empty",
         imgName: "Dumbbell_Squat",
+
+        sets: 3, reps: 10,
       
         target: "empty",
         secondaryMuscles: [
@@ -152,14 +156,14 @@ const WorkoutProvider = ({ children }) => {
           "empty"
         ]
       }
-      retlist.push(retExercise)
+      retList.push(retExercise)
       return retList
     }
 
     const getExercisesByBodyPart = (bodyPart) => {
       //exemplo
       let listFromApi = []//REPLACE WITH REQUEST
-      let retlist = []
+      let retList = []
       let retExercise = {
         id: "empty",
         name: "empty",
@@ -168,6 +172,8 @@ const WorkoutProvider = ({ children }) => {
         equipment: "empty",
         gifUrl: "empty",
         imgName: "Dumbbell_Squat",
+
+        sets: 3, reps: 10,
       
         target: "empty",
         secondaryMuscles: [
@@ -177,7 +183,7 @@ const WorkoutProvider = ({ children }) => {
           "empty"
         ]
       }
-      retlist.push(retExercise)
+      retList.push(retExercise)
       return retList
     }
 
@@ -205,6 +211,7 @@ const WorkoutProvider = ({ children }) => {
 
       workoutExerciseListFromApi.forEach((exerciseId) => {
         let exercise = getExerciseById(exerciseId)
+        console.log("exercise from context:", exercise)
         workoutExerciseList.push(exercise)
       })
   
@@ -219,31 +226,42 @@ const WorkoutProvider = ({ children }) => {
       return retWorkout
     }
 
-    const getWorkoutByOwner = () => {
+    const getRoutinesFromUser = (userId) => {
+      let routinesList = []
+
+      //exemplo, só uma rotina
       let workoutFromApi = { //REPLACE WITH REQUEST
         id: "empty", 
         difficulty: "empty",
         obj: "aaa",
-        user_id: "no user"
+        user_id: userId
       }
 
       let workoutExerciseListFromApi = [] //lista de ids //REPLACE WITH REQUEST
+      //placeholder
+      workoutExerciseListFromApi = [1,2,3]
+
       let workoutExerciseList = []
 
       workoutExerciseListFromApi.forEach((exerciseId) => {
-        let exercise = getExerciseById(exerciseId)
+        let [exercise] = getExerciseById(exerciseId)
+        console.log("exercise from context:", exercise)
         workoutExerciseList.push(exercise)
       })
   
       let retWorkout = {
         id: workoutFromApi.id, 
+        name: workoutFromApi.obj,
         difficulty: workoutFromApi.difficulty,
         goal: workoutFromApi.obj,
         userId: workoutFromApi.user_id,
         exerciseList: workoutExerciseList
       }
 
-      return retWorkout
+      routinesList.push(retWorkout)
+      routinesList.push(retWorkout)
+
+      return routinesList
     }
 
     
@@ -255,7 +273,7 @@ const WorkoutProvider = ({ children }) => {
       <WorkoutContext.Provider value={{ 
         currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
         startWorkout,  finishWorkout, calculateXpYield,
-        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getListBodyParts, getWorkoutById, getWorkoutByOwner
+        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser
       }}>
         {children}
       </WorkoutContext.Provider>

@@ -1,5 +1,5 @@
 import React from "react"
-import {View, Image, TouchableOpacity, ScrollView} from 'react-native'
+import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native'
 import styles from "./style"
 
 import MyTextRegular from "../MyText/MyTextRegular";
@@ -10,25 +10,26 @@ import Images from "../../Images";
 export default function RoutinePreview(props) {
     // console.log("PROPS: props")
     var routine =  props.routine
-    // console.log("TREINO: ", routine, "\n")
+    console.log("TREINO: ", routine.name, "  ", routine, "\n")
     var exerciseList = routine["exerciseList"]
 
     var getAllExercisePreviews = (list) => {
         var returnList = []
         for (let i = 0; i < list.length; i++) {
             var exercise = list[i]
-            // console.log("EXERCICIO: ", exercise)
-            var imgName = exercise.name + ".jpg"
-
-            var nomeFormatado = exercise.name.replace(new RegExp('_', "g"), ' ').slice(0, 14) + '... ';
-            if (nomeFormatado.length < 15) nomeFormatado = nomeFormatado.slice(0, nomeFormatado.length-4)
+            console.log("EXERCICIO: ", exercise)
+            // var imgName = exercise.imgName// + ".jpg"
+            
+            let nomeFormatado = exercise.name
+            // var nomeFormatado = exercise.name.replace(new RegExp('_', "g"), ' ').slice(0, 14) + '... ';
+            // if (nomeFormatado.length < 15) nomeFormatado = nomeFormatado.slice(0, nomeFormatado.length-4)
             
             returnList.push(
                 <View key={i}>
                 {/* // <View key={i} style={{borderWidth: 2, borderColor:'gold', borderRadius: 8, height: 80, margin: 8}}> */}
                     <MyTextRegular style={ {width: '100%', textAlign: 'center' } }>{nomeFormatado}</MyTextRegular>
                     <Image style={styles.img} key={i}
-                    source={ Images.exerciseImages[exercise.name] }
+                    source={ Images.exerciseImages[exercise.imgName] }
                     //source={ img }
                     onError={(error) => console.log('Image loading error:', error)}
                     />
@@ -50,7 +51,7 @@ export default function RoutinePreview(props) {
         activeOpacity={0.6} 
         style={styles.body}>
             
-            <MyTextH3 style={styles.headerText}>{routine.obj}</MyTextH3>
+            <MyTextH3 style={styles.headerText}>{routine.name}</MyTextH3>
             
             <ScrollView horizontal={true} style={styles.scroll}>
                 
@@ -58,7 +59,7 @@ export default function RoutinePreview(props) {
 
             </ScrollView>
             
-            <TouchableOpacity onPress={props.onPress}>
+            <TouchableOpacity style={{padding: 4}} onPress={props.onPress}>
                 <MyTextRegular>Ver Detalhes</MyTextRegular>
             </TouchableOpacity>
 

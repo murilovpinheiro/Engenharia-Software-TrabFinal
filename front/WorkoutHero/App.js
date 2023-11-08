@@ -74,7 +74,7 @@ export default function App() {
           screenOptions={stackOptions}
           // initialRouteName={resetData ? 'PASSCHANGE' : 'BEM VINDO'}>
           // {/* initialRouteName='BEM VINDO'> */}
-          initialRouteName='PASSCHANGE'>
+          initialRouteName='BEM VINDO'>
             
             <Stack.Screen name='BEM VINDO'   component={WelcomeScreen} />
             <Stack.Screen name='LOGIN'   component={LoginScreen} />

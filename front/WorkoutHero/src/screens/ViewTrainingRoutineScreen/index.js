@@ -26,8 +26,6 @@ export default function ViewTrainingRoutineScreen({route}) {
 
     const chooseRoutine = () => {
         console.log("func: ", startWorkout)
-        
-
         // navigation.reset({
         //     index: 0, routes: [{name:'TRAININGSCREEN'}]
         // })
@@ -55,7 +53,7 @@ export default function ViewTrainingRoutineScreen({route}) {
 
             <View style={{flexDirection:'row', alignItems: 'center'}}>
                 {/* <MyTextInput style={{margin: 10, flex:0.8}} defaultValue='Treino 1'></MyTextInput> */}
-                <MyTextH3 style={styles.textName}>{routine.obj}</MyTextH3>
+                <MyTextH3 style={styles.textName}>{routine.name}</MyTextH3>
 
             </View>
             

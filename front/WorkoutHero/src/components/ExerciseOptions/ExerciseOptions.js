@@ -25,12 +25,12 @@ export default function ExerciseOptions(props) {
     return (
         <View style={styles.body}>
             <View style={styles.header}>
-                <Image style={styles.headerImg} source={Images.exerciseImages[exercise.name]}/>
+                <Image style={styles.headerImg} source={Images.exerciseImages[exercise.imgName]}/>
 
 
                 <View style={styles.headerTextView}>
                     <MyTextH3 style={styles.headerTextName}>{exercise.name.replace(/_/g, " ").replace(/\([^()]*\)/g, "")}</MyTextH3>
-                    <MyTextRegular style={styles.headerTextType}>GRUPO MUSCULAR: {stringFromGroups(exercise.muscularGroups)}</MyTextRegular>
+                    {/* <MyTextRegular style={styles.headerTextType}>GRUPO MUSCULAR: {stringFromGroups(exercise.muscularGroups)}</MyTextRegular> */}
                 </View>
 
                 {/* <TouchableOpacity style={styles.headerDelete}>

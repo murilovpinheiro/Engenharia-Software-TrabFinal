@@ -10,7 +10,9 @@ const styles = StyleSheet.create({
         marginVertical: 16, paddingHorizontal: 8,
     },
     headerText: {
-        fontSize: 16
+        fontSize: 16,
+        paddingHorizontal: 4
+        // color: "black"
     },
     scroll: {
     },

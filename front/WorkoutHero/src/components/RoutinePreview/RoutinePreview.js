@@ -39,6 +39,12 @@ export default function RoutinePreview(props) {
         return returnList
     }
 
+    // var retExercise = {
+    //     name: originalExercise["nome"],
+
+    // }
+
+
     return (
         <View {...props}
         activeOpacity={0.6} 

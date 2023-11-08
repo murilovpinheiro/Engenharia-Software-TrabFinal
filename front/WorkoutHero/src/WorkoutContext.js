@@ -98,8 +98,165 @@ const WorkoutProvider = ({ children }) => {
       return totalYield
     }
 
+
+
+
+    /*
+      API requests
+    */
+    const getExerciseById = (id) => {
+      //exemplo
+      let retlist = []
+      let exerciseFromDatabase = {}//request
+      let retExercise = {
+        id: id,
+        name: "empty",
+
+        bodyPart: "empty",
+        equipment: "empty",
+        gifUrl: "empty",
+        imgName: "Dumbbell_Squat",
+      
+        target: "empty",
+        secondaryMuscles: [
+          "empty"
+        ],
+        instructions: [
+          "empty"
+        ]
+      }
+      retlist.push(retExercise)
+      return retList
+    }
+
+    const getExerciseByName = (name) => {
+      //exemplo
+
+      let retlist = []
+      let exerciseFromDatabase = {}//request
+
+      let retExercise = {
+        id: "empty",
+        name: name,
+
+        bodyPart: "empty",
+        equipment: "empty",
+        gifUrl: "empty",
+        imgName: "Dumbbell_Squat",
+      
+        target: "empty",
+        secondaryMuscles: [
+          "empty"
+        ],
+        instructions: [
+          "empty"
+        ]
+      }
+      retlist.push(retExercise)
+      return retList
+    }
+
+    const getExercisesByBodyPart = (bodyPart) => {
+      //exemplo
+      let listFromApi = []//REPLACE WITH REQUEST
+      let retlist = []
+      let retExercise = {
+        id: "empty",
+        name: "empty",
+
+        bodyPart: bodyPart,
+        equipment: "empty",
+        gifUrl: "empty",
+        imgName: "Dumbbell_Squat",
+      
+        target: "empty",
+        secondaryMuscles: [
+          "empty"
+        ],
+        instructions: [
+          "empty"
+        ]
+      }
+      retlist.push(retExercise)
+      return retList
+    }
+
+    const getAllExercises = () => {
+      let retList = []
+      return retList
+    }
+
+    const getListBodyParts = () => {
+      //let retList = ["back", "cardio", "chest", "lower arms", "lower legs", "neck", "shoulders", "upper arms", "upper legs", "waist"]
+      let retList = ["Peitoral", "Braços", "Costas", "Pernas", "Core", "Glúteos"]
+      return retList
+    }
+
+    const getWorkoutById = () => {
+      let workoutFromApi = { //REPLACE WITH REQUEST
+        id: "empty", 
+        difficulty: "empty",
+        obj: "aaa",
+        user_id: "no user"
+      }
+
+      let workoutExerciseListFromApi = [] //lista de ids //REPLACE WITH REQUEST
+      let workoutExerciseList = []
+
+      workoutExerciseListFromApi.forEach((exerciseId) => {
+        let exercise = getExerciseById(exerciseId)
+        workoutExerciseList.push(exercise)
+      })
+  
+      let retWorkout = {
+        id: workoutFromApi.id, 
+        difficulty: workoutFromApi.difficulty,
+        goal: workoutFromApi.obj,
+        userId: workoutFromApi.user_id,
+        exerciseList: workoutExerciseList
+      }
+
+      return retWorkout
+    }
+
+    const getWorkoutByOwner = () => {
+      let workoutFromApi = { //REPLACE WITH REQUEST
+        id: "empty", 
+        difficulty: "empty",
+        obj: "aaa",
+        user_id: "no user"
+      }
+
+      let workoutExerciseListFromApi = [] //lista de ids //REPLACE WITH REQUEST
+      let workoutExerciseList = []
+
+      workoutExerciseListFromApi.forEach((exerciseId) => {
+        let exercise = getExerciseById(exerciseId)
+        workoutExerciseList.push(exercise)
+      })
+  
+      let retWorkout = {
+        id: workoutFromApi.id, 
+        difficulty: workoutFromApi.difficulty,
+        goal: workoutFromApi.obj,
+        userId: workoutFromApi.user_id,
+        exerciseList: workoutExerciseList
+      }
+
+      return retWorkout
+    }
+
+    
+
+
+
+
     return (
-      <WorkoutContext.Provider value={{ currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, startWorkout, currentProgressL, setCurrentProgressL, finishWorkout }}>
+      <WorkoutContext.Provider value={{ 
+        currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
+        startWorkout,  finishWorkout, calculateXpYield,
+        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getListBodyParts, getWorkoutById, getWorkoutByOwner
+      }}>
         {children}
       </WorkoutContext.Provider>
     );

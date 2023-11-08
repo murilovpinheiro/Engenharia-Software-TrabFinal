@@ -13,6 +13,7 @@ import RoutinesListScreen from "./screens/RoutinesListScreen";
 import ViewTrainingRoutineScreen from "./screens/ViewTrainingRoutineScreen";
 import InTrainingScreen from "./screens/InTrainingScreen";
 import TimerScreen from "./screens/TimerScreen";
+import CreateTrainingRoutineScreen from "./screens/CreateTrainingRoutineScreen"
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { WorkoutContext, WorkoutProvider } from "./WorkoutContext";
@@ -80,6 +81,7 @@ const RoutinesStack = () => {
     return (
         <Stack.Navigator initialRouteName='ALLROUTINES'>
             <Stack.Screen name='Detalhes' options={{ headerShown: false }} component={ViewTrainingRoutineScreen} />
+            <Stack.Screen name='RotinaNova' options={{headerShown: false }} component={CreateTrainingRoutineScreen} />
             <Stack.Screen name='ALLROUTINES' options={{ headerShown: false }} component={RoutinesListScreen} />
         </Stack.Navigator>
     )

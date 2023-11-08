@@ -112,7 +112,7 @@ const WorkoutProvider = ({ children }) => {
       "reps_progress": 0, "rest": "00:01:00", "sets": 3, "weight": 60, "weight_progress": 0}
       */
       let retExercise = {
-        // id: id,
+        id: exerciseFromApi.id,
         name: exerciseFromApi.name,
 
         bodyPart: "empty",
@@ -199,7 +199,25 @@ const WorkoutProvider = ({ children }) => {
     }
 
     const getAllExercises = async () => {
+
       let retList = []
+      let exerciseListFromApi = [];
+
+      let response = null;
+      try {
+        response = await axios.get(baseUrl + `/exercise/select2`) // clause vazia pegando tudo
+        exerciseListFromApi = response.data
+        exerciseListFromApi.forEach((val) => {
+          retList.push(exerciseFromApiConverter(val));
+        })
+        console.log("\n\nLISTA EXERCICIOS API: ", exerciseListFromApi)
+        console.log("\n\nRETLIST: ", exerciseListFromApi)
+      } catch (error) {
+        console.log("ERRO GET EXERCISES FROM USER")
+        console.error(error)
+        throw error
+      }
+
       return retList
     }
 

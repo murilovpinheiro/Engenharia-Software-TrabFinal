@@ -195,6 +195,7 @@ export default function RoutinesListScreen() {
             <View style={{height:40}}/>
 
             <MyButtonRegular style={styles.btn} 
+            onPress={() => navigation.navigate('RotinaNova')}
             title="Criar Nova Rotina">
             </MyButtonRegular>
 

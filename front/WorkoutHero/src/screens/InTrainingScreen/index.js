@@ -128,7 +128,7 @@ export default function InTrainingScreen({route}) {
                 <View style={styles.imgBox}>
                     <Image
                     style={styles.img}
-                    source={ Images.exerciseImages[currentExercise.name] }
+                    source={ Images.exerciseImages[currentExercise.id] }
                     />
                     <MyTextRegular
                     style={{alignContent:'center'}}

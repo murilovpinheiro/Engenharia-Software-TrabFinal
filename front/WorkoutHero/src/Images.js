@@ -3,6 +3,12 @@
 
 const Images = {
     exerciseImages: {
+
+        "0": require("../assets/img/exercises/Barbell_Bench_Press.jpg"),
+        "1": require("../assets/img/exercises/Cable_Low_Seated_Row.jpg"),
+        "2": require("../assets/img/exercises/Pull-up.jpg"),
+        "3": require("../assets/img/exercises/Lever_Preacher_Curl.jpg"),
+
         "Smith_Sprint_Lunge": require("../assets/img/exercises/Smith_Sprint_Lunge.jpg"),
         "Lever_Kneeling_Leg_Curl_(plate_loaded)": require("../assets/img/exercises/Lever_Kneeling_Leg_Curl_(plate_loaded).jpg"),
         "Sit_(wall)": require("../assets/img/exercises/Sit_(wall).jpg"),

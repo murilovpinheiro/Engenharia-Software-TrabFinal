@@ -77,6 +77,7 @@ export default function CreateTrainingRoutineScreen() {
 
                 <TouchableOpacity style={{flex:0.2}}>
                 <MyTextRegular onPress={async () => { // funcao de salvar 
+                    setLoading(true)
                     await createWorkout(selectedExercises, userId, nomeTreino, 'E');
                     navigation.navigate('ALLROUTINES');
                 }}>Salvar</MyTextRegular>

@@ -13,6 +13,7 @@ import MyButtonRegular from "../../components/MyButton/MyButtonRegular";
 import MyTextH3 from "../../components/MyText/MyTextH3";
 
 import { WorkoutContext } from "../../WorkoutContext";
+import { AuthContext } from "../../AuthContext";
 
 const baseUrl = 'https://apiworkouthero.onrender.com'
 
@@ -23,6 +24,8 @@ export default function RoutinesListScreen() {
     const [ loading, setLoading ] = useState(true)
     const [ routinesList, setRoutinesList ] = useState([])
 
+    
+    const { userData } = useContext(AuthContext);
     const { getRoutinesFromUser } = useContext(WorkoutContext)
 
     const isFocused = useIsFocused();
@@ -85,7 +88,7 @@ export default function RoutinesListScreen() {
         // }
         
         try {
-            let routinesListFromApi = await getRoutinesFromUser(1)
+            let routinesListFromApi = await getRoutinesFromUser(userData.id)
             console.log("\n TODAS AS ROTINAS:\n", routinesListFromApi)
             setRoutinesList(routinesListFromApi)
         } catch (error) {

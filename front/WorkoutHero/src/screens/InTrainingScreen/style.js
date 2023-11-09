@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         // borderColor: '#F2BD00', borderRadius: 10, borderWidth: 2
     },
     img: {
-
+        resizeMode: "contain", maxWidth:"100%", maxHeight:"100%"
     },
     viewTimer: {
         //width: '100%',

@@ -24,7 +24,7 @@ export default function MyButtonSwitch(props) {
   
     return (
       <TouchableOpacity {...props} style={[defaultStyles.btnThin, props.style]}>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: 'row', alignItems:"center" }}>
           <MyTextRegular style={defaultStyles.btnTextThin}>
             {props.title}
           </MyTextRegular>

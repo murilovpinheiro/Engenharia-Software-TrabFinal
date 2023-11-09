@@ -221,6 +221,52 @@ const WorkoutProvider = ({ children }) => {
       return retList
     }
 
+    const createWorkout = async (ExIdList, idUser, nome, dificuldade ) => {
+      let response = null;
+      try {
+        // response = await axios({
+        //   method: 'post',
+        //   url: baseUrl + '/workout/insert',
+        //   headers: {}, 
+        //   data: {
+        //     id: 2, // This is the body part
+        //     difficulty: dificuldade,
+        //     obj: nome,
+        //     user_id: idUser
+        //   }
+        // });
+
+        // https://apiworkouthero.onrender.com/workout/insert2?id=4&difficulty=M&obj=Teste&user_id=1
+
+        response = await axios.post(`${baseUrl}/workout/insert2?id=1&difficulty=${dificuldade}&obj=${nome}&user_id=${idUser}`);
+
+        console.log('\n\n\nRESPONSE CREATEWORKOUT', response.data);
+
+        const novoTreino = response.data.newWorkout;
+
+        let responses = [response]
+        // ExIdList.forEach(async (idExercicio) => {
+        for (const idExercicio of ExIdList) {
+          console.log('EXERCICIO A SER COLOCADO: ', idExercicio)
+          const respExercicio = await axios.post(
+            `${baseUrl}/workout_exercise/insert2?id=1&workout_id=${novoTreino.id}&exercise_id=${idExercicio}`
+          )
+          responses.push(respExercicio);
+          console.log('\n\n RESPONSE EXERCICIOWK: ', respExercicio.data);
+        }
+        // });
+
+        
+
+        return responses;
+      
+      } catch (error) {
+        console.log("ERRO CREATE WORKOUT")
+        console.error(error)
+        throw error
+      }
+    }
+
     const getListBodyParts = async () => {
       //let retList = ["back", "cardio", "chest", "lower arms", "lower legs", "neck", "shoulders", "upper arms", "upper legs", "waist"]
       let retList = ["Peitoral", "Braços", "Costas", "Pernas", "Core", "Glúteos"]
@@ -365,7 +411,8 @@ const WorkoutProvider = ({ children }) => {
       <WorkoutContext.Provider value={{ 
         currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
         startWorkout,  finishWorkout, calculateXpYield,
-        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser
+        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser,
+        createWorkout
       }}>
         {children}
       </WorkoutContext.Provider>

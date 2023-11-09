@@ -10,17 +10,26 @@ import MyButtonRegular from "../../components/MyButton/MyButtonRegular"
 import MyTextRegular from "../../components/MyText/MyTextRegular"
 
 import { WorkoutContext } from "../../WorkoutContext";
+import { AuthContext } from "../../AuthContext";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CreateTrainingRoutineScreen() {
 
-    const { getAllExercises } = useContext(WorkoutContext);
+    const navigation = useNavigation()
+
+    const { userData } = useContext(AuthContext);
+
+    const { getAllExercises, createWorkout } = useContext(WorkoutContext);
 
     const [allExercises, setAllExercises] = useState([]);
     const [selectedExercises, setSelectedExercises] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [userId, setUserId] = useState('');
+    const [nomeTreino, setNomeTreino] = useState('Treino');
 
     useEffect(() => {
         
+        setUserId(userData.id);
         const fetchData = async () => {
             try {
                 let ExerciseList = await getAllExercises();
@@ -37,21 +46,40 @@ export default function CreateTrainingRoutineScreen() {
 
         fetchData();
 
+
     }, [])
 
     useEffect(() => {
         console.log('EXERCICIOS SELECIONADOS: ', selectedExercises)
     }, [selectedExercises])
 
+    useEffect(() => {
+        console.log('USUARIO: ', userId);
+    }, [userId])
+
     return (
         <>
 
         <View style={styles.body}>
-            <View style={{flexDirection:'row', alignItems: 'center'}}>
-                <MyTextInput style={{margin: 10, flex:0.8}} defaultValue='Treino 1'></MyTextInput>
+            <View style={
+                {
+                    flexDirection:'row', 
+                    alignItems: 'center',
+                    marginTop: 20
+                }
+            }>
+                <MyTextInput 
+                    style={{margin: 10, flex:0.8}} 
+                    defaultValue='Treino'
+                    value={nomeTreino}
+                    onChangeText={setNomeTreino}
+                ></MyTextInput>
 
                 <TouchableOpacity style={{flex:0.2}}>
-                <MyTextRegular>Salvar</MyTextRegular>
+                <MyTextRegular onPress={async () => { // funcao de salvar 
+                    await createWorkout(selectedExercises, userId, nomeTreino, 'E');
+                    navigation.navigate('ALLROUTINES');
+                }}>Salvar</MyTextRegular>
                 </TouchableOpacity>
             </View>
             
@@ -63,7 +91,7 @@ export default function CreateTrainingRoutineScreen() {
                 {loading && <MyTextRegular>Carregando...</MyTextRegular>}
 
                 {!loading && allExercises.map((val) => {
-                    return <ExerciseOptions exercise={val}
+                    return <ExerciseOptions exercise={val} showSelect={true}
                     onSelect={(exerciseId) => {
                         if (selectedExercises.includes(exerciseId)) {
                             // Remove o exercício da lista de selecionados
@@ -72,7 +100,6 @@ export default function CreateTrainingRoutineScreen() {
                             // Adiciona o exercício à lista de selecionados
                             setSelectedExercises([...selectedExercises, exerciseId]);
                         }
-
                     }} 
                     />
                 })}

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react"
-import {View, TouchableOpacity, ScrollView, TextInput} from "react-native"
+import {View, Text, TouchableOpacity, ScrollView, TextInput} from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import styles from "./style"
@@ -39,7 +39,7 @@ export default function ViewTrainingRoutineScreen({route}) {
         var retList = []
         for (let i = 0; i < exerciseList.length; i++) {
             retList.push(
-                <ExerciseOptions key={i} exercise={exerciseList[i]}/>
+                <ExerciseOptions key={i} exercise={exerciseList[i]} showSelect={false}/>
             )
         }
         return retList
@@ -48,7 +48,9 @@ export default function ViewTrainingRoutineScreen({route}) {
     return (
         <>
 
-        <View style={styles.body}>
+        <View style={{
+            ...(styles.body),
+        }}>
             <View style={{height:30}}></View>
 
             <View style={{flexDirection:'row', alignItems: 'center'}}>
@@ -61,8 +63,16 @@ export default function ViewTrainingRoutineScreen({route}) {
             onPress={chooseRoutine}
             />
             
-            <ScrollView style={styles.scrollBody}>
+            <ScrollView style={{
+                ...(styles.scrollBody),
+            }}>
                 { makeExercises() }
+                {/* GAMBIARRA MONSTRA AQUI */}
+                <Text>⠀⠀</Text>
+                <Text>⠀⠀</Text>
+                <Text>⠀⠀</Text>
+                <Text>⠀⠀</Text>
+                <Text>⠀⠀</Text>
             </ScrollView>
 
         </View>

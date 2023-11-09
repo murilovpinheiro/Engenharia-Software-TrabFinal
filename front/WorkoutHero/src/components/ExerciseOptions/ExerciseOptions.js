@@ -11,7 +11,7 @@ import Images from "../../Images";
 
 
 
-export default function ExerciseOptions({ exercise, onSelect }) {
+export default function ExerciseOptions({ exercise, onSelect, showSelect }) {
 
     const stringFromGroups = (array) => {
         let str = ""
@@ -52,9 +52,10 @@ export default function ExerciseOptions({ exercise, onSelect }) {
             <View style={styles.viewOptions}>
                 <MyButtonThin title={`${exercise.sets} seções de ${exercise.reps} repetições`} style={styles.selectOptions}></MyButtonThin>
             </View>
-            <View style={styles.viewOptions}>
+
+            {showSelect && <View style={styles.viewOptions}>
                 <MyButtonThin onPress={toggleSelection} title={isSelected ? "SELECIONADO" : "Não selecionado"}></MyButtonThin>
-            </View>
+            </View>}
 
             <View style={styles.divider}></View>
         </View>

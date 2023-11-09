@@ -4,6 +4,7 @@ import styles from "./style"
 
 import RoutinePreview from "../../components/RoutinePreview/RoutinePreview";
 import { useNavigation } from "@react-navigation/core";
+import { useIsFocused } from "@react-navigation/native";
 
 import axios from 'axios'
 import MyTextRegular from "../../components/MyText/MyTextRegular";
@@ -15,6 +16,7 @@ import { WorkoutContext } from "../../WorkoutContext";
 
 const baseUrl = 'https://apiworkouthero.onrender.com'
 
+
 export default function RoutinesListScreen() {
     
     var navigation = useNavigation()
@@ -23,20 +25,28 @@ export default function RoutinesListScreen() {
 
     const { getRoutinesFromUser } = useContext(WorkoutContext)
 
+    const isFocused = useIsFocused();
+
+    const fetchData = async () => {
+      try {
+        await pegarTodosTreinos();
+      } catch (error) {
+        console.log("error in fetchdata")
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
     useEffect(() => {
-        const fetchData = async () => {
-          try {
-            await pegarTodosTreinos();
-          } catch (error) {
-            console.log("error in fetchdata")
-            console.error(error);
-          } finally {
-            setLoading(false);
-          }
-        };
-      
         fetchData();
     }, []);
+
+    useEffect(() => {
+        console.log('called')
+        if (isFocused)
+            fetchData();
+    }, [isFocused])
 
 
     // var exampleRoutine = {

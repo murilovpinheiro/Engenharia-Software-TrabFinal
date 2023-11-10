@@ -92,7 +92,7 @@ export default function CreateTrainingRoutineScreen() {
                 {loading && <MyTextRegular>Carregando...</MyTextRegular>}
 
                 {!loading && allExercises.map((val) => {
-                    return <ExerciseOptions exercise={val} showSelect={true}
+                    return <ExerciseOptions key={val.id} exercise={val} showSelect={true}
                     onSelect={(exerciseId) => {
                         if (selectedExercises.includes(exerciseId)) {
                             // Remove o exercício da lista de selecionados

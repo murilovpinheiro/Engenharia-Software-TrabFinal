@@ -26,28 +26,28 @@ import PassRestoreRequestScreen from './src/screens/PassRestoreRequestScreen';
 export default function App() {
 
   const [resetData, setResetData] = useState(null);
-  const url = Linking.useURL();
+  // const url = Linking.useURL();
 
-  useEffect( () => {
-    if (url) {
-      const { hostname, path, queryParams } = Linking.parse(url);
+  // useEffect( () => {
+  //   if (url) {
+  //     const { hostname, path, queryParams } = Linking.parse(url);
 
-      console.log(
-        `Linked to app with hostname: ${hostname}, path: ${path} and data: ${JSON.stringify(
-          queryParams
-        )}`
-      );
+  //     console.log(
+  //       `Linked to app with hostname: ${hostname}, path: ${path} and data: ${JSON.stringify(
+  //         queryParams
+  //       )}`
+  //     );
       
-      if (path) {
-        const list = path.split('/')
-        if (list[1] == 'forgotpass') {
-          setResetData(queryParams); // colocando dados do link como dados para recuperação de senha
-        }
-      } else {
-        setResetData(null);
-      }
-    }
-  }, [url]);
+  //     if (path) {
+  //       const list = path.split('/')
+  //       if (list[1] == 'forgotpass') {
+  //         setResetData(queryParams); // colocando dados do link como dados para recuperação de senha
+  //       }
+  //     } else {
+  //       setResetData(null);
+  //     }
+  //   }
+  // }, [url]);
 
   const [fontsLoaded] = useFonts({
     'Lexend': require('./assets/fonts/Lexend/Lexend.ttf'),
@@ -83,7 +83,7 @@ export default function App() {
         
             <Stack.Screen name='MAIN'  component={MainContainer}/>
 
-            <Stack.Screen name='PASSCHANGE' component={PassChangeScreen} initialParams={resetData}/>
+            <Stack.Screen name='PASSCHANGE' component={PassChangeScreen} initialParams={resetData ? resetData : null}/>
           </Stack.Navigator>
         </NavigationContainer>
 

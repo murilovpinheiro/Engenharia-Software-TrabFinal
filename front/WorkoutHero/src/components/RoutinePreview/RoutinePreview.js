@@ -20,9 +20,9 @@ export default function RoutinePreview(props) {
             console.log("EXERCICIO: ", exercise)
             // var imgName = exercise.imgName// + ".jpg"
             
-            let nomeFormatado = exercise.name
-            // var nomeFormatado = exercise.name.replace(new RegExp('_', "g"), ' ').slice(0, 14) + '... ';
-            // if (nomeFormatado.length < 15) nomeFormatado = nomeFormatado.slice(0, nomeFormatado.length-4)
+            // let nomeFormatado = exercise.name
+            var nomeFormatado = exercise.name.replace(new RegExp('_', "g"), ' ').slice(0, 14) + '... ';
+            if (nomeFormatado.length < 15) nomeFormatado = nomeFormatado.slice(0, nomeFormatado.length-4)
             
             returnList.push(
                 <View key={i}>

@@ -89,6 +89,8 @@ export default function RoutinesListScreen() {
         
         try {
             let routinesListFromApi = await getRoutinesFromUser(userData.id)
+            let routinesListFromUser0 = await getRoutinesFromUser(0);
+            routinesListFromApi = [...routinesListFromUser0, ...routinesListFromApi]
             console.log("\n TODAS AS ROTINAS:\n", routinesListFromApi)
             setRoutinesList(routinesListFromApi)
         } catch (error) {

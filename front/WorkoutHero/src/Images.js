@@ -8,7 +8,7 @@ const Images = {
         "1": require("../assets/img/exercises/Cable_Low_Seated_Row.jpg"),
         "2": require("../assets/img/exercises/Pull-up.jpg"),
         "3": require("../assets/img/exercises/Lever_Preacher_Curl.jpg"),
-        "4": require("../assets/img/exercises/bulgarian-split-spuat_600x600.webp"),
+        "4": require("../assets/img/exercises/bulgarian.gif"),
         "6": require("../assets/img/exercises/push_up_uebung-eng.gif"),
         "7": require("../assets/img/exercises/decline.gif"),
         "8": require("../assets/img/exercises/bodyweight-squat-2.gif"),

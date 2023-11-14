@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import { View, Modal } from 'react-native';
 import { AuthContext } from './AuthContext';
 
 const WorkoutContext = createContext();
@@ -73,6 +74,9 @@ const WorkoutProvider = ({ children }) => {
       setCurrentExerciseIndex(0)
       setCurrentExercise(null)
       setCurrentProgressL([])
+
+      //xp popup
+
     }
 
     const calculateXpYield = () => {
@@ -414,6 +418,13 @@ const WorkoutProvider = ({ children }) => {
         getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser,
         createWorkout
       }}>
+        <Modal
+        transparent={true}
+        >
+          <View style={{padding:20}}>
+            <View style={{height:100, backgroundColor:'red'}}></View>
+          </View>
+        </Modal>
         {children}
       </WorkoutContext.Provider>
     );

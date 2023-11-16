@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { View, Modal } from 'react-native';
+import { View, Modal, Text } from 'react-native';
 import { AuthContext } from './AuthContext';
 
 const WorkoutContext = createContext();
@@ -45,21 +45,27 @@ const WorkoutProvider = ({ children }) => {
       try {
         //update xp
         let xpYield = calculateXpYield()
+        let exsYield = calculateExsYield()
+        let repsYield = calculateRepsYield()
+
+        let response = await axios.post(`${baseUrl}/user/add_status?login=${userData.login}&exercisesRealized=${exsYield}&repsRealized=${repsYield}`)
        
         userData.xp += xpYield
+        userData.exercisesRealized += exsYield; 
+        userData.repsRealized += repsYield; 
         console.log("XP OBTIDO: ", xpYield)
         var url = `${baseUrl}/user/update?id=${userData.id}&xp=${userData.xp}`
         response = await axios.post(url);
         console.log("RESPONSE: ", response)
 
 
-        var responseHistoric = axios.get(`${baseUrl}/historic/select?user_id=${userData.id}`)
-        console.log("HISTORIC: \n",responseHistoric)
-        var historic = responseHistoric.data[0]
-        var historicId = historic.id
+        // var responseHistoric = axios.get(`${baseUrl}/historic/select?user_id=${userData.id}`)
+        // console.log("HISTORIC: \n",responseHistoric)
+        // var historic = responseHistoric.data[0]
+        // var historicId = historic.id
 
-        var responseRealized = axios.post(`${baseUrl}/workout_realized/insert`, {workout_id:currentWorkout.id , historic_id:historicId})
-        console.log("REALIZED: \n",responseRealized)
+        // var responseRealized = axios.post(`${baseUrl}/workout_realized/insert`, {workout_id:currentWorkout.id , historic_id:historicId})
+        // console.log("REALIZED: \n",responseRealized)
 
       } catch (error) {
         console.log(error)
@@ -100,6 +106,21 @@ const WorkoutProvider = ({ children }) => {
       }
 
       return totalYield
+    }
+
+    // TODO: CONSERTAR ESSES DOIS
+    const calculateExsYield = () => {
+      let totalYield = 0;
+      totalYield += currentWorkout.exerciseList.length;
+      return totalYield;
+    }
+
+    // AQUI PRECISO FILTRAR QUAIS SETS FORAM FEITOS E QUAIS NAO FORAM
+    const calculateRepsYield = () => {
+      let totalYield = 0;
+      for (let i = 0; i < currentWorkout.exerciseList.length; i++) 
+        totalYield += currentExercise.reps * currentExercise.sets;
+      return totalYield;
     }
 
 
@@ -409,7 +430,27 @@ const WorkoutProvider = ({ children }) => {
     
 
 
+    const [modalVisible, setModalVisible] = useState(false);
+    const [contador, setContador] = useState(0);
 
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    const trigerModalAnimation = async() => {
+      setModalVisible(true);
+    
+      // Contagem regressiva de 10 segundos
+      for (let i = 1; i <= 3; i++) {
+        setContador(i);
+        await delay(1000); // Aguardar 1 segundo antes de atualizar o contador
+      }
+
+      setModalVisible(false);
+      setContador(0); // Reiniciar o contador
+    };
+    
+    useEffect(async () => {
+      return await trigerModalAnimation();
+    }, [])
 
     return (
       <WorkoutContext.Provider value={{ 
@@ -419,10 +460,19 @@ const WorkoutProvider = ({ children }) => {
         createWorkout
       }}>
         <Modal
-        transparent={true}
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+            setModalVisible(!modalVisible);
+          }}
         >
           <View style={{padding:20}}>
-            <View style={{height:100, backgroundColor:'red'}}></View>
+            <View style={{height:100, backgroundColor:'red'}}>
+              <Text>
+                {contador}
+              </Text>
+            </View>
           </View>
         </Modal>
         {children}

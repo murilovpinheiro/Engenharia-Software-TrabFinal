@@ -11,6 +11,7 @@ import { WorkoutContext } from "../../WorkoutContext";
 import Images from "../../Images";
 import MyButtonThin from "../../components/MyButton/MyButtonThin";
 import MyButtonSwitch from "../../components/MyButton/MyButtonSwitch";
+import MyTextH1 from "../../components/MyText/MyTextH1";
 
 export default function InTrainingScreen({route}) {
 
@@ -47,10 +48,10 @@ export default function InTrainingScreen({route}) {
         // atualizo o index
         setCurrentExerciseIndex(currentExerciseIndex + 1)
         if (currentExerciseIndex >= currentWorkout.exerciseList.length-1) { // coloquei um menos um aki
-            navigation.reset({
-                index: 0, routes: [{name:'MAIN'}]
-            })
             await finishWorkout()
+            navigation.reset({
+                index: 0, routes: [{name:'PERFIL'}]
+            })
 
         }
     }
@@ -113,6 +114,10 @@ export default function InTrainingScreen({route}) {
         return retList
     }
 
+    if (currentExerciseIndex >= currentWorkout.exerciseList.length) {
+        return <Text>Loading...</Text>
+    }
+
     return (
         <>
         <View style={styles.body}>
@@ -153,7 +158,7 @@ export default function InTrainingScreen({route}) {
                             <MyTextRegular style={styles.setsHeaderText}>FEITO</MyTextRegular>
                         </View>
 
-                        {currentExercise && makeExerciseView()}     
+                        {currentExercise && currentExerciseIndex < currentWorkout.exerciseList.length && makeExerciseView()}     
                     </View>
                         
                 </ScrollView>
@@ -163,7 +168,8 @@ export default function InTrainingScreen({route}) {
             <View style={styles.viewTimer}>
                 <TouchableOpacity onPress={prevExercise}><AntDesign style={styles.btnTimer} name='leftcircle' size={50} color={currentExerciseIndex == 0 ? '#00000000' : '#808080'}/></TouchableOpacity>
                 <TouchableOpacity onPress={handleClockPress}><AntDesign style={styles.btnTimer} name='clockcircleo' size={50} color='#F2BD00'/></TouchableOpacity>
-                <TouchableOpacity onPress={nextExercise}><AntDesign style={styles.btnTimer} name='rightcircle' size={50} color='#808080'/></TouchableOpacity>
+                {currentExerciseIndex != currentWorkout.exerciseList.length-1 && <TouchableOpacity onPress={nextExercise}><AntDesign style={styles.btnTimer} name='rightcircle' size={50} color='#808080'/></TouchableOpacity>}
+                {currentExerciseIndex == currentWorkout.exerciseList.length-1 && <TouchableOpacity onPress={nextExercise}><AntDesign style={styles.btnTimer} name='checkcircle' size={50} color='#F2BD00'/></TouchableOpacity>}
             </View>
 
             <View style={{height:90}}/>

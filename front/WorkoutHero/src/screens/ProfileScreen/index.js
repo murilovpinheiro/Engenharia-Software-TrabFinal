@@ -11,6 +11,8 @@ import MyTextH3 from "../../components/MyText/MyTextH3";
 
 import { AuthContext } from "../../AuthContext";
 
+import { useIsFocused } from "@react-navigation/native";
+
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
@@ -21,10 +23,18 @@ export default function ProfileScreen() {
 
     const [info, setInfo] = useState({})
 
+    const isFocused = useIsFocused();
+
     useEffect(() => {
         console.log("USUARIOOOOOOOOPERFIL", userData)
         fetchUserData()
     }, [])
+
+    useEffect(() => {
+        fetchUserData()
+        console.log("\n\nFOCADO\n\n", userData)
+    }, [isFocused])
+
 
     const fetchUserData = async () => {
         const url = `https://apiworkouthero.onrender.com/historic/select?user_id=${userData["id"]}`;
@@ -35,8 +45,9 @@ export default function ProfileScreen() {
             response = await axios.get(url)
             const { days_trained, reps_done } = response.data[0]
             const xp = userData["xp"]
-            const exercicios_feitos = days_trained
-            const repeticoes = reps_done
+            const exercicios_feitos = userData["exercisesRealized"]
+            const repeticoes = userData["repsRealized"]
+            console.log('\n\n\nXP, EXS E REPS: ', xp, exercicios_feitos, repeticoes )
             setInfo({xp, exercicios_feitos, repeticoes})
         } catch (error) {
             console.error(error);
@@ -103,16 +114,16 @@ export default function ProfileScreen() {
 
             <View style={[styles.viewStats,{height:100}]}>
                 <View style={styles.viewSingleStat}>
-                    <MyTextRegular style={styles.textStats}>Exercicios realizados</MyTextRegular>
-                    <MyTextRegular style={styles.textStats2}>{info.exercicios_feitos}</MyTextRegular>
-                </View>
-                <View style={styles.viewSingleStat}>
                     <MyTextRegular style={styles.textStats}>XP total:</MyTextRegular>
                     <MyTextRegular style={styles.textStats2}>{userData["xp"]}</MyTextRegular>
                 </View>
                 <View style={styles.viewSingleStat}>
+                    <MyTextRegular style={styles.textStats}>Exercicios realizados</MyTextRegular>
+                    <MyTextRegular style={styles.textStats2}>{userData["exercisesRealized"]}</MyTextRegular>
+                </View>
+                <View style={styles.viewSingleStat}>
                     <MyTextRegular style={styles.textStats}>Repetições feitas</MyTextRegular>
-                    <MyTextRegular style={styles.textStats2}>{info.repeticoes}</MyTextRegular>
+                    <MyTextRegular style={styles.textStats2}>{userData["repsRealized"]}</MyTextRegular>
                 </View>
                 {/* <View style={styles.viewStats}>
                     <MyTextRegular style={styles.textStats}>Horas treinando</MyTextRegular>

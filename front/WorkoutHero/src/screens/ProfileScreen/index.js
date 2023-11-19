@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react"
 import {View, Text, processColor, Button, Image} from "react-native"
+import * as Progress from 'react-native-progress';
 import { SelectList } from "react-native-dropdown-select-list";
 import axios from "axios";
 import styles from "./style"
@@ -84,11 +85,17 @@ export default function ProfileScreen() {
                 <View style={{flex:1}}>
                     <MyTextH3>{userData["name"]}</MyTextH3>
                     {/* <MyTextRegular>3 semanas ativo 🔥</MyTextRegular> */}
-                    <MyTextRegular>Level {Math.floor(userData["xp"] / 25)}</MyTextRegular>
+                    <MyTextRegular>Nível {Math.ceil(userData["xp"] / 100)}</MyTextRegular>
                     {/* xp bar é placeholder */}
-                    <View style={{height: 16, marginTop: 8, width: '100%', backgroundColor: 'white', borderRadius: 8, padding: 4, overflow: 'hidden'}}>
+                    {/* <View style={{height: 16, marginTop: 8, width: '100%', backgroundColor: 'white', borderRadius: 8, padding: 4, overflow: 'hidden'}}>
                         <View style={{height: '100%', backgroundColor: 'blue', width: '80%'}}></View>
-                    </View>
+                    </View> */}
+                    <Progress.Bar 
+                        style={{marginTop: 8, width: '100%'}}
+                        width={null} height={16} borderRadius={8} borderWidth={2}
+                        animationType={'decay'}
+                        progress={(userData["xp"] % 100)/100} 
+                    />
                 </View>
 
             </View>

@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
     },
     headerImg: {
         flex:0.15, 
-        backgroundColor: 'gray', borderRadius:32, 
+        backgroundColor: 'white', 
+        // borderRadius:32, 
         margin:2, marginRight: 8, aspectRatio:1,
         // alignVertical:'center'
     },

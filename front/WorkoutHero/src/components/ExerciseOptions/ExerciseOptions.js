@@ -29,10 +29,14 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect }) {
         console.log('id: ', exercise.id)
     };
 
+    if (!Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]) {
+        console.log("NAO ACHOU EXERCICIO: ", exercise.name.replace(/\([^)]*\)/g, '').trim())
+    }
+
     return (
         <View style={styles.body}>
             <View style={styles.header}>
-                {Images.exerciseImages2[exercise.name] && <Image style={styles.headerImg} source={Images.exerciseImages2[exercise.name]}/>}
+                {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles.headerImg} source={Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]}/>}
                 {/* <Image style={styles.headerImg} source={{
                     uri: 'https://reactnative.dev/img/tiny_logo.png'
                 }}/> */}

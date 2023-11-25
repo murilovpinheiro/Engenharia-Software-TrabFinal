@@ -28,8 +28,8 @@ export default function RoutinePreview(props) {
                 <View key={i}>
                 {/* // <View key={i} style={{borderWidth: 2, borderColor:'gold', borderRadius: 8, height: 80, margin: 8}}> */}
                     <MyTextRegular style={ {width: '100%', textAlign: 'center' } }>{nomeFormatado}</MyTextRegular>
-                    {Images.exerciseImages2[exercise.name] && <Image style={styles.img} key={i}
-                    source={ Images.exerciseImages2[exercise.name] }
+                    {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles.img} key={i}
+                    source={ Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] }
                     //source={ img }
                     onError={(error) => console.log('Image loading error:', error)}
                     />}

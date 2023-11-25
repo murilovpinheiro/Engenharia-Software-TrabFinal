@@ -91,7 +91,6 @@ export default function CreateTrainingRoutineScreen() {
                 data={allExercises}
                 renderItem={
                     ({item}) => {
-                        console.log(item)
                         if (item){
 
                             return  <ExerciseOptions key={item.id} exercise={item} showSelect={true}
@@ -108,6 +107,7 @@ export default function CreateTrainingRoutineScreen() {
                         }
                     }
                 }
+                onEndReached={console.log('\n\n\n\n\nCHEGOU FIM\n\n\n\n\n')}
             />}
                 
         </View>

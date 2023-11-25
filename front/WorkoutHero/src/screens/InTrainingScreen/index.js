@@ -48,11 +48,10 @@ export default function InTrainingScreen({route}) {
         // atualizo o index
         setCurrentExerciseIndex(currentExerciseIndex + 1)
         if (currentExerciseIndex >= currentWorkout.exerciseList.length-1) { // coloquei um menos um aki
-            await finishWorkout()
             navigation.reset({
                 index: 0, routes: [{name:'PERFIL'}]
             })
-
+            await finishWorkout()
         }
     }
 

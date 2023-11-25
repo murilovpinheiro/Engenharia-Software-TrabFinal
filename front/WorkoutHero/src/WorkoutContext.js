@@ -1,7 +1,9 @@
 import axios from 'axios';
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import { View, Modal, Text } from 'react-native';
+import React, { createContext, useState, useEffect, useContext, useRef } from 'react';
+import { View, Modal, Text, Animated } from 'react-native';
+import * as Progress from 'react-native-progress';
 import { AuthContext } from './AuthContext';
+import MyTextRegular from './components/MyText/MyTextRegular';
 
 const WorkoutContext = createContext();
 
@@ -41,31 +43,27 @@ const WorkoutProvider = ({ children }) => {
 
     const finishWorkout = async () => {
       console.log("ta no workoutcontext")
-      
+      let oldXp = userData.xp;
+      let newXp = userData.xp;
       try {
+        
         //update xp
+        
         let xpYield = calculateXpYield()
-        let exsYield = calculateExsYield()
-        let repsYield = calculateRepsYield()
-
-        let response = await axios.post(`${baseUrl}/user/add_status?login=${userData.login}&exercisesRealized=${exsYield}&repsRealized=${repsYield}`)
+        let exercisesDone = calculateExsYield()
+        let repsDone = calculateRepsYield()
+        
+        let response = await axios.post(`${baseUrl}/user/add_status?login=${userData.login}&exercisesRealized=${exercisesDone}&repsRealized=${repsDone}`)
        
         userData.xp += xpYield
-        userData.exercisesRealized += exsYield; 
-        userData.repsRealized += repsYield; 
+        userData.exercisesRealized += exercisesDone; 
+        userData.repsRealized += repsDone; 
+        newXp = userData.xp;
+
         console.log("XP OBTIDO: ", xpYield)
         var url = `${baseUrl}/user/update?id=${userData.id}&xp=${userData.xp}`
         response = await axios.post(url);
         console.log("RESPONSE: ", response)
-
-
-        // var responseHistoric = axios.get(`${baseUrl}/historic/select?user_id=${userData.id}`)
-        // console.log("HISTORIC: \n",responseHistoric)
-        // var historic = responseHistoric.data[0]
-        // var historicId = historic.id
-
-        // var responseRealized = axios.post(`${baseUrl}/workout_realized/insert`, {workout_id:currentWorkout.id , historic_id:historicId})
-        // console.log("REALIZED: \n",responseRealized)
 
       } catch (error) {
         console.log(error)
@@ -82,28 +80,29 @@ const WorkoutProvider = ({ children }) => {
       setCurrentProgressL([])
 
       //xp popup
-
+      await trigerModalAnimation({oldXp, newXp});
     }
 
     const calculateXpYield = () => {
-      let totalYield = 0
-      for (let i = 0; i < currentWorkout.exerciseList.length; i++) {
-        let exYield = 0
-        for (let j = 0; j < currentExercise.sets; j++) {
-          exYield += 1;
-        }
-        if (exYield == currentExercise.sets) exYield += 1; //bonus por fazer todos
+      let totalYield = 100
+      // for (let i = 0; i < currentWorkout.exerciseList.length; i++) {
+      //   let exYield = 0
+      //   for (let j = 0; j < currentExercise.sets; j++) {
+            //AQUI: CHECAR QUAIS SETS FORAM FEITOS
+      //     exYield += 1;
+      //   }
+      //   if (exYield == currentExercise.sets) exYield += 1; //bonus por fazer todos
 
-        if (currentExercise.difficulty == "E") {
-          exYield *= 15;
-        } else if (currentExercise.difficulty == "M") {
-          exYield *= 70;
-        } else if (currentExercise.difficulty == "H") {
-          exYield *= 150;
-        }
+      //   if (currentExercise.difficulty == "E") {
+      //     exYield *= 15;
+      //   } else if (currentExercise.difficulty == "M") {
+      //     exYield *= 70;
+      //   } else if (currentExercise.difficulty == "H") {
+      //     exYield *= 150;
+      //   }
 
-        totalYield += exYield
-      }
+      //   totalYield += exYield
+      // }
 
       return totalYield
     }
@@ -429,28 +428,64 @@ const WorkoutProvider = ({ children }) => {
 
     
 
-
+    
     const [modalVisible, setModalVisible] = useState(false);
+    // const [modalExp, setModalExpTarget]
     const [contador, setContador] = useState(0);
+    const maxXp = 100.0;
+    const [progress, setProgress] = useState(0);
+    const [progressXp, setProgressXp] = useState(0);
+    const animatedXpTarget = useRef(new Animated.Value(0)).current
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    const trigerModalAnimation = async() => {
+    //TODO: Mover tudo para um component separado
+    const trigerModalAnimation = async(props) => {
+      let {oldXp, newXp} = props;
       setModalVisible(true);
-    
+      let xpToDistribute = newXp - oldXp;
+      
+      setProgress((oldXp % 100) * 0.01);
+      setProgressXp(oldXp);
+      // console.log(progress)
+      for (let i = 1; i <= 3; i++) {
+        setContador(i);
+        await delay(200); 
+      }
+      // Animated.timing(progress, {
+      //   toValue: newXp / maxXp,
+      //   duration: 2000, // Adjust the duration as needed
+      //   useNativeDriver: true, // This is necessary for certain animations
+      // }).start();
+      while (xpToDistribute > 0) {
+        oldXp += 1;
+        setProgress((oldXp % 100) * 0.01);
+        setProgressXp(oldXp);
+        if (progress >= 1.0) {
+          progress -= 1.0;
+        }
+        xpToDistribute -= 1;
+        // console.log(progress, " ", xpToDistribute)
+        await delay(2);
+      }
       // Contagem regressiva de 10 segundos
       for (let i = 1; i <= 3; i++) {
         setContador(i);
-        await delay(1000); // Aguardar 1 segundo antes de atualizar o contador
+        await delay(1000); 
       }
 
       setModalVisible(false);
       setContador(0); // Reiniciar o contador
     };
-    
-    useEffect(async () => {
-      return await trigerModalAnimation();
-    }, [])
+
+    // useEffect(() => {
+    //   Animated.timing(animatedXp, {
+    //     toValue: animatedXpTarget,
+    //     duration: 2000, // Adjust the duration as needed
+    //     useNativeDriver: true, // This is necessary for certain animations
+    //   }).start();
+    // })
+
 
     return (
       <WorkoutContext.Provider value={{ 
@@ -467,12 +502,25 @@ const WorkoutProvider = ({ children }) => {
             setModalVisible(!modalVisible);
           }}
         >
-          <View style={{padding:20}}>
-            <View style={{height:100, backgroundColor:'red'}}>
-              <Text>
-                {contador}
-              </Text>
+          <View style={{padding:20, height:"100%", backgroundColor:'#8888'}}>
+            <View style={{height:40}}/>
+
+            <View style={{padding:20, backgroundColor:'#fff', borderRadius:8}}>
+              <View style={{flexDirection: 'row'}}>
+                <MyTextRegular style={{flex:1}}>
+                  XP Total: {progressXp}
+                </MyTextRegular>
+                <MyTextRegular style={{right:0, textAlign: 'right',}}>
+                  Nível {Math.ceil(progressXp/100)}
+                </MyTextRegular>
+              </View>
+              
+              <Progress.Bar 
+              progress={progress} width={null} height={20} borderRadius={0} borderWidth={4}
+              animationType={'spring'}
+              />
             </View>
+            
           </View>
         </Modal>
         {children}

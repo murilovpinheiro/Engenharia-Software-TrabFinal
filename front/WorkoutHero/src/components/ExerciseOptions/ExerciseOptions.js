@@ -32,7 +32,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect }) {
     return (
         <View style={styles.body}>
             <View style={styles.header}>
-                <Image style={styles.headerImg} source={Images.exerciseImages[exercise.id]}/>
+                {Images.exerciseImages2[exercise.name] && <Image style={styles.headerImg} source={Images.exerciseImages2[exercise.name]}/>}
                 {/* <Image style={styles.headerImg} source={{
                     uri: 'https://reactnative.dev/img/tiny_logo.png'
                 }}/> */}

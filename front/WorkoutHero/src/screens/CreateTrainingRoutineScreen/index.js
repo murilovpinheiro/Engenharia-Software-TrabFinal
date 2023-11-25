@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import {View, Text, TouchableOpacity, ScrollView, TextInput} from "react-native"
+import {View, Text, TouchableOpacity, ScrollView, TextInput, SectionList, FlatList} from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import styles from "./style"
@@ -84,35 +84,32 @@ export default function CreateTrainingRoutineScreen() {
                 </TouchableOpacity>
             </View>
             
+            {loading && <MyTextRegular>Carregando...</MyTextRegular>}
 
-            {/* <MyButtonRegular title="Adicionar Exercício"></MyButtonRegular> */}
-            
-            <ScrollView style={styles.scrollBody}>
+            {!loading &&<FlatList
+                // style={styles.scrollBody}
+                data={allExercises}
+                renderItem={
+                    ({item}) => {
+                        console.log(item)
+                        if (item){
 
-                {loading && <MyTextRegular>Carregando...</MyTextRegular>}
-
-                {!loading && allExercises.map((val) => {
-                    return <ExerciseOptions key={val.id} exercise={val} showSelect={true}
-                    onSelect={(exerciseId) => {
-                        if (selectedExercises.includes(exerciseId)) {
-                            // Remove o exercício da lista de selecionados
-                            setSelectedExercises(selectedExercises.filter(id => id !== exerciseId));
-                        } else {
-                            // Adiciona o exercício à lista de selecionados
-                            setSelectedExercises([...selectedExercises, exerciseId]);
+                            return  <ExerciseOptions key={item.id} exercise={item} showSelect={true}
+                            onSelect={(exerciseId) => {
+                                if (selectedExercises.includes(exerciseId)) {
+                                    // Remove o exercício da lista de selecionados
+                                    setSelectedExercises(selectedExercises.filter(id => id !== exerciseId));
+                                } else {
+                                    // Adiciona o exercício à lista de selecionados
+                                    setSelectedExercises([...selectedExercises, exerciseId]);
+                                }
+                            }} 
+                            />
                         }
-                    }} 
-                    />
-                })}
-
-                {/* GAMBIARRA MONSTRA AQUI */}
-                <Text>⠀⠀</Text>
-                <Text>⠀⠀</Text>
-                <Text>⠀⠀</Text>
-                <Text>⠀⠀</Text>
-                <Text>⠀⠀</Text>
+                    }
+                }
+            />}
                 
-            </ScrollView>
         </View>
 
         </>

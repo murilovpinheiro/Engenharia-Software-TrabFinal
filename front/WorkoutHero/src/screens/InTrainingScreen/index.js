@@ -131,10 +131,10 @@ export default function InTrainingScreen({route}) {
             <ScrollView style={styles.scrollBody}>
                 
                 <View style={styles.imgBox}>
-                    <Image
+                    {Images.exerciseImages2[exercise.name] && <Image
                     style={styles.img}
-                    source={ Images.exerciseImages[currentExercise.id] }
-                    />
+                    source={ Images.exerciseImages2[currentExercise.name] }
+                    />}
                     <MyTextRegular
                     style={{alignContent:'center'}}
                     >

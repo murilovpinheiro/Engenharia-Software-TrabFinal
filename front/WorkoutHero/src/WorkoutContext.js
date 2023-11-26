@@ -138,6 +138,8 @@ const WorkoutProvider = ({ children }) => {
       let retExercise = {
         id: exerciseFromApi.id,
         name: exerciseFromApi.name,
+        muscles: exerciseFromApi.muscles,
+        body_part: exerciseFromApi.body_part,
 
         bodyPart: "empty",
         equipment: "empty",

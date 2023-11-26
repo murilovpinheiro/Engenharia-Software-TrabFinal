@@ -21,9 +21,13 @@ import { AuthProvider } from './src/AuthContext';
 import AppStyles from './src/AppStyles';
 import PassRestoreRequestScreen from './src/screens/PassRestoreRequestScreen';
 
+import axios from 'axios';
+
 // const STYLES = ['default', 'dark-content', 'light-content'];
 
 export default function App() {
+
+  let response = axios.get(`https://apiworkouthero.onrender.com/exercise/select?id=0`)
 
   const [resetData, setResetData] = useState(null);
   // const url = Linking.useURL();

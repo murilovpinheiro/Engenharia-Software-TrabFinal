@@ -12,6 +12,7 @@ import MyTextRegular from "../../components/MyText/MyTextRegular"
 import { WorkoutContext } from "../../WorkoutContext";
 import { AuthContext } from "../../AuthContext";
 import { useNavigation } from "@react-navigation/native";
+import ExerciseOptions2 from "../../components/ExerciseOptions2/ExerciseOptions2";
 
 export default function CreateTrainingRoutineScreen() {
 
@@ -86,29 +87,37 @@ export default function CreateTrainingRoutineScreen() {
             
             {loading && <MyTextRegular>Carregando...</MyTextRegular>}
 
-            {!loading &&<FlatList
-                // style={styles.scrollBody}
-                data={allExercises}
-                renderItem={
-                    ({item}) => {
-                        if (item){
+            {!loading &&
+            <View 
+            style={styles.scrollBody}
+            
+            >
 
-                            return  <ExerciseOptions key={item.id} exercise={item} showSelect={true}
-                            onSelect={(exerciseId) => {
-                                if (selectedExercises.includes(exerciseId)) {
-                                    // Remove o exercício da lista de selecionados
-                                    setSelectedExercises(selectedExercises.filter(id => id !== exerciseId));
-                                } else {
-                                    // Adiciona o exercício à lista de selecionados
-                                    setSelectedExercises([...selectedExercises, exerciseId]);
-                                }
-                            }} 
-                            />
+                <FlatList
+                    // style={styles.scrollBody}
+                    data={allExercises}
+                    renderItem={
+                        ({item}) => {
+                            if (item){
+
+                                return  <ExerciseOptions2 key={item.id} exercise={item} 
+                                // showSelect={true}
+                                onSelect={(exerciseId) => {
+                                    if (selectedExercises.includes(exerciseId)) {
+                                        // Remove o exercício da lista de selecionados
+                                        setSelectedExercises(selectedExercises.filter(id => id !== exerciseId));
+                                    } else {
+                                        // Adiciona o exercício à lista de selecionados
+                                        setSelectedExercises([...selectedExercises, exerciseId]);
+                                    }
+                                }} 
+                                />
+                            }
                         }
                     }
-                }
-                onEndReached={console.log('\n\n\n\n\nCHEGOU FIM\n\n\n\n\n')}
-            />}
+                    onEndReached={console.log('\n\n\n\n\nCHEGOU FIM\n\n\n\n\n')}
+                />
+            </View>}
                 
         </View>
 

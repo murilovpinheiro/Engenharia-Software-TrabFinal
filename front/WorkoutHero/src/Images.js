@@ -109,7 +109,7 @@ const Images = {
         // "Barra Fixa Supinada": require("../assets/img/exercises/Barra_Fixa_Supinada.gif"),
         // "Remada Baixa": require("../assets/img/exercises/Remada_Baixa.gif"),
         // "Rosca Scott": require("../assets/img/exercises/Rosca_Scott.gif"),
-        // "archer pull up": require("../assets/img/exercises/archer_pull_up.gif"),
+        "archer pull up": require("../assets/img/exercises/archer_pull_up.gif"),
         // "Agachamento Búlgaro": require("../assets/img/exercises/Agachamento_Búlgaro.gif"),
         // "Flexão": require("../assets/img/exercises/Flexão.gif"),
         // "Flexão declinada": require("../assets/img/exercises/Flexão_declinada.gif"),

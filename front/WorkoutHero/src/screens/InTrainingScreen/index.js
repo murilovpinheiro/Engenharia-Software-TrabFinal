@@ -130,7 +130,7 @@ export default function InTrainingScreen({route}) {
             <ScrollView style={styles.scrollBody}>
                 
                 <View style={styles.imgBox}>
-                    {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image
+                    {Images.exerciseImages2[currentExercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image
                     style={styles.img}
                     source={ Images.exerciseImages2[currentExercise.name.replace(/\([^)]*\)/g, '').trim()] }
                     />}

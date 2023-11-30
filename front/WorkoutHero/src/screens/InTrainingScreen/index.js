@@ -12,6 +12,8 @@ import Images from "../../Images";
 import MyButtonThin from "../../components/MyButton/MyButtonThin";
 import MyButtonSwitch from "../../components/MyButton/MyButtonSwitch";
 import MyTextH1 from "../../components/MyText/MyTextH1";
+import MySwitch from "../../components/MySwitch/MySwitch";
+import AppStyles from "../../AppStyles";
 
 export default function InTrainingScreen({route}) {
 
@@ -94,19 +96,33 @@ export default function InTrainingScreen({route}) {
 
         if (currentExercise != null)
             for (let i = 0; i < currentExercise.sets; ++i) {
+                let currentSetBool = currentProgressL[currentExerciseIndex][i];
+                let viewColor = currentSetBool ? AppStyles.colors.secondary : AppStyles.colors.accent;
+                console.log(viewColor);
                 retList.push(
-                    <MyButtonSwitch 
-                    onToggle={() => {
-                        setSets(i)
-                    }}
-                    key={currentExerciseIndex*100 + i} 
-                    title={`Seção ${i+1}: ${currentExercise.reps} repetições`} 
-                    style={[styles.setOptions]} 
-                    value={currentProgressL[currentExerciseIndex][i]}
-                    // style={{backgroundColor: 'red'}} 
-                    // style={sets[i] === true ? { backgroundColor: 'blue' } : { backgroundColor: 'red' }}
+                    <View
+                    style={[
+                        styles.setOptions, 
+                        // {backgroundColor: viewColor}
+                    ]} 
+                    key={currentExerciseIndex*200 + i} 
                     >
-                    </MyButtonSwitch>
+                        <MyTextRegular>
+                            Série {i+1}: {currentExercise.reps} repetições
+                        </MyTextRegular>
+                        <View style={{width:32}}/>
+                        <MySwitch
+                            // style={{float:"left"}}
+                            iconEnabledName="checkmark-circle-outline"
+                            iconDisabledName="ellipse-outline"
+                            iconEnabledColor="white"
+                            iconDisabledColor="white"
+                            size={32}
+                            defaultValue={currentSetBool}
+                            onToggle={()=>{console.log("Switch Pressed"); setSets(i)}}
+                        ></MySwitch>
+                    </View>
+
                 )
             }
 
@@ -130,12 +146,15 @@ export default function InTrainingScreen({route}) {
             <ScrollView style={styles.scrollBody}>
                 
                 <View style={styles.imgBox}>
-                    {Images.exerciseImages2[currentExercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image
-                    style={styles.img}
-                    source={ Images.exerciseImages2[currentExercise.name.replace(/\([^)]*\)/g, '').trim()] }
-                    />}
+                    <View style={styles.imgFrame}>
+                        {Images.exerciseImages2[currentExercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image
+                        style={styles.img}
+                        source={ Images.exerciseImages2[currentExercise.name.replace(/\([^)]*\)/g, '').trim()] }
+                        />}
+                    </View>
+                    
                     <MyTextRegular
-                    style={{alignContent:'center'}}
+                    style={{alignContent:'center', position:'relative', bottom:-10}}
                     >
                         {currentExercise.name.replace(/_/g, " ")}
                     </MyTextRegular>
@@ -151,10 +170,10 @@ export default function InTrainingScreen({route}) {
 
                     <View style={styles.viewSets}>
                         <View style={styles.setsHeader}>
-                            <MyTextRegular style={styles.setsHeaderText}>SÉRIE</MyTextRegular>
-                            <MyTextRegular style={styles.setsHeaderText}>PESO (KG)</MyTextRegular>
-                            <MyTextRegular style={[styles.setsHeaderText,{flex:0.3}]}>REPETIÇÕES</MyTextRegular>
-                            <MyTextRegular style={styles.setsHeaderText}>FEITO</MyTextRegular>
+                            {/* <MyTextRegular style={styles.setsHeaderText}>SÉRIE</MyTextRegular> */}
+                            {/* <MyTextRegular style={styles.setsHeaderText}>PESO (KG)</MyTextRegular> */}
+                            {/* <MyTextRegular style={[styles.setsHeaderText,{flex:0.3}]}>REPETIÇÕES</MyTextRegular> */}
+                            {/* <MyTextRegular style={styles.setsHeaderText}>FEITO</MyTextRegular> */}
                         </View>
 
                         {currentExercise && currentExerciseIndex < currentWorkout.exerciseList.length && makeExerciseView()}     

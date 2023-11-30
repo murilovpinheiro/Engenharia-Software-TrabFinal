@@ -15,8 +15,8 @@ export default function MySwitch({
     const toggleSwitch = () => {
         if (disabled) return;
         setValue(!value);
-        
-        onToggle();
+
+        if (onToggle) onToggle();
     }
 
     return (

@@ -12,15 +12,22 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     imgBox: {
-        width: '95%', aspectRatio:1.2, alignSelf: 'center',
+        width: '95%', aspectRatio:1.1, alignSelf: 'center',
+        display:"flex",
+        flexDirection:"column",
         backgroundColor: AppStyles.colors.accent,
         borderRadius: 16,
         padding:16,
         alignItems:'center'
         // borderColor: '#F2BD00', borderRadius: 10, borderWidth: 2
     },
+    imgFrame: {
+        height:"90%",
+        borderRadius: 8,
+        overflow: "hidden"
+    },
     img: {
-        resizeMode: "contain", maxWidth:"100%", maxHeight:"100%"
+        resizeMode: "cover", maxWidth:"100%", maxHeight:"100%"
     },
     viewTimer: {
         //width: '100%',
@@ -55,10 +62,13 @@ const styles = StyleSheet.create({
     },
     setOptions:{
         margin: 8,
+        flexDirection: "row",
         justifyContent: 'center',
-        height:32,
+        alignItems: 'center',
+        height:36,
         
         borderWidth:0,
+        borderRadius:16,
         backgroundColor: AppStyles.colors.accent,
         color: AppStyles.colors.text
     },

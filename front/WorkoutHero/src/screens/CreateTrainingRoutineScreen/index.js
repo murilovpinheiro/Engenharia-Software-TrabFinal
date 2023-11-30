@@ -20,9 +20,13 @@ export default function CreateTrainingRoutineScreen() {
 
     const { userData } = useContext(AuthContext);
 
-    const { getAllExercises, createWorkout } = useContext(WorkoutContext);
+    const { getAllExercises, getExercises, createWorkout } = useContext(WorkoutContext);
 
     const [allExercises, setAllExercises] = useState([]);
+    const [limit, setLimit] = useState(5);
+    const [offset, setOffset] = useState(0);
+    const LIMITE = 317;
+
     const [selectedExercises, setSelectedExercises] = useState([]);
     const [loading, setLoading] = useState(true);
     const [userId, setUserId] = useState('');
@@ -33,7 +37,8 @@ export default function CreateTrainingRoutineScreen() {
         setUserId(userData.id);
         const fetchData = async () => {
             try {
-                let ExerciseList = await getAllExercises();
+                // let ExerciseList = await getAllExercises();
+                let ExerciseList = await getExercises(limit, offset) // limit, offset, resto da clause
                 setAllExercises(ExerciseList);
                 console.log('\n\nTA AI OH OS EXERCICIO', allExercises);
                 // console.log('tome o id do primeiro ex: ', allExercises[0].id)
@@ -115,7 +120,11 @@ export default function CreateTrainingRoutineScreen() {
                             }
                         }
                     }
-                    onEndReached={console.log('\n\n\n\n\nCHEGOU FIM\n\n\n\n\n')}
+                    onEndReached={() => {
+                        console.log('\n\n\n\n\nCHEGOU FIM\n\n\n\n\n')
+                        const dif = limit - offset;
+                        // const 
+                    }}
                 />
             </View>}
                 

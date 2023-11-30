@@ -247,6 +247,31 @@ const WorkoutProvider = ({ children }) => {
       return retList
     }
 
+    // pega exercicios por intervalo e possui mais um parametro caso necessite de mais filtro
+    const getExercises = async(limit, offset, restoDaClause = '') => {
+      let response = null;
+      let retList = [];
+      try {
+        const urlget = baseUrl + `/exercise/selectPage?offset=${offset}&limit=${limit}` + restoDaClause;
+        console.log(urlget)
+        response = await axios.get(baseUrl + `/exercise/selectPage?offset=${offset}&limit=${limit}` + restoDaClause);
+        if (response.message) {
+          throw Error(response.message);
+        }
+        console.log(response.data, offset, limit)
+        let exerciseListFromApi = response.data
+        exerciseListFromApi.forEach((val) => {
+          retList.push(exerciseFromApiConverter(val));
+        })
+      } catch (error) {
+        console.log("ERRO GET EXERCISES FROM USER")
+        console.error(error)
+        throw error
+      }
+
+      return retList
+    }
+
     const createWorkout = async (ExIdList, idUser, nome, dificuldade ) => {
       let response = null;
       try {
@@ -493,7 +518,7 @@ const WorkoutProvider = ({ children }) => {
       <WorkoutContext.Provider value={{ 
         currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
         startWorkout,  finishWorkout, calculateXpYield,
-        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser,
+        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser,
         createWorkout
       }}>
         <Modal

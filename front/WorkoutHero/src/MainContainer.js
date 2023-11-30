@@ -11,6 +11,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 // import InTrainingScreen from "./screens/InTrainingScreen";
 import RoutinesListScreen from "./screens/RoutinesListScreen";
 import ViewTrainingRoutineScreen from "./screens/ViewTrainingRoutineScreen";
+import ViewTrainingRoutineScreen2 from "./screens/ViewTrainingRoutineScreen2";
 import InTrainingScreen from "./screens/InTrainingScreen";
 import TimerScreen from "./screens/TimerScreen";
 import CreateTrainingRoutineScreen from "./screens/CreateTrainingRoutineScreen"
@@ -81,6 +82,7 @@ const RoutinesStack = () => {
     return (
         <Stack.Navigator initialRouteName='ALLROUTINES'>
             <Stack.Screen name='Detalhes' options={{ headerShown: false }} component={ViewTrainingRoutineScreen} />
+            <Stack.Screen name='DetalhesNovo' options={{ headerShown: false }} component={ViewTrainingRoutineScreen2} />
             <Stack.Screen name='RotinaNova' options={{headerShown: false }} component={CreateTrainingRoutineScreen} />
             <Stack.Screen name='ALLROUTINES' options={{ headerShown: false }} component={RoutinesListScreen} />
         </Stack.Navigator>

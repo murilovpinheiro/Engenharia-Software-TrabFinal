@@ -24,11 +24,12 @@ export default function CreateTrainingRoutineScreen() {
 
     const [allExercises, setAllExercises] = useState([]);
     const [limit, setLimit] = useState(5);
-    const [offset, setOffset] = useState(0);
+    const [offset, setOffset] = useState(300);
     const LIMITE = 317;
 
     const [selectedExercises, setSelectedExercises] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [loading2, setLoading2] = useState(true);
     const [userId, setUserId] = useState('');
     const [nomeTreino, setNomeTreino] = useState('Treino');
 
@@ -62,6 +63,21 @@ export default function CreateTrainingRoutineScreen() {
     useEffect(() => {
         console.log('USUARIO: ', userId);
     }, [userId])
+
+    useEffect(() => {
+        const fetch2 = async () => {
+            try {
+                let ExerciseList = await getExercises(limit, offset) // limit, offset, resto da clause
+                setAllExercises([...allExercises, ...ExerciseList])
+            } catch (error) {
+                console.log("error in fetchdata")
+                console.error(error);
+            }
+        }
+
+        fetch2();
+
+    }, [offset])
 
     return (
         <>
@@ -101,6 +117,7 @@ export default function CreateTrainingRoutineScreen() {
                 <FlatList
                     // style={styles.scrollBody}
                     data={allExercises}
+                    keyExtractor={(id) => { id.toString(); }}
                     renderItem={
                         ({item}) => {
                             if (item){
@@ -121,9 +138,15 @@ export default function CreateTrainingRoutineScreen() {
                         }
                     }
                     onEndReached={() => {
-                        console.log('\n\n\n\n\nCHEGOU FIM\n\n\n\n\n')
-                        const dif = limit - offset;
-                        // const 
+                        if (loading2) {
+                            if (offset + limit >= 317) {
+                                setLoading2(false);
+                                console.log('\n\n\n\n\nCHEGOU FIM\n\n\n\n\n')
+                                return;
+                            }
+                            setOffset(() => (offset + limit));
+                            console.log('valores novos: ', offset);
+                        }
                     }}
                 />
             </View>}

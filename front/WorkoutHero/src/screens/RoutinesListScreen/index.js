@@ -178,13 +178,24 @@ export default function RoutinesListScreen() {
         navigation.navigate("Detalhes", {routine: selectedRoutine})
     }
 
+    const openRoutineView2 = (selectedRoutine) => {
+        navigation.navigate("DetalhesNovo", {routine: selectedRoutine});
+    }
+
+
     const makePreviews = () => {
         var retList = []
         for (let i = 0; i < routinesList.length; i++){
             let r = routinesList[i]
-            retList.push(
-                <RoutinePreview key={i} onPress={() => openRoutineView(r)} routine={r}/>
-            )
+            if (r.userId == 0) {
+                retList.push(
+                    <RoutinePreview key={i} onPress={() => openRoutineView(r)} routine={r}/>
+                );
+            } else {
+                retList.push(
+                    <RoutinePreview key={i} onPress={() => openRoutineView2(r)} routine={r}/>
+                );
+            }
         }
         return retList
     }

@@ -63,7 +63,7 @@ export default function ViewTrainingRoutineScreen2({route}) {
             try {
                 for (let i = 0; i < routine["exerciseList"].length; i++) {
                     retList.push(
-                        <ExerciseOptions key={i} exercise={routine["exerciseList"][i]} showSelect={false}/>
+                        <ExerciseOptions key={i} exercise={routine["exerciseList"][i]} showSelect={false} routineID={routine.id}/>
                     )
                 }
             } catch (err) {

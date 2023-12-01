@@ -315,7 +315,22 @@ const WorkoutProvider = ({ children }) => {
     }
 
     // TODO: IMPLEMENTAR DELECAO DE EXERCICIO DO TREINO 
-    const delExerciseToWK = async(idEx, idWk) => {}
+    const delExerciseToWK = async(idEx, idWk) => {
+      try {
+
+        let response1 = await axios.get(
+          `${baseUrl}/workout_exercise/select?workout_id=${idWk}&exercise_id=${idEx}`
+        );
+
+        let wkexId = response1.data[0].id;
+
+        let response2 = await axios.post(
+          `${baseUrl}/workout_exercise/delete2?id=${wkexId}`
+        );
+      } catch (error) {
+        throw error;
+      }
+    }
 
     const getListBodyParts = async () => {
       //let retList = ["back", "cardio", "chest", "lower arms", "lower legs", "neck", "shoulders", "upper arms", "upper legs", "waist"]
@@ -472,21 +487,13 @@ const WorkoutProvider = ({ children }) => {
       setContador(0); // Reiniciar o contador
     };
 
-    // useEffect(() => {
-    //   Animated.timing(animatedXp, {
-    //     toValue: animatedXpTarget,
-    //     duration: 2000, // Adjust the duration as needed
-    //     useNativeDriver: true, // This is necessary for certain animations
-    //   }).start();
-    // })
-
 
     return (
       <WorkoutContext.Provider value={{ 
         currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
         startWorkout,  finishWorkout, calculateXpYield,
         getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser, getRoutine,
-        createWorkout, addExerciseToWK
+        createWorkout, addExerciseToWK, delExerciseToWK
       }}>
         <Modal
           transparent={true}

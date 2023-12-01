@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import {View, TouchableOpacity, Image, CheckBox} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -9,9 +9,10 @@ import MyTextH3 from "../MyText/MyTextH3";
 import MyButtonThin from "../MyButton/MyButtonThin.js"
 import Images from "../../Images";
 
+import { WorkoutContext } from "../../WorkoutContext";
 
 
-export default function ExerciseOptions({ exercise, onSelect, showSelect }) {
+export default function ExerciseOptions({ exercise, onSelect, showSelect, routineID }) {
 
     const stringFromGroups = (array) => {
         let str = ""
@@ -21,7 +22,10 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect }) {
         return str
     }
 
+    const { delExerciseToWK } = useContext(WorkoutContext)
+
     const [isSelected, setIsSelected] = useState(false);
+    const [invisible, setInvisible] = useState(false);
 
     const toggleSelection = () => {
         setIsSelected(!isSelected); // Inverte o estado de seleção
@@ -32,6 +36,8 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect }) {
     if (!Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]) {
         console.log("NAO ACHOU EXERCICIO: ", exercise.name.replace(/\([^)]*\)/g, '').trim())
     }
+
+    if (invisible) { return }
 
     return (
         <View style={styles.body}>
@@ -47,9 +53,17 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect }) {
                     {/* <MyTextRegular style={styles.headerTextType}>GRUPO MUSCULAR: {stringFromGroups(exercise.muscularGroups)}</MyTextRegular> */}
                 </View>
 
-                {/* <TouchableOpacity style={styles.headerDelete}>
-                    <AntDesign name='delete' color='gray' size={32}/>
-                </TouchableOpacity> */}
+                <TouchableOpacity style={styles.headerDelete}
+                    onPress={async () => {
+                        // requisicao de delecao
+                        console.log('exercise.id e routineID', exercise.id, routineID)
+                        await delExerciseToWK(exercise.id, routineID);
+                        // retira o componente
+                        setInvisible(true);
+                    }}
+                >
+                    <AntDesign name='delete' color='black' size={30}/>
+                </TouchableOpacity>
 
             </View>
 

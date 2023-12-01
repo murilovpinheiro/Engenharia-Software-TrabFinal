@@ -351,16 +351,46 @@ const WorkoutProvider = ({ children }) => {
       return retWorkout
     }
 
+    const getRoutine = async (routineId) => {
+      let response = null;
+      let routineFromApi = null;
+      try {
+        response = await axios.get(baseUrl + `/WORKOUT/select?id=${routineId}`)
+        routineFromApi = response.data[0]
+      } catch (error) {
+        console.log("ERRO GET ROUTINES FROM USER")
+        console.error(error)
+        throw error
+      }
+
+      let workoutFromApi = routineFromApi;
+      let workoutExerciseListFromApi = routineFromApi.exerciseList
+      let workoutExerciseList = []
+
+      for (let j = 0; j < workoutExerciseListFromApi.length; j++) {
+        let exercise = exerciseFromApiConverter(workoutExerciseListFromApi[j])
+        workoutExerciseList.push(exercise)
+      }
+
+      return {
+        id: workoutFromApi.id, 
+        name: workoutFromApi.obj,
+        difficulty: workoutFromApi.difficulty,
+        goal: workoutFromApi.obj,
+        userId: workoutFromApi.user_id,
+        exerciseList: workoutExerciseList
+      }
+
+    }
+
     const getRoutinesFromUser = async (userId) => {
       let routinesList = []
       let routinesListFromApi = []
       
-      let data = null;
       let response = null;
       try {
         response = await axios.get(baseUrl + `/WORKOUT/select?user_id=${userId}`)
         routinesListFromApi = response.data
-        console.log("LISTA TREINOS API: ", routinesListFromApi)
       } catch (error) {
         console.log("ERRO GET ROUTINES FROM USER")
         console.error(error)
@@ -370,12 +400,10 @@ const WorkoutProvider = ({ children }) => {
       for (let i = 0; i < routinesListFromApi.length; i++) {
         let workoutFromApi = routinesListFromApi[i];
         let workoutExerciseListFromApi = workoutFromApi.exerciseList //lista de ids //REPLACE WITH REQUEST
-        console.log("lista exercicios:", workoutExerciseListFromApi)
         let workoutExerciseList = []
 
         for (let j = 0; j < workoutExerciseListFromApi.length; j++) {
           let exercise = exerciseFromApiConverter(workoutExerciseListFromApi[j])
-          console.log("exercise from context:", exercise)
           workoutExerciseList.push(exercise)
         }
 
@@ -387,68 +415,8 @@ const WorkoutProvider = ({ children }) => {
           userId: workoutFromApi.user_id,
           exerciseList: workoutExerciseList
         }
-        console.log("rotina:", retWorkout)
         routinesList.push(retWorkout)
       }
-
-      // routinesListFromApi.forEach(async (workoutFromApi)=>{
-      //   let workoutExerciseListFromApi = workoutFromApi.exerciseList //lista de ids //REPLACE WITH REQUEST
-      //   console.log("lista exercicios:", workoutExerciseListFromApi)
-      //   let workoutExerciseList = []
-
-      //   workoutExerciseListFromApi.forEach(async (exerciseFromApi) => {
-      //     // let [exercise] = await getExerciseById(exerciseId)
-      //     let exercise = exerciseFromApiConverter(exerciseFromApi)
-      //     console.log("exercise from context:", exercise)
-      //     workoutExerciseList.push(exercise)
-      //   })
-
-      //   let retWorkout = {
-      //     // id: workoutFromApi.id, 
-      //     name: workoutFromApi.obj,
-      //     difficulty: workoutFromApi.difficulty,
-      //     goal: workoutFromApi.obj,
-      //     userId: workoutFromApi.user_id,
-      //     exerciseList: workoutExerciseList
-      //   }
-      //   console.log("rotina:", retWorkout)
-      //   routinesList.push(retWorkout)
-      // })
-
-      console.log("lista:",routinesList)
-
-      //exemplo, só uma rotina
-      // let workoutFromApi = { //REPLACE WITH REQUEST
-      //   id: "empty", 
-      //   difficulty: "empty",
-      //   obj: "aaa",
-      //   user_id: userId
-      // }
-
-
-      // let workoutExerciseListFromApi = [] //lista de ids //REPLACE WITH REQUEST
-      // //placeholder
-      // workoutExerciseListFromApi = [1,2,3]
-      // let workoutExerciseList = []
-
-      // workoutExerciseListFromApi.forEach((exerciseId) => {
-      //   let [exercise] = getExerciseById(exerciseId)
-      //   console.log("exercise from context:", exercise)
-      //   workoutExerciseList.push(exercise)
-      // })
-  
-      // let retWorkout = {
-      //   id: workoutFromApi.id, 
-      //   name: workoutFromApi.obj,
-      //   difficulty: workoutFromApi.difficulty,
-      //   goal: workoutFromApi.obj,
-      //   userId: workoutFromApi.user_id,
-      //   exerciseList: workoutExerciseList
-      // }
-
-      // routinesList.push(retWorkout)
-      // routinesList.push(retWorkout)
-
       return routinesList
     }
 
@@ -517,7 +485,7 @@ const WorkoutProvider = ({ children }) => {
       <WorkoutContext.Provider value={{ 
         currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
         startWorkout,  finishWorkout, calculateXpYield,
-        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser,
+        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser, getRoutine,
         createWorkout, addExerciseToWK
       }}>
         <Modal

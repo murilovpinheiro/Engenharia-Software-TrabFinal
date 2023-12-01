@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import {View, Text, TouchableOpacity, ScrollView, TextInput} from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -14,27 +14,43 @@ import { WorkoutContext } from "../../WorkoutContext";
 import { useNavigation } from "@react-navigation/native";
 
 
-export default function ViewTrainingRoutineScreen2({route}) {
-    var params = route.params
-    // console.log(params)
-    var routine = params.routine
-    var exerciseList = routine["exerciseList"]
+import { useIsFocused } from "@react-navigation/native";
 
+
+export default function ViewTrainingRoutineScreen2({route}) {
+    
     const navigation = useNavigation()
+    
+    const { getRoutine } = useContext(WorkoutContext)
+    const [routine, setRoutine] = useState(null);
 
     const { startWorkout } = useContext(WorkoutContext)
+    const [nomeTreino, setNomeTreino] = useState('');
 
-    const [nomeTreino, setNomeTreino] = useState(routine.name);
+    const isFocused = useIsFocused();
+    useEffect( () => {
+
+        const fetchData = async() => {
+            var params = route.params
+            var routineBruh = params.routine
+            var realRoutine = await getRoutine(routineBruh.id);
+            console.log('coisas novas', routine, nomeTreino)
+            
+            setRoutine(realRoutine);   
+            setNomeTreino(realRoutine.name)
+        }
+
+        fetchData();
+
+        
+        
+    }, [isFocused]);
+
 
     const chooseRoutine = () => {
-        // console.log("func: ", startWorkout)
-        // navigation.reset({
-        //     index: 0, routes: [{name:'TRAININGSCREEN'}]
-        // })
         startWorkout(routine)
         navigation.goBack()
         navigation.navigate('TREINAR', {screen: 'TRAININGSCREEN'})
-        
     }
 
     const selectExercise = () => {
@@ -43,10 +59,17 @@ export default function ViewTrainingRoutineScreen2({route}) {
 
     const makeExercises = () => {
         var retList = []
-        for (let i = 0; i < exerciseList.length; i++) {
-            retList.push(
-                <ExerciseOptions key={i} exercise={exerciseList[i]} showSelect={false}/>
-            )
+        if (routine && routine["exerciseList"]) {
+            try {
+                for (let i = 0; i < routine["exerciseList"].length; i++) {
+                    retList.push(
+                        <ExerciseOptions key={i} exercise={routine["exerciseList"][i]} showSelect={false}/>
+                    )
+                }
+            } catch (err) {
+                console.log(err);
+                throw err;
+            }
         }
         return retList
     }
@@ -74,7 +97,7 @@ export default function ViewTrainingRoutineScreen2({route}) {
 
             </View>
 
-            <Text>{routine.id}</Text>
+            {routine && <Text>{routine.id}</Text>}
             
             <MyButtonRegular title="Começar" style={styles.startBtn}
             onPress={chooseRoutine}
@@ -96,11 +119,11 @@ export default function ViewTrainingRoutineScreen2({route}) {
             }}
             />
             
-            <ScrollView style={{
+            {routine && <ScrollView style={{
                 ...(styles.scrollBody),
             }}>
                 { makeExercises() }
-            </ScrollView>
+            </ScrollView>}
 
         </View>
 

@@ -70,8 +70,6 @@ export default function CreateTrainingRoutineScreen({route}) {
                     console.log('ja selecionados: ', exsJaSelecionados);
                     return !exsJaSelecionados.includes(exercicio.id)
                 }));
-                // console.log('\n\nTA AI OH OS EXERCICIO', allExercises);
-                // console.log('tome o id do primeiro ex: ', allExercises[0].id)
             } catch (error) {
                 console.log("error in fetchdata")
                 console.error(error);

@@ -24,6 +24,8 @@ export default function ViewTrainingRoutineScreen2({route}) {
 
     const { startWorkout } = useContext(WorkoutContext)
 
+    const [nomeTreino, setNomeTreino] = useState(routine.name);
+
     const chooseRoutine = () => {
         // console.log("func: ", startWorkout)
         // navigation.reset({
@@ -35,8 +37,11 @@ export default function ViewTrainingRoutineScreen2({route}) {
         
     }
 
+    const selectExercise = () => {
+        navigation.navigate('RotinaNova', {screen: 'RotinaNova', routine: routine});
+    }
+
     const makeExercises = () => {
-        console.log("TO AQUI");
         var retList = []
         for (let i = 0; i < exerciseList.length; i++) {
             retList.push(
@@ -56,16 +61,39 @@ export default function ViewTrainingRoutineScreen2({route}) {
 
             <View style={{flexDirection:'row', alignItems: 'center'}}>
                 {/* <MyTextInput style={{margin: 10, flex:0.8}} defaultValue='Treino 1'></MyTextInput> */}
-                <MyTextH3 style={styles.textName}>TREINO PADRAO</MyTextH3>
+                {/* <MyTextH3 style={styles.textName}>TREINO PADRAO</MyTextH3> */}
+                <TextInput
+                    style={{
+                            ...(styles.textName),
+                            }}
+                    value={nomeTreino}
+                    editable={true}
+                    onChangeText={text => setNomeTreino(text)}
+                    placeholder="Nome Treino"
+                />
 
             </View>
+
+            <Text>{routine.id}</Text>
             
             <MyButtonRegular title="Começar" style={styles.startBtn}
             onPress={chooseRoutine}
             />
 
-            <MyButtonRegular title="Adicionar Exercicio" style={styles.startBtn}
-            onPress={chooseRoutine}
+            <MyButtonRegular title="Adicionar Exercicio" style={
+                {
+                    ...styles.startBtn,
+                    backgroundColor: '#071d1a',
+                }
+            }
+            text = {
+                {
+                    color: '#ffc629'
+                }
+            }
+            onPress={() => {
+                selectExercise();
+            }}
             />
             
             <ScrollView style={{

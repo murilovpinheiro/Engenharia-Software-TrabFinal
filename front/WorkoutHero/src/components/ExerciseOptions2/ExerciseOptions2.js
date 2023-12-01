@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from "react"
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Certifique-se de instalar o pacote
 import Images from "../../Images";
-
+import MyButtonThin from '../MyButton/MyButtonThin';
+import MyTextH3 from "../MyText/MyTextH3";
 
 const ExerciseOptions2 = ({exercise}) => {
+
+  const [isSelected, setIsSelected] = useState(false);
+
+  const toggleSelection = () => {
+      setIsSelected(!isSelected); // Inverte o estado de seleção
+      onSelect(exercise.id); // Chama a função onSelect com o ID do exercício
+      console.log('id: ', exercise.id)
+  };
 
   return (
     <View style={styles.container}>
@@ -22,6 +31,7 @@ const ExerciseOptions2 = ({exercise}) => {
                 <Text>{exercise.name}</Text>
                 <Text>{exercise.body_part}: {exercise.muscles}</Text>
             </View>
+            <MyButtonThin onPress={toggleSelection} title={isSelected ? "SELECIONADO" : "Não selecionado"}></MyButtonThin>
         </View>
     </View>
   );

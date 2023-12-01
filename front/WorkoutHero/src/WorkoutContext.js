@@ -275,20 +275,6 @@ const WorkoutProvider = ({ children }) => {
     const createWorkout = async (ExIdList, idUser, nome, dificuldade ) => {
       let response = null;
       try {
-        // response = await axios({
-        //   method: 'post',
-        //   url: baseUrl + '/workout/insert',
-        //   headers: {}, 
-        //   data: {
-        //     id: 2, // This is the body part
-        //     difficulty: dificuldade,
-        //     obj: nome,
-        //     user_id: idUser
-        //   }
-        // });
-
-        // https://apiworkouthero.onrender.com/workout/insert2?id=4&difficulty=M&obj=Teste&user_id=1
-
         response = await axios.post(`${baseUrl}/workout/insert2?id=1&difficulty=${dificuldade}&obj=${nome}&user_id=${idUser}`);
 
         console.log('\n\n\nRESPONSE CREATEWORKOUT', response.data);
@@ -317,6 +303,19 @@ const WorkoutProvider = ({ children }) => {
         throw error
       }
     }
+
+    const addExerciseToWK = async(idEx, idWk) => {
+      try {
+        let response = await axios.post(
+          `${baseUrl}/workout_exercise/insert2?id=1&workout_id=${idWk}&exercise_id=${idEx}`
+        );
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    // TODO: IMPLEMENTAR DELECAO DE EXERCICIO DO TREINO 
+    const delExerciseToWK = async(idEx, idWk) => {}
 
     const getListBodyParts = async () => {
       //let retList = ["back", "cardio", "chest", "lower arms", "lower legs", "neck", "shoulders", "upper arms", "upper legs", "waist"]
@@ -519,7 +518,7 @@ const WorkoutProvider = ({ children }) => {
         currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
         startWorkout,  finishWorkout, calculateXpYield,
         getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser,
-        createWorkout
+        createWorkout, addExerciseToWK
       }}>
         <Modal
           transparent={true}

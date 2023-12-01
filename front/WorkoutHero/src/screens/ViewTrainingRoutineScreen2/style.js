@@ -9,7 +9,11 @@ const styles = StyleSheet.create({
         width: "100%", height:"100%",
     },
     textName: {
-        textAlign: 'center', width:'100%'
+        textAlign: 'center', width:'100%',
+        fontFamily: 'Lexend-Bold',
+        fontSize: 20,
+        color: AppStyles.colors.text,
+        marginVertical: 4
     },
     startBtn: {
         margin: 8,

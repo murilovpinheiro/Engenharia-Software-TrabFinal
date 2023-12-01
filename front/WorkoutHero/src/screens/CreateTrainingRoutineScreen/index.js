@@ -14,7 +14,7 @@ import { AuthContext } from "../../AuthContext";
 import { useNavigation } from "@react-navigation/native";
 import ExerciseOptions2 from "../../components/ExerciseOptions2/ExerciseOptions2";
 
-export default function CreateTrainingRoutineScreen() {
+export default function CreateTrainingRoutineScreen({route}) {
 
     const navigation = useNavigation()
 
@@ -31,7 +31,8 @@ export default function CreateTrainingRoutineScreen() {
     const [loading, setLoading] = useState(true);
     const [loading2, setLoading2] = useState(true);
     const [userId, setUserId] = useState('');
-    const [nomeTreino, setNomeTreino] = useState('Treino');
+    const [nomeTreino, setNomeTreino] = useState('');
+    const [nomeFiltro, setNomeFiltro] = useState('');
 
     useEffect(() => {
         
@@ -41,7 +42,7 @@ export default function CreateTrainingRoutineScreen() {
                 // let ExerciseList = await getAllExercises();
                 let ExerciseList = await getExercises(limit, offset) // limit, offset, resto da clause
                 setAllExercises(ExerciseList);
-                console.log('\n\nTA AI OH OS EXERCICIO', allExercises);
+                // console.log('\n\nTA AI OH OS EXERCICIO', allExercises);
                 // console.log('tome o id do primeiro ex: ', allExercises[0].id)
             } catch (error) {
                 console.log("error in fetchdata")
@@ -53,6 +54,10 @@ export default function CreateTrainingRoutineScreen() {
 
         fetchData();
 
+        if (route?.params?.routine) {
+            console.log('\n\n\n\nROTINA\n\n\n\n')
+            console.log(route.params.routine);
+        }
 
     }, [])
 
@@ -87,22 +92,28 @@ export default function CreateTrainingRoutineScreen() {
                 {
                     flexDirection:'row', 
                     alignItems: 'center',
-                    marginTop: 20
+                    marginTop: 20,
+                    padding: 2
                 }
             }>
-                <MyTextInput 
+                
+                <TouchableOpacity style={{flex:0.2}}
+                onPress={() => {
+                    navigation.goBack();
+                }}>
+                    <AntDesign name="back" size={40} color="black" />
+                </TouchableOpacity>
+
+                <MyTextInput
                     style={{margin: 10, flex:0.8}} 
-                    defaultValue='Treino'
-                    value={nomeTreino}
+                    placeholder='Treino'
+                    value={nomeFiltro}
                     onChangeText={setNomeTreino}
-                ></MyTextInput>
+                >
+                </MyTextInput>
 
                 <TouchableOpacity style={{flex:0.2}}>
-                <MyTextRegular onPress={async () => { // funcao de salvar 
-                    setLoading(true)
-                    await createWorkout(selectedExercises, userId, nomeTreino, 'E');
-                    navigation.navigate('ALLROUTINES');
-                }}>Salvar</MyTextRegular>
+                    <AntDesign name="menu-unfold" size={40} color="black" />
                 </TouchableOpacity>
             </View>
             

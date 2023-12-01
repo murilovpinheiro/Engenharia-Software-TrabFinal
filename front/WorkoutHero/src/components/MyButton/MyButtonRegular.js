@@ -8,7 +8,7 @@ export default function MyButtonRegular(props) {
         <TouchableOpacity  {...props} 
         style={[defaultStyles.btnRegular, defaultStyles.btnDisabled, props.style, {opacity: props.disabled ? 0.5 : 1}]}>
             
-            <MyTextRegular style={defaultStyles.btnTextRegular}>{props.title}</MyTextRegular>
+            <MyTextRegular style={[defaultStyles.btnTextRegular, props?.text]}>{props.title}</MyTextRegular>
             {props.children}
         
         </TouchableOpacity >

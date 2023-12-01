@@ -26,7 +26,7 @@ export default function CreateTrainingRoutineScreen({route}) {
     const [exsJaSelecionados, setExsJaSelecionados] = useState([]);
     const [foramSelecionados, setForamSelecionados] = useState(false);
 
-    const [allExercises, setAllExercises] = useState([]);
+    const [allExercises, setAllExercises] = useState(null);
     const [limit, setLimit] = useState(5);
     const [offset, setOffset] = useState(300);
     const LIMITE = 317;
@@ -101,6 +101,14 @@ export default function CreateTrainingRoutineScreen({route}) {
 
     }, [offset])
 
+    useEffect(() => {
+        // tratando caso em que muitos exercicios sao selecionados, logo o primeiro offset talvez nao apareca
+        if (allExercises && allExercises.length === 0) {
+            console.log('eh zero?')
+            setOffset(() => (offset + limit));
+        }
+    }, [allExercises])
+
     const goBack = async () => {
         // AQUI INDICA QUE NAO PRECISAMOS CRIAR UMA ROTINA NOVA, MAS SIM ATUALIZAR UMA EXISTENTE
         const pushNewData = async () => {
@@ -130,8 +138,8 @@ export default function CreateTrainingRoutineScreen({route}) {
                 
                 <TouchableOpacity style={{flex:0.2}}
                 onPress={goBack}>
-                    {selectedExercises.length == 0 && <AntDesign name="back" size={40} color="black" />}
-                    {selectedExercises.length >= 1 && <AntDesign name="check" size={40} color="black" />}
+                    {selectedExercises && selectedExercises.length == 0 && <AntDesign name="back" size={40} color="black" />}
+                    {selectedExercises && selectedExercises.length >= 1 && <AntDesign name="check" size={40} color="black" />}
                 </TouchableOpacity>
 
                 <MyTextInput

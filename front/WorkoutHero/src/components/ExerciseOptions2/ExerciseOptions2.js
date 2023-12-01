@@ -5,7 +5,7 @@ import Images from "../../Images";
 import MyButtonThin from '../MyButton/MyButtonThin';
 import MyTextH3 from "../MyText/MyTextH3";
 
-const ExerciseOptions2 = ({exercise}) => {
+const ExerciseOptions2 = ({exercise, onSelect}) => {
 
   const [isSelected, setIsSelected] = useState(false);
 

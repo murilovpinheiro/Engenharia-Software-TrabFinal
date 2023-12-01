@@ -20,7 +20,11 @@ export default function CreateTrainingRoutineScreen({route}) {
 
     const { userData } = useContext(AuthContext);
 
-    const { getAllExercises, getExercises, createWorkout } = useContext(WorkoutContext);
+    const { getAllExercises, getExercises, createWorkout, addExerciseToWK } = useContext(WorkoutContext);
+
+    const [routine, setRoutine] = useState(null);
+    const [exsJaSelecionados, setExsJaSelecionados] = useState([]);
+    const [foramSelecionados, setForamSelecionados] = useState(false);
 
     const [allExercises, setAllExercises] = useState([]);
     const [limit, setLimit] = useState(5);
@@ -33,15 +37,39 @@ export default function CreateTrainingRoutineScreen({route}) {
     const [userId, setUserId] = useState('');
     const [nomeTreino, setNomeTreino] = useState('');
     const [nomeFiltro, setNomeFiltro] = useState('');
-
+    
+    // primeiro pego os que ja estao no treino
     useEffect(() => {
         
         setUserId(userData.id);
+        const loadAlreadySelected = () => {
+
+            if (route?.params?.routine) {
+                console.log('\n\n\n\nROTINA\n\n\n\n\n\n', route?.params?.routine)
+                setRoutine(route?.params?.routine); // aqui diz que a logica vai ser totalmente diferente
+                setExsJaSelecionados(() => {
+                    return route?.params?.routine.exerciseList.map((exercicio) => {
+                        console.log('exercicio id:', exercicio.id);
+                        return exercicio.id;
+                    })
+                })
+                console.log('\n\n\n\n\nSELECIONADOS\n\n\n\n\n', exsJaSelecionados)
+            }
+        }
+        loadAlreadySelected();
+        setForamSelecionados(true);
+    }, [])
+
+    // depois eu pego somente quando tenho a informacao de quais ja estao no treino
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 // let ExerciseList = await getAllExercises();
                 let ExerciseList = await getExercises(limit, offset) // limit, offset, resto da clause
-                setAllExercises(ExerciseList);
+                setAllExercises(ExerciseList.filter((exercicio) => {
+                    console.log('ja selecionados: ', exsJaSelecionados);
+                    return !exsJaSelecionados.includes(exercicio.id)
+                }));
                 // console.log('\n\nTA AI OH OS EXERCICIO', allExercises);
                 // console.log('tome o id do primeiro ex: ', allExercises[0].id)
             } catch (error) {
@@ -51,38 +79,43 @@ export default function CreateTrainingRoutineScreen({route}) {
                 setLoading(false);
             }
         }
+        if (foramSelecionados)
+            fetchData();
+    }, [foramSelecionados])
 
-        fetchData();
-
-        if (route?.params?.routine) {
-            console.log('\n\n\n\nROTINA\n\n\n\n')
-            console.log(route.params.routine);
-        }
-
-    }, [])
-
-    useEffect(() => {
-        console.log('EXERCICIOS SELECIONADOS: ', selectedExercises)
-    }, [selectedExercises])
-
-    useEffect(() => {
-        console.log('USUARIO: ', userId);
-    }, [userId])
-
+    // useEffect para carregar mais exercicios com o tempo (so pego se tenho as infos dos que ja estao no treino)
     useEffect(() => {
         const fetch2 = async () => {
             try {
                 let ExerciseList = await getExercises(limit, offset) // limit, offset, resto da clause
-                setAllExercises([...allExercises, ...ExerciseList])
+                setAllExercises([...allExercises, ...ExerciseList].filter((exercicio) => {
+                    console.log('ja selecionados: ', exsJaSelecionados);
+                    return !exsJaSelecionados.includes(exercicio.id)
+                }))
             } catch (error) {
                 console.log("error in fetchdata")
                 console.error(error);
             }
         }
 
-        fetch2();
+        if (foramSelecionados)
+            fetch2();
 
     }, [offset])
+
+    const goBack = async () => {
+        // AQUI INDICA QUE NAO PRECISAMOS CRIAR UMA ROTINA NOVA, MAS SIM ATUALIZAR UMA EXISTENTE
+        const pushNewData = async () => {
+
+            if (routine) { 
+                for (const exID of selectedExercises) {
+                    await addExerciseToWK(exID, routine.id)
+                }
+            }
+        }
+        await pushNewData();
+        navigation.goBack();
+    }
 
     return (
         <>
@@ -98,9 +131,7 @@ export default function CreateTrainingRoutineScreen({route}) {
             }>
                 
                 <TouchableOpacity style={{flex:0.2}}
-                onPress={() => {
-                    navigation.goBack();
-                }}>
+                onPress={goBack}>
                     <AntDesign name="back" size={40} color="black" />
                 </TouchableOpacity>
 

@@ -253,12 +253,12 @@ const WorkoutProvider = ({ children }) => {
       let retList = [];
       try {
         const urlget = baseUrl + `/exercise/selectPage?offset=${offset}&limit=${limit}` + restoDaClause;
-        console.log(urlget)
+        // console.log(urlget)
         response = await axios.get(baseUrl + `/exercise/selectPage?offset=${offset}&limit=${limit}` + restoDaClause);
         if (response.message) {
           throw Error(response.message);
         }
-        console.log(response.data, offset, limit)
+        // console.log(response.data, offset, limit)
         let exerciseListFromApi = response.data
         exerciseListFromApi.forEach((val) => {
           retList.push(exerciseFromApiConverter(val));

@@ -26,6 +26,7 @@ export default function ViewTrainingRoutineScreen2({route}) {
 
     const { startWorkout } = useContext(WorkoutContext)
     const [nomeTreino, setNomeTreino] = useState('');
+    const [updateTrigger, setUpdateTrigger] = useState(false);
 
     const isFocused = useIsFocused();
     useEffect( () => {
@@ -41,10 +42,10 @@ export default function ViewTrainingRoutineScreen2({route}) {
         }
 
         fetchData();
-
+        setUpdateTrigger(false);
         
         
-    }, [isFocused]);
+    }, [isFocused, updateTrigger]);
 
 
     const chooseRoutine = () => {
@@ -63,7 +64,7 @@ export default function ViewTrainingRoutineScreen2({route}) {
             try {
                 for (let i = 0; i < routine["exerciseList"].length; i++) {
                     retList.push(
-                        <ExerciseOptions key={i} exercise={routine["exerciseList"][i]} showSelect={false} routineID={routine.id}/>
+                        <ExerciseOptions key={i} exercise={routine["exerciseList"][i]} showSelect={false} throwTrigger={() => setUpdateTrigger(true)} routineID={routine.id}/>
                     )
                 }
             } catch (err) {

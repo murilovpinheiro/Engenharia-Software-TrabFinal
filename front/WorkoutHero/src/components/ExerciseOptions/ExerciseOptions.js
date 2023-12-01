@@ -12,7 +12,7 @@ import Images from "../../Images";
 import { WorkoutContext } from "../../WorkoutContext";
 
 
-export default function ExerciseOptions({ exercise, onSelect, showSelect, routineID }) {
+export default function ExerciseOptions({ exercise, onSelect, showSelect, throwTrigger, routineID }) {
 
     const stringFromGroups = (array) => {
         let str = ""
@@ -25,7 +25,6 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, routin
     const { delExerciseToWK } = useContext(WorkoutContext)
 
     const [isSelected, setIsSelected] = useState(false);
-    const [invisible, setInvisible] = useState(false);
 
     const toggleSelection = () => {
         setIsSelected(!isSelected); // Inverte o estado de seleção
@@ -36,8 +35,6 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, routin
     if (!Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]) {
         console.log("NAO ACHOU EXERCICIO: ", exercise.name.replace(/\([^)]*\)/g, '').trim())
     }
-
-    if (invisible) { return }
 
     return (
         <View style={styles.body}>
@@ -58,8 +55,10 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, routin
                         // requisicao de delecao
                         console.log('exercise.id e routineID', exercise.id, routineID)
                         await delExerciseToWK(exercise.id, routineID);
+
+                        throwTrigger();
                         // retira o componente
-                        setInvisible(true);
+                        // setInvisible(true);
                     }}
                 >
                     <AntDesign name='delete' color='black' size={30}/>

@@ -130,7 +130,8 @@ export default function CreateTrainingRoutineScreen({route}) {
                 
                 <TouchableOpacity style={{flex:0.2}}
                 onPress={goBack}>
-                    <AntDesign name="back" size={40} color="black" />
+                    {selectedExercises.length == 0 && <AntDesign name="back" size={40} color="black" />}
+                    {selectedExercises.length >= 1 && <AntDesign name="check" size={40} color="black" />}
                 </TouchableOpacity>
 
                 <MyTextInput

@@ -49,7 +49,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
         return () => clearInterval(interval);
     }, [sets]) 
     useEffect(() => {
-        if (secondsSets === 5 && clicouSets) {
+        if (secondsSets === 1 && clicouSets) {
             console.log("OKEI Sets")
             saveSets()
             setSecondsSets(0);
@@ -68,7 +68,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
         return () => clearInterval(interval2);
     }, [reps])
     useEffect(() => {
-        if (secondsReps === 5 && clicouReps) {
+        if (secondsReps === 1 && clicouReps) {
             console.log("OKEI REPS")
             saveReps();
             setSecondsReps(0);

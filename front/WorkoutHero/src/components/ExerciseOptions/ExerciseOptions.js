@@ -22,7 +22,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
         return str
     }
 
-    const { delExerciseToWK, getSetsAndReps } = useContext(WorkoutContext)
+    const { delExerciseToWK, getSetsAndReps, updateReps, updateSets } = useContext(WorkoutContext)
 
     const [isSelected, setIsSelected] = useState(false);
 
@@ -35,6 +35,8 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
     if (!Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]) {
         console.log("NAO ACHOU EXERCICIO: ", exercise.name.replace(/\([^)]*\)/g, '').trim())
     }
+
+    const [wkexid, setWkexid] = useState(null);
 
     const [sets, setSets] = useState(0);
     const [secondsSets, setSecondsSets] = useState(0);
@@ -49,6 +51,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
     useEffect(() => {
         if (secondsSets === 5 && clicouSets) {
             console.log("OKEI Sets")
+            saveSets()
             setSecondsSets(0);
             setClicouSets(false);
         }
@@ -67,6 +70,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
     useEffect(() => {
         if (secondsReps === 5 && clicouReps) {
             console.log("OKEI REPS")
+            saveReps();
             setSecondsReps(0);
             setClicouReps(false);
         }
@@ -74,12 +78,36 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
 
     useEffect(() => {
         const fetch = async () => {
-            const {sets, reps} = await getSetsAndReps(routineID, exercise.id);
+            const {id, sets, reps} = await getSetsAndReps(routineID, exercise.id);
+            setWkexid(id);
             setSets(sets);
             setReps(reps);
         }
         fetch();
     }, [])
+
+    const saveSets = () => {
+        let setsToUp = sets;
+        try {
+            setsToUp = parseInt(setsToUp);
+            updateSets(wkexid, setsToUp)
+        } catch (error) {
+            console.log('error sets: ', setsToUp)
+            throw error
+        }
+    }
+
+    const saveReps = () => {
+        let repsToUp = reps;
+        try {
+            repsToUp = parseInt(repsToUp);
+            updateReps(wkexid, repsToUp)
+        } catch (error) {
+            console.log('error reps: ', repsToUp)
+            throw error
+        }
+    }
+
 
     const handleNum = (numero) => {
         if (numero === '') return '';
@@ -88,8 +116,8 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
         } catch (error) {
             return 0;
         }
-    } 
-
+    }
+    
     return (
         <View style={styles.body}>
             <View style={styles.header}>

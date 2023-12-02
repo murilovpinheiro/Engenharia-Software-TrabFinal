@@ -449,6 +449,35 @@ const WorkoutProvider = ({ children }) => {
       return null;
     }
 
+    const updateSets = async (wkex_id, sets) => {
+      let response = null;
+      try {
+        sets = parseInt(sets);
+        response = await axios.post(
+          baseUrl + `/workout_exercise/update?id=${wkex_id}&sets=${sets}`
+        )
+      } catch (error) {
+        console.error(error)
+        throw error
+      }
+      return response
+    }
+
+    const updateReps = async (wkex_id, reps) => {
+      let response = null;
+      try {
+        reps = parseInt(reps);
+        response = await axios.post(
+          baseUrl + `/workout_exercise/update?id=${wkex_id}&reps=${reps}`
+        )
+      } catch (error) {
+        console.error(error)
+        throw error
+      }
+      return response
+    }
+
+
     const [modalVisible, setModalVisible] = useState(false);
     // const [modalExp, setModalExpTarget]
     const [contador, setContador] = useState(0);
@@ -504,7 +533,7 @@ const WorkoutProvider = ({ children }) => {
         currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
         startWorkout,  finishWorkout, calculateXpYield,
         getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser, getRoutine, getSetsAndReps,
-        createWorkout, addExerciseToWK, delExerciseToWK
+        createWorkout, addExerciseToWK, delExerciseToWK, updateReps, updateSets
       }}>
         <Modal
           transparent={true}

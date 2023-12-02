@@ -21,12 +21,40 @@ export default function ViewTrainingRoutineScreen2({route}) {
     
     const navigation = useNavigation()
     
-    const { getRoutine } = useContext(WorkoutContext)
+    const { getRoutine, updateRoutineName } = useContext(WorkoutContext)
     const [routine, setRoutine] = useState(null);
 
     const { startWorkout } = useContext(WorkoutContext)
-    const [nomeTreino, setNomeTreino] = useState('');
     const [updateTrigger, setUpdateTrigger] = useState(false);
+    
+    const [nomeTreino, setNomeTreino] = useState('');
+    const [seconds, setSeconds] = useState(0);
+    const [clicou, setClicou] = useState(false);
+    useEffect(() => {
+        setSeconds(0)
+        const interval = setInterval(() => {
+            setSeconds((prevSeconds) => prevSeconds + 1)
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [nomeTreino])
+    useEffect(() => {
+        if (seconds === 1 && clicou) {
+            saveName();
+        }
+    }, [seconds])
+
+    const saveName = () => {
+        if (!routine) return;
+        let saveToUp = nomeTreino;
+        if (saveToUp == '') saveToUp = 'Treino Sem Nome'
+        try {
+            console.log(routine.id, saveToUp)
+            updateRoutineName(routine.id, saveToUp)
+        } catch (error) {
+            console.log('error nome: ', nomeTreino)
+            throw error;
+        }
+    }
 
     const isFocused = useIsFocused();
     useEffect( () => {
@@ -92,8 +120,9 @@ export default function ViewTrainingRoutineScreen2({route}) {
                             }}
                     value={nomeTreino}
                     editable={true}
-                    onChangeText={text => setNomeTreino(text)}
+                    onChangeText={text => {setClicou(true); setNomeTreino(text)}}
                     placeholder="Nome Treino"
+                    onTouchStart={() => setClicou(true)}
                 />
 
             </View>

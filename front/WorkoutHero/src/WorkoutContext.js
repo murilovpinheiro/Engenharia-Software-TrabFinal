@@ -366,6 +366,33 @@ const WorkoutProvider = ({ children }) => {
       return retWorkout
     }
 
+    const updateRoutineName = async(routineId, nome) => {
+      let response = null;
+      nome = String(nome);
+      try {
+        response = await axios.post(
+          baseUrl + `/workout/update?id=${routineId}&obj=${nome}`
+        )
+      } catch (error) {
+        console.error(error)
+        throw error
+      }
+      return response;
+    }
+
+    const deleteRoutine = async(routineId) => {
+      let response = null;
+      try {
+        response = await axios.post(
+          baseUrl + `/workout/delete2?id=${routineId}`
+        )
+      } catch (error) {
+        console.error(error)
+        throw error
+      }
+      return response;
+    }
+
     const getRoutine = async (routineId) => {
       let response = null;
       let routineFromApi = null;
@@ -532,7 +559,7 @@ const WorkoutProvider = ({ children }) => {
       <WorkoutContext.Provider value={{ 
         currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
         startWorkout,  finishWorkout, calculateXpYield,
-        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser, getRoutine, getSetsAndReps,
+        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser, updateRoutineName, deleteRoutine, getRoutine, getSetsAndReps,
         createWorkout, addExerciseToWK, delExerciseToWK, updateReps, updateSets
       }}>
         <Modal

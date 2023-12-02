@@ -435,9 +435,20 @@ const WorkoutProvider = ({ children }) => {
       return routinesList
     }
 
-    
+    const getSetsAndReps = async (workout_id, exercise_id) => {
+      let response = null;
+      try {
+        response = await axios.get(
+          baseUrl + `/workout_exercise/select?workout_id=${workout_id}&exercise_id=${exercise_id}`
+        )
+      } catch (error) {
+        console.error(error)
+        throw error
+      }
+      if (response.data) return response.data[0];
+      return null;
+    }
 
-    
     const [modalVisible, setModalVisible] = useState(false);
     // const [modalExp, setModalExpTarget]
     const [contador, setContador] = useState(0);
@@ -492,7 +503,7 @@ const WorkoutProvider = ({ children }) => {
       <WorkoutContext.Provider value={{ 
         currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
         startWorkout,  finishWorkout, calculateXpYield,
-        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser, getRoutine,
+        getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser, getRoutine, getSetsAndReps,
         createWorkout, addExerciseToWK, delExerciseToWK
       }}>
         <Modal

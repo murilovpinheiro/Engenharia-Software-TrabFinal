@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react"
-import {View, TouchableOpacity, Image, CheckBox} from 'react-native'
+import React, { useState, useContext, useEffect } from "react"
+import {View, TouchableOpacity, Image, CheckBox, TextInput, Text} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import styles from "./style"
@@ -22,7 +22,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
         return str
     }
 
-    const { delExerciseToWK } = useContext(WorkoutContext)
+    const { delExerciseToWK, getSetsAndReps } = useContext(WorkoutContext)
 
     const [isSelected, setIsSelected] = useState(false);
 
@@ -35,6 +35,27 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
     if (!Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]) {
         console.log("NAO ACHOU EXERCICIO: ", exercise.name.replace(/\([^)]*\)/g, '').trim())
     }
+
+    const [sets, setSets] = useState(0);
+    const [reps, setReps] = useState(0);
+
+    useEffect(() => {
+        const fetch = async () => {
+            const {sets, reps} = await getSetsAndReps(routineID, exercise.id);
+            setSets(sets);
+            setReps(reps);
+        }
+        fetch();
+    }, [])
+
+    const handleNum = (numero) => {
+        if (numero === '') return '';
+        try {
+            return parseInt(numero);
+        } catch (error) {
+            return 0;
+        }
+    } 
 
     return (
         <View style={styles.body}>
@@ -53,12 +74,10 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                 <TouchableOpacity style={styles.headerDelete}
                     onPress={async () => {
                         // requisicao de delecao
-                        console.log('exercise.id e routineID', exercise.id, routineID)
                         await delExerciseToWK(exercise.id, routineID);
 
+                        // aciona trigger para recarregar a pagina
                         throwTrigger();
-                        // retira o componente
-                        // setInvisible(true);
                     }}
                 >
                     <AntDesign name='delete' color='black' size={30}/>
@@ -67,12 +86,34 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
             </View>
 
             <View style={styles.viewOptions}>
-                <MyButtonThin title={`${exercise.sets} seções de ${exercise.reps} repetições`} style={styles.selectOptions}></MyButtonThin>
+                <TextInput
+                    value={reps.toString()}
+                    editable={true}
+                    onChangeText={text => setReps(handleNum(text))}
+                    onChanged = {(text) => {
+                        this.setState({
+                            mobile: text.replace(/[^0-9]/g, ''),
+                        });
+                    }}
+                    keyboardType='numeric'
+                />
+                <Text>SETS</Text>
             </View>
 
-            {showSelect && <View style={styles.viewOptions}>
-                <MyButtonThin onPress={toggleSelection} title={isSelected ? "SELECIONADO" : "Não selecionado"}></MyButtonThin>
-            </View>}
+            <View style={styles.viewOptions}>
+                <TextInput
+                    value={sets.toString()}
+                    editable={true}
+                    onChangeText={text => setSets(handleNum(text))}
+                    onChanged = {(text) => {
+                        this.setState({
+                            mobile: text.replace(/[^0-9]/g, ''),
+                        });
+                    }}
+                    keyboardType='numeric'
+                />
+                <Text>REPS</Text>
+            </View>
 
             <View style={styles.divider}></View>
         </View>

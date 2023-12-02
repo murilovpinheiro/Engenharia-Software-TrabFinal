@@ -37,7 +37,40 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
     }
 
     const [sets, setSets] = useState(0);
+    const [secondsSets, setSecondsSets] = useState(0);
+    const [clicouSets, setClicouSets] = useState(false);
+    useEffect(() => {
+            setSecondsSets(0);
+            const interval = setInterval(() => {
+                setSecondsSets((prevSeconds) => prevSeconds + 1);
+            }, 1000);
+        return () => clearInterval(interval);
+    }, [sets]) 
+    useEffect(() => {
+        if (secondsSets === 5 && clicouSets) {
+            console.log("OKEI Sets")
+            setSecondsSets(0);
+            setClicouSets(false);
+        }
+    }, [secondsSets])
+ 
     const [reps, setReps] = useState(0);
+    const [secondsReps, setSecondsReps] = useState(0);
+    const [clicouReps, setClicouReps] = useState(false);
+    useEffect(() => {
+            setSecondsReps(0);
+            const interval2 = setInterval(() => {
+                setSecondsReps((prevSeconds2) => prevSeconds2 + 1);
+            }, 1000);
+        return () => clearInterval(interval2);
+    }, [reps])
+    useEffect(() => {
+        if (secondsReps === 5 && clicouReps) {
+            console.log("OKEI REPS")
+            setSecondsReps(0);
+            setClicouReps(false);
+        }
+    }, [secondsReps])
 
     useEffect(() => {
         const fetch = async () => {
@@ -89,30 +122,36 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                 <TextInput
                     value={reps.toString()}
                     editable={true}
-                    onChangeText={text => setReps(handleNum(text))}
+                    onChangeText={text => {setClicouReps(true); setReps(handleNum(text))}}
                     onChanged = {(text) => {
                         this.setState({
                             mobile: text.replace(/[^0-9]/g, ''),
                         });
+                        
                     }}
                     keyboardType='numeric'
+                    onTouchStart={() => setClicouReps(true)}
+                    placeholder="0"
                 />
-                <Text>SETS</Text>
+                <Text>REPS</Text>
             </View>
 
             <View style={styles.viewOptions}>
                 <TextInput
                     value={sets.toString()}
                     editable={true}
-                    onChangeText={text => setSets(handleNum(text))}
+                    onChangeText={text => {setClicouSets(true); setSets(handleNum(text))}}
                     onChanged = {(text) => {
                         this.setState({
                             mobile: text.replace(/[^0-9]/g, ''),
                         });
                     }}
                     keyboardType='numeric'
+                    onTouchStart={() => setClicouSets(true)}
+                    placeholder="0"
+
                 />
-                <Text>REPS</Text>
+                <Text>SETS</Text>
             </View>
 
             <View style={styles.divider}></View>

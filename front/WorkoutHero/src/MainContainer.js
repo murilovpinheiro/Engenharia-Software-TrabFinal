@@ -1,8 +1,8 @@
-import React, { createContext } from "react"
+import React, { createContext, useEffect, useLayoutEffect } from "react"
 import { StyleSheet } from "react-native";
 import AppStyles from "./AppStyles";
 
-import { NavigationContainer, TabRouter } from "@react-navigation/native";
+import { NavigationContainer, TabRouter, getFocusedRouteNameFromRoute, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -26,38 +26,35 @@ const nameNovo = "TREINOS"
 
 const Tab = createBottomTabNavigator();
 
+const tabDefaultOptions = ({route}) => ({
+    tabBarIcon: ({focused, color, size}) => {
+        let iconName; let rn = route.name;
+        if (rn === namePerfil) {
+            iconName = 'person'
+        } else if (rn === nameTreinar) {
+            iconName = 'fitness'
+        } else if (rn === nameNovo) {
+            iconName = 'create'
+        }
+        return <Ionicons name={iconName} size={45} color={color}/>
+    },
+
+    tabBarStyle: styles.navTabStyle,
+    tabBarActiveTintColor: '#F2BD00',
+    tabBarInactiveTintColor: '#808080',
+    tabBarLabelStyle: styles.navTabText,
+
+    headerShown: false
+});
 
 export default function MainContainer(){
-
    
     return (
         <WorkoutProvider>
             
         <Tab.Navigator
         initialRouteName='LOGINFLUX'
-        screenOptions={({route}) => ({
-            tabBarIcon: ({focused, color, size}) => {
-                let iconName; let rn = route.name;
-                if (rn === namePerfil) {
-                    iconName = 'person'
-                } else if (rn === nameTreinar) {
-                    iconName = 'fitness'
-                } else if (rn === nameNovo) {
-                    iconName = 'create'
-                }
-                return <Ionicons name={iconName} size={45} color={color}/>
-            },
-
-            tabBarStyle: styles.navTabStyle,
-            tabBarActiveTintColor: '#F2BD00',
-            tabBarInactiveTintColor: '#808080',
-            tabBarLabelStyle: styles.navTabText,
-
-            headerShown: false,
-            // headerStyle: styles.navHeaderStyle,
-            // headerTintColor: 'white',
-            // headerTitleStyle: styles.navHeaderTitle,
-        })}
+        screenOptions={tabDefaultOptions}
         >
             {/* <Tab.Screen name='LOGINFLUX'
             component={LoginFluxContainer}
@@ -74,16 +71,34 @@ export default function MainContainer(){
 
     );
 }
+//options={({route}) => ({tabBarShown: shouldHideTabBar(route)})}
 
-
-const RoutinesStack = () => {
+const RoutinesStack = ({navigation, route}) => {
     const Stack = createNativeStackNavigator()
+
+    // const shouldShowTabBar = (route) => {
+    //     const routeName = getFocusedRouteNameFromRoute(route) ?? 'noName'
+    //     // return true;
+    //     if (routeName == 'ALLROUTINES') {
+    //         return true;
+    //     }
+    //     console.log("changed")
+    //     return false;
+    // }    
+    // useLayoutEffect(() => {
+    //     let optionsCopy = {...tabDefaultOptions};
+    //     if (shouldShowTabBar(route)) {
+    //         navigation2.setOptions(tabDefaultOptions)
+    //     } else {
+    //         navigation2.setOptions({...optionsCopy, tabBarStyle: {display: 'none'}})
+    //     }
+    //   },[navigation, route]);
 
     return (
         <Stack.Navigator initialRouteName='ALLROUTINES'>
             <Stack.Screen name='Detalhes' options={{ headerShown: false }} component={ViewTrainingRoutineScreen} />
             <Stack.Screen name='DetalhesNovo' options={{ headerShown: false }} component={ViewTrainingRoutineScreen2} />
-            <Stack.Screen name='RotinaNova' options={{headerShown: false }} component={CreateTrainingRoutineScreen} />
+            <Stack.Screen name='RotinaNova' options={{headerShown: false}} component={CreateTrainingRoutineScreen} />
             <Stack.Screen name='ALLROUTINES' options={{ headerShown: false }} component={RoutinesListScreen} />
         </Stack.Navigator>
     )

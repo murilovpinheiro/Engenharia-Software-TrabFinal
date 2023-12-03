@@ -171,7 +171,7 @@ export default function CreateTrainingRoutineScreen({route}) {
                         ({item}) => {
                             if (item){
 
-                                return  <ExerciseOptions2 key={item.id} exercise={item} 
+                                return  <ExerciseOptions2 key={String(item.id)} exercise={item} 
                                 // showSelect={true}
                                 onSelect={(exerciseId) => {
                                     if (selectedExercises.includes(exerciseId)) {

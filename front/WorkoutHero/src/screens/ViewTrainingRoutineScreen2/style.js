@@ -13,11 +13,20 @@ const styles = StyleSheet.create({
         fontFamily: 'Lexend-Bold',
         fontSize: 20,
         color: AppStyles.colors.text,
-        marginVertical: 4
+        width: 'auto',
+        padding: 8,
+        alignSelf: 'center',
+        marginVertical: 4,
+        borderBottomWidth: 4,
     },
     startBtn: {
+        width: '95%',
         margin: 8,
-        width: '80%', alignSelf: 'center', backgroundColor: AppStyles.colors.accent
+        // paddingHorizontal: 130,
+        // width: '100%',
+        // marginHorizontal: 50,
+        alignSelf: 'center', 
+        backgroundColor: AppStyles.colors.accent
     }
 })
 

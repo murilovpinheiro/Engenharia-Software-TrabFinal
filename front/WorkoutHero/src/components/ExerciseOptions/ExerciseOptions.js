@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react"
 import {View, TouchableOpacity, Image, CheckBox, TextInput, Text} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
-import AntDesign from '@expo/vector-icons/AntDesign';
+// import AntDesign from '@expo/vector-icons/AntDesign';
 import styles from "./style"
 
 import MyTextRegular from "../MyText/MyTextRegular";
@@ -10,11 +10,13 @@ import MyButtonThin from "../MyButton/MyButtonThin.js"
 import Images from "../../Images";
 
 import { WorkoutContext } from "../../WorkoutContext";
+import MyTextInput from "../MyTextInput/MyTextInput.js";
 
 
 export default function ExerciseOptions({ exercise, onSelect, showSelect, throwTrigger, routineID }) {
 
     const stringFromGroups = (array) => {
+        if (!array) return ""
         let str = ""
         for (let i = 0; i < array.length; i++){
             str += array[i].name.toUpperCase() + " "
@@ -119,70 +121,132 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
     }
     
     return (
-        <View style={styles.body}>
-            <View style={styles.header}>
-                {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles.headerImg} source={Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]}/>}
-                {/* <Image style={styles.headerImg} source={{
-                    uri: 'https://reactnative.dev/img/tiny_logo.png'
-                }}/> */}
+        // <View style={styles.body}>
+        //     <View style={styles.header}>
+        //         {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles.headerImg} source={Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]}/>}
+        //         {/* <Image style={styles.headerImg} source={{
+        //             uri: 'https://reactnative.dev/img/tiny_logo.png'
+        //         }}/> */}
 
 
-                <View style={styles.headerTextView}>
-                    <MyTextH3 style={styles.headerTextName}>{exercise.name.replace(/_/g, " ").replace(/\([^()]*\)/g, "")}</MyTextH3>
-                    {/* <MyTextRegular style={styles.headerTextType}>GRUPO MUSCULAR: {stringFromGroups(exercise.muscularGroups)}</MyTextRegular> */}
-                </View>
+        //         <View style={styles.headerTextView}>
+        //             <MyTextH3 style={styles.headerTextName}>{exercise.name.replace(/_/g, " ").replace(/\([^()]*\)/g, "")}</MyTextH3>
+        //             {/* <MyTextRegular style={styles.headerTextType}>GRUPO MUSCULAR: {stringFromGroups(exercise.muscularGroups)}</MyTextRegular> */}
+        //         </View>
 
-                <TouchableOpacity style={styles.headerDelete}
-                    onPress={async () => {
-                        // requisicao de delecao
-                        await delExerciseToWK(exercise.id, routineID);
+        //         <TouchableOpacity style={styles.headerDelete}
+        //             onPress={async () => {
+        //                 // requisicao de delecao
+        //                 await delExerciseToWK(exercise.id, routineID);
 
-                        // aciona trigger para recarregar a pagina
-                        throwTrigger();
-                    }}
-                >
-                    <AntDesign name='delete' color='black' size={30}/>
-                </TouchableOpacity>
+        //                 // aciona trigger para recarregar a pagina
+        //                 throwTrigger();
+        //             }}
+        //         >
+        //             <AntDesign name='delete' color='black' size={30}/>
+        //         </TouchableOpacity>
 
-            </View>
+        //     </View>
 
-            <View style={styles.viewOptions}>
-                <TextInput
-                    value={reps.toString()}
-                    editable={true}
-                    onChangeText={text => {setClicouReps(true); setReps(handleNum(text))}}
-                    onChanged = {(text) => {
-                        this.setState({
-                            mobile: text.replace(/[^0-9]/g, ''),
-                        });
+        //     <View style={styles.viewOptions}>
+        //         <TextInput
+        //             value={reps.toString()}
+        //             editable={true}
+        //             onChangeText={text => {setClicouReps(true); setReps(handleNum(text))}}
+        //             onChanged = {(text) => {
+        //                 this.setState({
+        //                     mobile: text.replace(/[^0-9]/g, ''),
+        //                 });
                         
-                    }}
-                    keyboardType='numeric'
-                    onTouchStart={() => setClicouReps(true)}
-                    placeholder="0"
-                />
-                <Text>REPS</Text>
+        //             }}
+        //             keyboardType='numeric'
+        //             onTouchStart={() => setClicouReps(true)}
+        //             placeholder="0"
+        //         />
+        //         <Text>REPS</Text>
+        //     </View>
+
+        //     <View style={styles.viewOptions}>
+        //         <TextInput
+        //             value={sets.toString()}
+        //             editable={true}
+        //             onChangeText={text => {setClicouSets(true); setSets(handleNum(text))}}
+        //             onChanged = {(text) => {
+        //                 this.setState({
+        //                     mobile: text.replace(/[^0-9]/g, ''),
+        //                 });
+        //             }}
+        //             keyboardType='numeric'
+        //             onTouchStart={() => setClicouSets(true)}
+        //             placeholder="0"
+
+        //         />
+        //         <Text>SETS</Text>
+        //     </View>
+
+        //     <View style={styles.divider}></View>
+        // </View>
+        <View style={styles.card}>
+            {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles.img} source={Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]}/>}
+            
+            <MyTextH3 style={styles.exerciseName}>{exercise.name.replace(/_/g, " ").replace(/\([^()]*\)/g, "")}</MyTextH3>
+            
+            <TouchableOpacity style={styles.btnDelete}
+                     onPress={async () => {
+                         // requisicao de delecao
+                         await delExerciseToWK(exercise.id, routineID);
+
+                         // aciona trigger para recarregar a pagina
+                         throwTrigger();
+                     }}
+                 >
+                
+                <Ionicons name='close-circle-outline' color='black' size={30}/>
+            </TouchableOpacity>
+
+            <View style={styles.content}>
+                 
+            
+                <MyTextRegular>{exercise.body_part}</MyTextRegular>
+                <MyTextRegular>{exercise.muscles}</MyTextRegular>
+
+                <View style={styles.setsRepsView}>
+                    <MyTextInput style={styles.setsRepsInput}
+                        value={reps.toString()}
+                        editable={true}
+                        onChangeText={text => {setClicouReps(true); setReps(handleNum(text))}}
+                        onChanged = {(text) => {
+                            this.setState({
+                                mobile: text.replace(/[^0-9]/g, ''),
+                            });
+                            
+                        }}
+                        keyboardType='numeric'
+                        onTouchStart={() => setClicouReps(true)}
+                        placeholder="1"
+                    >
+                    </MyTextInput>
+                    
+                    <MyTextH3> sets de </MyTextH3>
+
+                    <MyTextInput style={styles.setsRepsInput}
+                        value={sets.toString()}
+                        editable={true}
+                        onChangeText={text => {setClicouSets(true); setSets(handleNum(text))}}
+                        onChanged = {(text) => {
+                            this.setState({
+                                mobile: text.replace(/[^0-9]/g, ''),
+                            });
+                        }}
+                        keyboardType='numeric'
+                        onTouchStart={() => setClicouSets(true)}
+                        placeholder="0"
+                    >
+                    </MyTextInput>
+
+                    <MyTextH3> repetições</MyTextH3>
+                </View>
             </View>
-
-            <View style={styles.viewOptions}>
-                <TextInput
-                    value={sets.toString()}
-                    editable={true}
-                    onChangeText={text => {setClicouSets(true); setSets(handleNum(text))}}
-                    onChanged = {(text) => {
-                        this.setState({
-                            mobile: text.replace(/[^0-9]/g, ''),
-                        });
-                    }}
-                    keyboardType='numeric'
-                    onTouchStart={() => setClicouSets(true)}
-                    placeholder="0"
-
-                />
-                <Text>SETS</Text>
-            </View>
-
-            <View style={styles.divider}></View>
         </View>
     );
 }

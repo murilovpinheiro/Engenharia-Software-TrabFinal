@@ -5,6 +5,8 @@ import Images from "../../Images";
 import MyButtonThin from '../MyButton/MyButtonThin';
 import MyTextH3 from "../MyText/MyTextH3";
 import styles from "./style"
+import MyTextRegular from "../MyText/MyTextRegular";
+import MySwitch from "../MySwitch/MySwitch";
 
 const ExerciseOptions2 = ({exercise, onSelect}) => {
 
@@ -17,23 +19,53 @@ const ExerciseOptions2 = ({exercise, onSelect}) => {
   };
 
   return (
-    <View style={styles2.container}>
+    
+    <View style={styles.body}>
+      
 
-        <View style={styles2.container2}>
-            {/* <TouchableOpacity >
-                <Icon name="trash-o" size={30} color="black" />
-            </TouchableOpacity> */}
+      <View style={styles.container}>
 
-            {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles2.fotoDeFundo} source={Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]}/>}
+        <View style={styles.imgFrame}>
+          {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles.img} source={Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]}/>}
         </View>
 
-        <View>
+        <View style={styles.textInfoView}>
+          <MyTextH3 style={styles.textName}>{exercise.name}</MyTextH3>
+          <MyTextRegular style={styles.textParts}>{exercise.body_part}: {exercise.muscles}</MyTextRegular>
+        </View>
+
+        <View style={styles.selectIcon}>
+          <Text>incluir</Text>
+          <MySwitch
+            iconEnabledName="checkmark-circle-outline"
+            iconDisabledName="ellipse-outline"
+            iconEnabledColor="black"
+            iconDisabledColor="black"
+            size={32}
+            defaultValue={isSelected}
+            onToggle={toggleSelection}
+          ></MySwitch>
+        </View>
+        
+        {/* <MyButtonThin onPress={toggleSelection} title={isSelected ? "SELECIONADO" : "Não selecionado"}></MyButtonThin> */}
+
+        {/* <View style={styles2.container2}>
+            <TouchableOpacity >
+                <Icon name="trash-o" size={30} color="black" />
+            </TouchableOpacity>
+
+            {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles2.fotoDeFundo} source={Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]}/>}
+        </View> */}
+
+        {/* <View>
             <View >
                 <Text>{exercise.name}</Text>
                 <Text>{exercise.body_part}: {exercise.muscles}</Text>
             </View>
             <MyButtonThin onPress={toggleSelection} title={isSelected ? "SELECIONADO" : "Não selecionado"}></MyButtonThin>
-        </View>
+        </View> */}
+      </View>
+      <View style={styles.divider}></View>
     </View>
     // <View style={styles.card}>
     //   {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles.img} source={Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]}/>}

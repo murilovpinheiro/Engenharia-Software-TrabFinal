@@ -76,8 +76,8 @@ export default function ViewTrainingRoutineScreen2({route}) {
     }, [isFocused, updateTrigger]);
 
 
-    const chooseRoutine = () => {
-        startWorkout(routine)
+    const chooseRoutine = async () => {
+        await startWorkout(routine)
         navigation.goBack()
         navigation.navigate('TREINAR', {screen: 'TRAININGSCREEN'})
     }
@@ -133,7 +133,7 @@ export default function ViewTrainingRoutineScreen2({route}) {
                 flexDirection: 'column'
             }}>
                 <MyButtonRegular title="Começar" style={styles.startBtn}
-                onPress={chooseRoutine}
+                onPress={async() => await chooseRoutine()}
                 />
 
                 <MyButtonRegular title="Adicionar Exercicio" style={

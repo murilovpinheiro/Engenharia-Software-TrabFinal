@@ -119,6 +119,18 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
             return 0;
         }
     }
+
+    function formatarString(inputString) {
+        // Divida a string em um array usando a vírgula como delimitador
+        const partes = inputString.split(',');
+    
+        // Capitalize a primeira letra de cada palavra e junte-as com espaço
+        const stringFormatada = partes
+            .map(parte => parte.trim().charAt(0).toUpperCase() + parte.slice(1))
+            .join(', ');
+    
+        return stringFormatada;
+    }
     
     return (
         // <View style={styles.body}>
@@ -207,8 +219,8 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
             <View style={styles.content}>
                  
             
-                <MyTextRegular>{exercise.body_part}</MyTextRegular>
-                <MyTextRegular>{exercise.muscles}</MyTextRegular>
+                <MyTextRegular>{formatarString(exercise.body_part)}</MyTextRegular>
+                <MyTextRegular>{formatarString(exercise.muscles)}</MyTextRegular>
 
                 <View style={styles.setsRepsView}>
                     <MyTextInput style={styles.setsRepsInput}

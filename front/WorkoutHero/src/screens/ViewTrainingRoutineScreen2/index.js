@@ -121,13 +121,13 @@ export default function ViewTrainingRoutineScreen2({route}) {
                     value={nomeTreino}
                     editable={true}
                     onChangeText={text => {setClicou(true); setNomeTreino(text)}}
-                    placeholder="Nome Treino"
+                    placeholder="Treino  "
                     onTouchStart={() => setClicou(true)}
                 />
 
             </View>
 
-            {routine && <Text>{routine.id}</Text>}
+            {/* {routine && <Text>{routine.id}</Text>} */}
             
             <View style={{
                 flexDirection: 'column'

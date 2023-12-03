@@ -99,6 +99,9 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         backgroundColor: '#0003'
     },
+    muscleText: {
+        fontWeight: 300
+    }
 })
 
 export default styles

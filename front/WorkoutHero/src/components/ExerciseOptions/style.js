@@ -40,7 +40,65 @@ const styles = StyleSheet.create({
     },
     divider: {
         marginTop: 16, height:4, borderRadius: 2, backgroundColor: AppStyles.colors.primary
-    }
+    },
+
+    card: {
+        backgroundColor: 'white',
+        margin: 12,
+        height: 320,
+        borderRadius: 16,
+        overflow: 'hidden'
+    },
+    exerciseName: {
+        marginTop: 0,
+        padding: 4,
+        paddingLeft: 16,
+        backgroundColor: '#fff6',
+        textShadowColor: '#fff', // Border color
+        textShadowOffset: { width: 0, height: 1 }, // Border offset (x, y)
+        textShadowRadius: 10, // Border width
+        textTransform: 'capitalize'
+    },
+    btnDelete: {
+        position: 'absolute',
+        top: 6, right: 6,
+    },
+    img: {
+        flex: 1,
+        width: '100%',
+        height: 200,
+        resizeMode: 'cover',
+        position: 'absolute',
+    },
+    content: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        height: 120,
+        padding: 15,
+        backgroundColor: AppStyles.colors.accent,
+    },
+    setsRepsView: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+    },
+    setsRepsText: {
+        
+    },
+    setsRepsInput: {
+        marginTop: 10,
+        fontFamily: 'Lexend-Bold',
+        fontSize: 26,
+        textAlign: 'center',
+        
+
+        width: 50,
+        borderWidth: 0,
+        borderBottomWidth: 4,
+        borderRadius: 0,
+        backgroundColor: '#0003'
+    },
 })
 
 export default styles

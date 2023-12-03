@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'; // Certifique-se de in
 import Images from "../../Images";
 import MyButtonThin from '../MyButton/MyButtonThin';
 import MyTextH3 from "../MyText/MyTextH3";
+import styles from "./style"
 
 const ExerciseOptions2 = ({exercise, onSelect}) => {
 
@@ -16,14 +17,14 @@ const ExerciseOptions2 = ({exercise, onSelect}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles2.container}>
 
-        <View style={styles.container2}>
-            <TouchableOpacity >
+        <View style={styles2.container2}>
+            {/* <TouchableOpacity >
                 <Icon name="trash-o" size={30} color="black" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
-            {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles.fotoDeFundo} source={Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]}/>}
+            {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles2.fotoDeFundo} source={Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]}/>}
         </View>
 
         <View>
@@ -34,10 +35,16 @@ const ExerciseOptions2 = ({exercise, onSelect}) => {
             <MyButtonThin onPress={toggleSelection} title={isSelected ? "SELECIONADO" : "Não selecionado"}></MyButtonThin>
         </View>
     </View>
+    // <View style={styles.card}>
+    //   {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles.img} source={Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()]}/>}
+    //   <View style={styles.content}>
+    //     <MyTextH3>{exercise.name}</MyTextH3>
+    //   </View>
+    // </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styles2 = StyleSheet.create({
   container: {
     flex: 1,
     marginVertical: 10,

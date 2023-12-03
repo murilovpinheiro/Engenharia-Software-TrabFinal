@@ -111,7 +111,7 @@ export default function ViewTrainingRoutineScreen2({route}) {
         }}>
             <View style={{height:30}}></View>
 
-            <View style={{flexDirection:'row', alignItems: 'center'}}>
+            <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center'}}>
                 {/* <MyTextInput style={{margin: 10, flex:0.8}} defaultValue='Treino 1'></MyTextInput> */}
                 {/* <MyTextH3 style={styles.textName}>TREINO PADRAO</MyTextH3> */}
                 <TextInput
@@ -129,31 +129,38 @@ export default function ViewTrainingRoutineScreen2({route}) {
 
             {routine && <Text>{routine.id}</Text>}
             
-            <MyButtonRegular title="Começar" style={styles.startBtn}
-            onPress={chooseRoutine}
-            />
+            <View style={{
+                flexDirection: 'column'
+            }}>
+                <MyButtonRegular title="Começar" style={styles.startBtn}
+                onPress={chooseRoutine}
+                />
 
-            <MyButtonRegular title="Adicionar Exercicio" style={
-                {
-                    ...styles.startBtn,
-                    backgroundColor: '#071d1a',
+                <MyButtonRegular title="Adicionar Exercicio" style={
+                    {
+                        ...styles.startBtn,
+                        backgroundColor: '#071d1a',
+                    }
                 }
-            }
-            text = {
-                {
-                    color: '#ffc629'
+                text = {
+                    {
+                        color: '#ffc629'
+                    }
                 }
-            }
-            onPress={() => {
-                selectExercise();
-            }}
-            />
+                onPress={() => {
+                    selectExercise();
+                }}
+                />
+            </View>
+            
             
             {routine && <ScrollView style={{
                 ...(styles.scrollBody),
             }}>
                 { makeExercises() }
             </ScrollView>}
+
+            <View style={{height:80}}></View>
 
         </View>
 

@@ -13,6 +13,7 @@ import { WorkoutContext } from "../../WorkoutContext";
 import { AuthContext } from "../../AuthContext";
 import { useNavigation } from "@react-navigation/native";
 import ExerciseOptions2 from "../../components/ExerciseOptions2/ExerciseOptions2";
+import MyTextH3 from "../../components/MyText/MyTextH3";
 
 export default function CreateTrainingRoutineScreen({route}) {
 
@@ -27,8 +28,8 @@ export default function CreateTrainingRoutineScreen({route}) {
     const [foramSelecionados, setForamSelecionados] = useState(false);
 
     const [allExercises, setAllExercises] = useState(null);
-    const [limit, setLimit] = useState(5);
-    const [offset, setOffset] = useState(300);
+    const [limit, setLimit] = useState(15);
+    const [offset, setOffset] = useState(0);
     const LIMITE = 317;
 
     const [selectedExercises, setSelectedExercises] = useState([]);
@@ -142,17 +143,19 @@ export default function CreateTrainingRoutineScreen({route}) {
                     {selectedExercises && selectedExercises.length >= 1 && <AntDesign name="check" size={40} color="black" />}
                 </TouchableOpacity>
 
-                <MyTextInput
+                {/* <MyTextInput
                     style={{margin: 10, flex:0.8}} 
                     placeholder='Treino'
                     value={nomeFiltro}
                     onChangeText={setNomeTreino}
                 >
-                </MyTextInput>
+                </MyTextInput> */}
 
-                <TouchableOpacity style={{flex:0.2}}>
+                <MyTextH3>EXERCÍCIOS</MyTextH3>
+
+                {/* <TouchableOpacity style={{flex:0.2}}>
                     <AntDesign name="menu-unfold" size={40} color="black" />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
             
             {loading && <MyTextRegular>Carregando...</MyTextRegular>}
@@ -198,6 +201,7 @@ export default function CreateTrainingRoutineScreen({route}) {
                         }
                     }}
                 />
+                <View style={{height:160}}/>
             </View>}
                 
         </View>

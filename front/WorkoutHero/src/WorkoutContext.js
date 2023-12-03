@@ -272,6 +272,22 @@ const WorkoutProvider = ({ children }) => {
       return retList
     }
 
+    const createWorkoutAlt = async (idUser, nome) => {
+      let response = null;
+      try {
+        response = await axios.post(
+          `${baseUrl}/workout/insert2?id=1&difficulty=E&obj=${nome}&user_id=${idUser}`
+        )
+      } catch(error) {
+        console.log('erro createworkoutalt')
+        console.log(error)
+        throw error
+      }
+      let wkID = response.data.newWorkout.id;
+      let routine = await getRoutine(wkID);
+      return routine;
+    }
+
     const createWorkout = async (ExIdList, idUser, nome, dificuldade ) => {
       let response = null;
       try {
@@ -560,7 +576,7 @@ const WorkoutProvider = ({ children }) => {
         currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
         startWorkout,  finishWorkout, calculateXpYield,
         getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser, updateRoutineName, deleteRoutine, getRoutine, getSetsAndReps,
-        createWorkout, addExerciseToWK, delExerciseToWK, updateReps, updateSets
+        createWorkoutAlt, createWorkout, addExerciseToWK, delExerciseToWK, updateReps, updateSets
       }}>
         <Modal
           transparent={true}

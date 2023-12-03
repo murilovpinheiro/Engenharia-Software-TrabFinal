@@ -26,7 +26,7 @@ export default function RoutinesListScreen() {
 
     
     const { userData } = useContext(AuthContext);
-    const { getRoutinesFromUser } = useContext(WorkoutContext)
+    const { getRoutinesFromUser, createWorkoutAlt } = useContext(WorkoutContext)
 
     const isFocused = useIsFocused();
 
@@ -101,6 +101,14 @@ export default function RoutinesListScreen() {
         return retList
     }
 
+    const [routineReady, setRoutineReady] = useState(false);
+    const [newRoutine, setNewRoutine] = useState(null);
+    useEffect(() => {
+        if (routineReady && newRoutine) {
+            openRoutineView2(newRoutine);
+        }
+    }, [routineReady])
+
     if (loading) {
         
         return (
@@ -122,7 +130,14 @@ export default function RoutinesListScreen() {
             <View style={{height:40}}/>
 
             <MyButtonRegular style={styles.btn} 
-            onPress={() => navigation.navigate('RotinaNova')}
+            onPress={
+                async () => {
+                    setRoutineReady(false);
+                    let routine = await createWorkoutAlt(userData.id, 'Novo Treino')
+                    setNewRoutine(routine);
+                    setRoutineReady(true);
+                }
+            }
             title="Criar Nova Rotina">
             </MyButtonRegular>
 

@@ -1,14 +1,18 @@
-import React from "react"
+import React, {useContext} from "react"
 import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native'
 import styles from "./style"
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 import MyTextRegular from "../MyText/MyTextRegular";
 import MyTextH3 from "../MyText/MyTextH3";
 
 import Images from "../../Images";
+import { WorkoutContext } from "../../WorkoutContext";
 
 export default function RoutinePreview(props) {
-    // console.log("PROPS: props")
+
+    const {deleteRoutine} = useContext(WorkoutContext)
+
     var routine =  props.routine
     console.log("TREINO: ", routine.name, "  ", routine, "\n")
     var exerciseList = routine["exerciseList"]
@@ -51,7 +55,17 @@ export default function RoutinePreview(props) {
         activeOpacity={0.6} 
         style={styles.body}>
             
-            <MyTextH3 style={styles.headerText}>{routine.name}</MyTextH3>
+            <View style={{flex: 1, flexDirection: "row"}}>
+                <MyTextH3 style={styles.headerText}>{routine.name}</MyTextH3>
+                <TouchableOpacity style={{padding: 4}} onPress={async () => {
+                    console.log("ola")
+                    await deleteRoutine(routine.id);
+                    if (props.throwTrigger)
+                        props.throwTrigger();
+                }}>
+                    <AntDesign name='delete' color='black' size={30}/>
+                </TouchableOpacity>
+            </View>
             
             <ScrollView horizontal={true} style={styles.scroll}>
                 

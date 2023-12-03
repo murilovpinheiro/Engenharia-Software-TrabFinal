@@ -49,7 +49,17 @@ export default function RoutinesListScreen() {
         console.log('called')
         if (isFocused)
             fetchData();
+            
     }, [isFocused])
+
+    const [updateTrigger, setUpdateTrigger] = useState(false)
+    useEffect(() => {
+        if (updateTrigger) {
+            setLoading(false);
+            fetchData();
+            setUpdateTrigger(false)
+        }
+    }, [updateTrigger])
     
     const pegarTodosTreinos = async () => {        
         try {
@@ -84,7 +94,7 @@ export default function RoutinesListScreen() {
                 );
             } else {
                 retList.push(
-                    <RoutinePreview key={i} onPress={() => openRoutineView2(r)} routine={r}/>
+                    <RoutinePreview key={i} onPress={() => openRoutineView2(r)} routine={r} throwTrigger={() => setUpdateTrigger(true)}/>
                 );
             }
         }

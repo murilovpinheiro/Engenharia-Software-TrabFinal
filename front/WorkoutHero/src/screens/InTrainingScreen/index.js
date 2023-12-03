@@ -94,7 +94,9 @@ export default function InTrainingScreen({route}) {
     const makeExerciseView = () => {
         var retList = []
 
-        if (currentExercise != null)
+        if (currentExercise != null) {
+            // mudar sets e reps do currentExercise
+            console.log('ERRO AQUI', currentExercise)
             for (let i = 0; i < currentExercise.sets; ++i) {
                 let currentSetBool = currentProgressL[currentExerciseIndex][i];
                 let viewColor = currentSetBool ? AppStyles.colors.secondary : AppStyles.colors.accent;
@@ -125,7 +127,7 @@ export default function InTrainingScreen({route}) {
 
                 )
             }
-
+        }
         return retList
     }
 

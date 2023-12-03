@@ -223,23 +223,6 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                 <MyTextRegular>{formatarString(exercise.muscles)}</MyTextRegular>
 
                 <View style={styles.setsRepsView}>
-                    <MyTextInput style={styles.setsRepsInput}
-                        value={reps.toString()}
-                        editable={true}
-                        onChangeText={text => {setClicouReps(true); setReps(handleNum(text))}}
-                        onChanged = {(text) => {
-                            this.setState({
-                                mobile: text.replace(/[^0-9]/g, ''),
-                            });
-                            
-                        }}
-                        keyboardType='numeric'
-                        onTouchStart={() => setClicouReps(true)}
-                        placeholder="1"
-                    >
-                    </MyTextInput>
-                    
-                    <MyTextH3> sets de </MyTextH3>
 
                     <MyTextInput style={styles.setsRepsInput}
                         value={sets.toString()}
@@ -253,6 +236,24 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                         keyboardType='numeric'
                         onTouchStart={() => setClicouSets(true)}
                         placeholder="0"
+                    >
+                    </MyTextInput>
+                    
+                    <MyTextH3> sets de </MyTextH3>
+
+                    <MyTextInput style={styles.setsRepsInput}
+                        value={reps.toString()}
+                        editable={true}
+                        onChangeText={text => {setClicouReps(true); setReps(handleNum(text))}}
+                        onChanged = {(text) => {
+                            this.setState({
+                                mobile: text.replace(/[^0-9]/g, ''),
+                            });
+                            
+                        }}
+                        keyboardType='numeric'
+                        onTouchStart={() => setClicouReps(true)}
+                        placeholder="1"
                     >
                     </MyTextInput>
 

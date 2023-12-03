@@ -24,12 +24,12 @@ export default function ViewTrainingRoutineScreen({route}) {
 
     const { startWorkout } = useContext(WorkoutContext)
 
-    const chooseRoutine = () => {
+    const chooseRoutine = async() => {
         console.log("func: ", startWorkout)
         // navigation.reset({
         //     index: 0, routes: [{name:'TRAININGSCREEN'}]
         // })
-        startWorkout(routine)
+        await startWorkout(routine)
         navigation.goBack()
         navigation.navigate('TREINAR', {screen: 'TRAININGSCREEN'})
         
@@ -60,7 +60,7 @@ export default function ViewTrainingRoutineScreen({route}) {
             </View>
             
             <MyButtonRegular title="Começar" style={styles.startBtn}
-            onPress={chooseRoutine}
+            onPress={async() => await chooseRoutine()}
             />
             
             <ScrollView style={{

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"
-import {View, TouchableOpacity, Image, CheckBox, TextInput, Text} from 'react-native'
+import {View, TouchableOpacity, Image, CheckBox, TextInput, Text, ScrollView} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 // import AntDesign from '@expo/vector-icons/AntDesign';
 import styles from "./style"
@@ -220,7 +220,8 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                  
             
                 <MyTextRegular>{formatarString(exercise.body_part)}</MyTextRegular>
-                <MyTextRegular>{formatarString(exercise.muscles)}</MyTextRegular>
+                <MyTextRegular style={{height: 20}}>{formatarString(exercise.muscles)}</MyTextRegular>
+                
 
                 <View style={styles.setsRepsView}>
 

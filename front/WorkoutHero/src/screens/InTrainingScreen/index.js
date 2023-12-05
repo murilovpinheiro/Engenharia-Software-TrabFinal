@@ -27,6 +27,8 @@ export default function InTrainingScreen({route}) {
     
     const [backgroundColor, setBackgroundColor] = useState('red')
 
+    const { formatarString } = useContext(WorkoutContext);
+
     useEffect(() => {
         console.log('refresh')
       }, [currentProgressL]);
@@ -135,13 +137,15 @@ export default function InTrainingScreen({route}) {
         return <Text>Loading...</Text>
     }
 
+    //currentExerciseIndex
+
     return (
         <>
         <View style={styles.body}>
             <View style={{height: 36}}/>
 
             <View style={{alignItems:'center'}}>
-                <MyTextH3 style={{alignContent:'center'}}>{currentExercise.name.replace(/_/g, " ")}</MyTextH3>
+                <MyTextH3 style={{alignContent:'center'}}>{currentWorkout.name.replace(/_/g, " ")}</MyTextH3>
                 {/* <MyTextH3 style={{alignContent:'center'}}>{currentExerciseIndex}</MyTextH3> */}
             </View>
             
@@ -155,11 +159,17 @@ export default function InTrainingScreen({route}) {
                         />}
                     </View>
                     
-                    <MyTextRegular
-                    style={{alignContent:'center', position:'relative', bottom:-10}}
-                    >
-                        {currentExercise.name.replace(/_/g, " ")}
-                    </MyTextRegular>
+                    <View style={{alignContent:'center', position:'relative', bottom:40, backgroundColor: '#fff5'}}>
+                        <MyTextH3>
+                            {formatarString(currentExercise.name)}
+                        </MyTextH3>
+                    </View>
+
+
+                    <View style={{alignContent:'center', alignItems: 'center', position:'absolute', bottom:0, padding: 8}}>
+                        <MyTextRegular>{formatarString(currentExercise.body_part)}</MyTextRegular>
+                        <MyTextRegular>{formatarString(currentExercise.muscles)}</MyTextRegular>
+                    </View>
                 </View>
                 
 

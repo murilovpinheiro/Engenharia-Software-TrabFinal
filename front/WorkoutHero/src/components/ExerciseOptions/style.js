@@ -77,12 +77,15 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 120,
         padding: 15,
+        paddingTop: 4,
         backgroundColor: AppStyles.colors.accent,
     },
     setsRepsView: {
         flexDirection: 'row',
         alignItems: 'flex-end',
         justifyContent: 'center',
+        position: 'absolute',
+        bottom: 8, left: 0, right: 0
     },
     setsRepsText: {
         

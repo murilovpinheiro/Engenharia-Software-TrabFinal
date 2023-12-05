@@ -227,7 +227,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                  
             
                 <MyTextRegular>{formatarString(exercise.body_part)}</MyTextRegular>
-                <MyTextRegular>{formatarString(exercise.muscles)}</MyTextRegular>
+                <MyTextRegular style={{height: 40}}>{formatarString(exercise.muscles)}</MyTextRegular>
 
                 <View style={styles.setsRepsView}>
 

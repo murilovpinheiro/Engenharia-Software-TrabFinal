@@ -7,6 +7,7 @@ import MyTextH3 from "../MyText/MyTextH3";
 import styles from "./style"
 import MyTextRegular from "../MyText/MyTextRegular";
 import MySwitch from "../MySwitch/MySwitch";
+import { WorkoutContext } from "../../WorkoutContext";
 
 const ExerciseOptions2 = ({exercise, onSelect}) => {
 

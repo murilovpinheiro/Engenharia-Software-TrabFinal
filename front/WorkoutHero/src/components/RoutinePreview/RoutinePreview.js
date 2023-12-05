@@ -57,7 +57,7 @@ export default function RoutinePreview(props) {
             
             <View style={{flex: 1, flexDirection: "row"}}>
                 <MyTextH3 style={styles.headerText}>{routine.name}</MyTextH3>
-                <TouchableOpacity style={{padding: 4}} onPress={async () => {
+                <TouchableOpacity style={styles.deleteBtn} onPress={async () => {
                     console.log("ola")
                     await deleteRoutine(routine.id);
                     if (props.throwTrigger)
@@ -73,9 +73,12 @@ export default function RoutinePreview(props) {
 
             </ScrollView>
             
-            <TouchableOpacity style={{padding: 4}} onPress={props.onPress}>
-                <MyTextRegular>Ver Detalhes</MyTextRegular>
-            </TouchableOpacity>
+            <View style={{flexDirection:'row-reverse'}}>
+                <TouchableOpacity style={{padding: 4}} onPress={props.onPress}>
+                    <MyTextRegular>Ver Detalhes</MyTextRegular>
+                </TouchableOpacity>
+            </View>
+
 
         </View>
     );

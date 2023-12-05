@@ -228,7 +228,11 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                     <MyTextInput style={styles.setsRepsInput}
                         value={sets.toString()}
                         editable={true}
-                        onChangeText={text => {setClicouSets(true); setSets(handleNum(text))}}
+                        onChangeText={text => {setClicouSets(true); setSets(() => {
+                            let retorno = handleNum(text)
+                            if (retorno == 0) retorno = 3
+                            return retorno
+                        })}}
                         onChanged = {(text) => {
                             this.setState({
                                 mobile: text.replace(/[^0-9]/g, ''),
@@ -245,7 +249,11 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                     <MyTextInput style={styles.setsRepsInput}
                         value={reps.toString()}
                         editable={true}
-                        onChangeText={text => {setClicouReps(true); setReps(handleNum(text))}}
+                        onChangeText={text => {setClicouReps(true); setReps(() => {
+                            let retorno = handleNum(text)
+                            if (retorno == 0) retorno = 10;
+                            return retorno;
+                        })}}
                         onChanged = {(text) => {
                             this.setState({
                                 mobile: text.replace(/[^0-9]/g, ''),

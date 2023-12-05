@@ -132,9 +132,9 @@ export default function ViewTrainingRoutineScreen2({route}) {
             <View style={{
                 flexDirection: 'column'
             }}>
-                <MyButtonRegular title="Começar" style={styles.startBtn}
+                {routine && routine["exerciseList"].length >= 0 && <MyButtonRegular title="Começar" style={styles.startBtn}
                 onPress={async() => await chooseRoutine()}
-                />
+                />}
 
                 <MyButtonRegular title="Adicionar Exercicio" style={
                     {

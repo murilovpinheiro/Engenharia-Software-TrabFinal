@@ -75,6 +75,21 @@ export default function ViewTrainingRoutineScreen2({route}) {
         
     }, [isFocused, updateTrigger]);
 
+    useEffect(() => {
+        const fetchData = async() => {
+            var params = route.params
+            var routineBruh = params.routine
+            var realRoutine = await getRoutine(routineBruh.id);
+            console.log('coisas novas', routine, nomeTreino)
+            
+            setRoutine(realRoutine);   
+            setNomeTreino(realRoutine.name)
+        }
+
+        fetchData();
+        setUpdateTrigger(false);
+    }, [updateTrigger])
+
 
     const chooseRoutine = async () => {
         await startWorkout(routine)
@@ -92,7 +107,7 @@ export default function ViewTrainingRoutineScreen2({route}) {
             try {
                 for (let i = 0; i < routine["exerciseList"].length; i++) {
                     retList.push(
-                        <ExerciseOptions key={i} exercise={routine["exerciseList"][i]} showSelect={false} throwTrigger={() => setUpdateTrigger(true)} routineID={routine.id}/>
+                        <ExerciseOptions key={routine["exerciseList"][i].id} exercise={routine["exerciseList"][i]} showSelect={false} throwTrigger={() => setUpdateTrigger(true)} routineID={routine.id}/>
                     )
                 }
             } catch (err) {

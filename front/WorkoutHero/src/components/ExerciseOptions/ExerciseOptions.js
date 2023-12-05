@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"
-import {View, TouchableOpacity, Image, CheckBox, TextInput, Text, ScrollView} from 'react-native'
+import {View, TouchableOpacity, Image, CheckBox, TextInput, Text} from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 // import AntDesign from '@expo/vector-icons/AntDesign';
 import styles from "./style"
@@ -40,7 +40,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
 
     const [wkexid, setWkexid] = useState(null);
 
-    const [sets, setSets] = useState(0);
+    const [sets, setSets] = useState(3);
     const [secondsSets, setSecondsSets] = useState(0);
     const [clicouSets, setClicouSets] = useState(false);
     useEffect(() => {
@@ -59,7 +59,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
         }
     }, [secondsSets])
  
-    const [reps, setReps] = useState(0);
+    const [reps, setReps] = useState(10);
     const [secondsReps, setSecondsReps] = useState(0);
     const [clicouReps, setClicouReps] = useState(false);
     useEffect(() => {
@@ -82,6 +82,13 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
         const fetch = async () => {
             const {id, sets, reps} = await getSetsAndReps(routineID, exercise.id);
             setWkexid(id);
+            if (sets == 0 || reps == 0) {
+                setReps(10);
+                setSets(3);
+                saveReps();
+                saveSets();
+                return;
+            }
             setSets(sets);
             setReps(reps);
         }
@@ -220,15 +227,14 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                  
             
                 <MyTextRegular>{formatarString(exercise.body_part)}</MyTextRegular>
-                <MyTextRegular style={{height: 20}}>{formatarString(exercise.muscles)}</MyTextRegular>
-                
+                <MyTextRegular>{formatarString(exercise.muscles)}</MyTextRegular>
 
                 <View style={styles.setsRepsView}>
 
                     <MyTextInput style={styles.setsRepsInput}
                         value={sets.toString()}
                         editable={true}
-                        onChangeText={text => {setClicouSets(true); setSets(handleNum(text) == 0 ? 3 : handleNum(text))}}
+                        onChangeText={text => {setClicouSets(true); setSets(handleNum(text))}}
                         onChanged = {(text) => {
                             this.setState({
                                 mobile: text.replace(/[^0-9]/g, ''),
@@ -237,6 +243,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                         keyboardType='numeric'
                         onTouchStart={() => setClicouSets(true)}
                         placeholder="0"
+                        onEndEditing={() => {if (sets === '') setSets(3)}}
                     >
                     </MyTextInput>
                     
@@ -245,7 +252,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                     <MyTextInput style={styles.setsRepsInput}
                         value={reps.toString()}
                         editable={true}
-                        onChangeText={text => {setClicouReps(true); setReps(handleNum(text) == 0 ? 10 : handleNum(text))}}
+                        onChangeText={text => {setClicouReps(true); setReps(handleNum(text))}}
                         onChanged = {(text) => {
                             this.setState({
                                 mobile: text.replace(/[^0-9]/g, ''),
@@ -255,6 +262,7 @@ export default function ExerciseOptions({ exercise, onSelect, showSelect, throwT
                         keyboardType='numeric'
                         onTouchStart={() => setClicouReps(true)}
                         placeholder="1"
+                        onEndEditing={() => {if (reps === '') setReps(10)}}
                     >
                     </MyTextInput>
 

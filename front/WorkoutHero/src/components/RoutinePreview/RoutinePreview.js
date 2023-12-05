@@ -16,14 +16,14 @@ export default function RoutinePreview(props) {
     const { formatarString } = useContext(WorkoutContext)
 
     var routine =  props.routine
-    console.log("TREINO: ", routine.name, "  ", routine, "\n")
+    // console.log("TREINO: ", routine.name, "  ", routine, "\n")
     var exerciseList = routine["exerciseList"]
 
     var getAllExercisePreviews = (list) => {
         var returnList = []
         for (let i = 0; i < list.length; i++) {
             var exercise = list[i]
-            console.log("EXERCICIO: ", exercise)
+            // console.log("EXERCICIO: ", exercise)
             // var imgName = exercise.imgName// + ".jpg"
             
             // let nomeFormatado = exercise.name

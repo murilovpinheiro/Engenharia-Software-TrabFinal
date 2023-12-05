@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     exerciseName: {
         marginTop: 0,
         padding: 4,
+        paddingRight: 36,
         paddingLeft: 16,
         backgroundColor: '#fff6',
         textShadowColor: '#fff', // Border color

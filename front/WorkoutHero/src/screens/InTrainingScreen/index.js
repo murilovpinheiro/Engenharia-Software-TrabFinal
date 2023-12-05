@@ -56,6 +56,10 @@ export default function InTrainingScreen({route}) {
                 index: 0, routes: [{name:'PERFIL'}]
             })
             await finishWorkout()
+            navigation.reset({
+                index: 0, routes: [{name:'PERFIL'}]
+            })
+            
         }
     }
 
@@ -159,8 +163,8 @@ export default function InTrainingScreen({route}) {
                         />}
                     </View>
                     
-                    <View style={{alignContent:'center', position:'relative', bottom:40, backgroundColor: '#fff5'}}>
-                        <MyTextH3>
+                    <View style={{alignContent:'center', position:'absolute', bottom:80, backgroundColor: '#fff5', width: '100%'}}>
+                        <MyTextH3 style={{textAlign: 'center'}}>
                             {formatarString(currentExercise.name)}
                         </MyTextH3>
                     </View>

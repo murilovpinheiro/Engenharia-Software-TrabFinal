@@ -5,7 +5,8 @@ import AppStyles from '../../AppStyles';
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: AppStyles.colors.background
+        backgroundColor: AppStyles.colors.background,
+        borderWidth: 2
     },
     scrollBody: {
         width: "100%", height:"100%",
@@ -17,13 +18,15 @@ const styles = StyleSheet.create({
         flexDirection:"column",
         backgroundColor: AppStyles.colors.accent,
         borderRadius: 16,
-        padding:16,
+        paddingBottom: 16,
         alignItems:'center'
         // borderColor: '#F2BD00', borderRadius: 10, borderWidth: 2
     },
     imgFrame: {
-        height:"90%",
-        borderRadius: 8,
+        height:"80%",
+        // borderRadius: 8,
+        borderTopEndRadius: 16,
+        borderTopStartRadius: 16,
         overflow: "hidden"
     },
     img: {

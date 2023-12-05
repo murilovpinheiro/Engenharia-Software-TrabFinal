@@ -13,6 +13,8 @@ export default function RoutinePreview(props) {
 
     const {deleteRoutine} = useContext(WorkoutContext)
 
+    const { formatarString } = useContext(WorkoutContext)
+
     var routine =  props.routine
     console.log("TREINO: ", routine.name, "  ", routine, "\n")
     var exerciseList = routine["exerciseList"]
@@ -26,10 +28,11 @@ export default function RoutinePreview(props) {
             
             // let nomeFormatado = exercise.name
             var nomeFormatado = exercise.name.replace(new RegExp('_', "g"), ' ').slice(0, 14) + '... ';
-            if (nomeFormatado.length < 15) nomeFormatado = nomeFormatado.slice(0, nomeFormatado.length-4)
+            nomeFormatado = formatarString(exercise.name)
+            // if (nomeFormatado.length < 15) nomeFormatado = nomeFormatado.slice(0, nomeFormatado.length-4)
             
             returnList.push(
-                <View key={i}>
+                <View key={i} style={{width: 128}}>
                 {/* // <View key={i} style={{borderWidth: 2, borderColor:'gold', borderRadius: 8, height: 80, margin: 8}}> */}
                     <MyTextRegular style={ {width: '100%', textAlign: 'center' } }>{nomeFormatado}</MyTextRegular>
                     {Images.exerciseImages2[exercise.name.replace(/\([^)]*\)/g, '').trim()] && <Image style={styles.img} key={i}
@@ -74,8 +77,8 @@ export default function RoutinePreview(props) {
             </ScrollView>
             
             <View style={{flexDirection:'row-reverse'}}>
-                <TouchableOpacity style={{padding: 4}} onPress={props.onPress}>
-                    <MyTextRegular>Ver Detalhes</MyTextRegular>
+                <TouchableOpacity style={styles.detailsBtn} onPress={props.onPress}>
+                    <MyTextRegular style={{color:"black"}}>Ver Detalhes</MyTextRegular>
                 </TouchableOpacity>
             </View>
 

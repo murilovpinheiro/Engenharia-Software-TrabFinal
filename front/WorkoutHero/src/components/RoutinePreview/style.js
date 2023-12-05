@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
         top: 0, right: 0,
         padding: 2
     },
+    detailsBtn: {
+        padding: 4,
+        backgroundColor: AppStyles.colors.accent,
+        borderRadius: 16,
+    }
 });
 
 export default styles

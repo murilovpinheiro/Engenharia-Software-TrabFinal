@@ -539,6 +539,18 @@ const WorkoutProvider = ({ children }) => {
       return response
     }
 
+    function formatarString(inputString) {
+      // Divida a string em um array usando a vírgula como delimitador
+      const partes = inputString.split(',');
+  
+      // Capitalize a primeira letra de cada palavra e junte-as com espaço
+      const stringFormatada = partes
+          .map(parte => parte.trim().charAt(0).toUpperCase() + parte.slice(1))
+          .join(', ');
+  
+      return stringFormatada.replace(/\([^)]*\)/g, '').trim();
+  }
+
 
     const [modalVisible, setModalVisible] = useState(false);
     // const [modalExp, setModalExpTarget]
@@ -595,7 +607,8 @@ const WorkoutProvider = ({ children }) => {
         currentWorkout, currentExerciseIndex, currentExercise, setCurrentExerciseIndex, currentProgressL, setCurrentProgressL, 
         startWorkout,  finishWorkout, calculateXpYield,
         getExerciseById, getExerciseByName, getExercisesByBodyPart, getAllExercises, getExercises, getListBodyParts, getWorkoutById, getRoutinesFromUser, updateRoutineName, deleteRoutine, getRoutine, getSetsAndReps,
-        createWorkoutAlt, createWorkout, addExerciseToWK, delExerciseToWK, updateReps, updateSets
+        createWorkoutAlt, createWorkout, addExerciseToWK, delExerciseToWK, updateReps, updateSets,
+        formatarString
       }}>
         <Modal
           transparent={true}

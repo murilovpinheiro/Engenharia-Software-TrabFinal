@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Certifique-se de instalar o pacote
 import Images from "../../Images";
@@ -11,6 +11,8 @@ import MySwitch from "../MySwitch/MySwitch";
 const ExerciseOptions2 = ({exercise, onSelect}) => {
 
   const [isSelected, setIsSelected] = useState(false);
+
+  const { formatarString } = useContext(WorkoutContext)
 
   const toggleSelection = () => {
       setIsSelected(!isSelected); // Inverte o estado de seleção
@@ -30,8 +32,8 @@ const ExerciseOptions2 = ({exercise, onSelect}) => {
         </View>
 
         <View style={styles.textInfoView}>
-          <MyTextH3 style={styles.textName}>{exercise.name}</MyTextH3>
-          <MyTextRegular style={styles.textParts}>{exercise.body_part}: {exercise.muscles}</MyTextRegular>
+          <MyTextH3 style={styles.textName}>{formatarString(exercise.name)}</MyTextH3>
+          <MyTextRegular style={styles.textParts}>{formatarString(exercise.body_part)}: {formatarString(exercise.muscles)}</MyTextRegular>
         </View>
 
         <View style={styles.selectIcon}>
